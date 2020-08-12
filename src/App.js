@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from "react-router-dom"
 
 import HomePage from "./pages/HomePage"
+import ProductPage from "./pages/ProductsPage"
 import Navigation from "./components/Navigation"
 
 function App() {
@@ -13,7 +14,12 @@ function App() {
         <Switch>
           <Route 
             exact path="/"
-            component={HomePage} />
+            component={HomePage} 
+          />
+          <Route
+            path="/productsPage"
+            component={ProductPage}
+          />
         </Switch>
     </div>
   );
