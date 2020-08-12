@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Table } from "react-bootstrap"
+import { Table, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 
 import { getProducts } from "../../store/Products/actions"
@@ -14,6 +14,10 @@ export default function ProductTable(){
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])
+
+    function getMoreProducts(){
+        dispatch(getProducts())
+    }
 
     const displayProducts = products
                             ? products.map(product => {
@@ -34,6 +38,11 @@ export default function ProductTable(){
                                             </div>
                                             <div>
                                             Price(€): {product.price}
+                                            </div>
+                                            <div>
+                                                <Button>
+                                                    Buy Me!
+                                                </Button>
                                             </div>
                                         </td>
                                     </tr>
@@ -57,6 +66,14 @@ export default function ProductTable(){
                     {displayProducts}
                 </tbody>
             </Table>
+            <div style={{
+                textAlign: "center"
+            }}>
+                <button
+                 onClick={getMoreProducts}>
+                    Load More!
+                </button>
+            </div>
         </div>
     )
 }
