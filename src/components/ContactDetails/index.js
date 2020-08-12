@@ -30,7 +30,7 @@ export default function ContactDetails(){
                             Email:
                         </td>
                         <td>
-                            Email goes here
+                            {owner.email}
                         </td>
                     </tr>
                     <tr>
@@ -38,7 +38,7 @@ export default function ContactDetails(){
                             Phone:
                         </td>
                         <td>
-                            Phone goes here
+                            +{owner.phone}
                         </td>
                     </tr>
                     <tr>
