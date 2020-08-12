@@ -1,3 +1,3 @@
-const selectProducts = state => {
+export const selectProducts = state => {
     return state.products
 }
