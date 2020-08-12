@@ -1,6 +1,7 @@
 import React from "react"
 import { Jumbotron } from "react-bootstrap"
 import "./index.css"
+import Bio from "../../components/Bio"
 
 const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597221407/IMG_5465_gmhofp.jpg"
 
@@ -26,9 +27,7 @@ export default function HomePage(){
             </div>
             <div>
                 <body>
-                    <p>
-                        Bio Here
-                    </p>
+                    <Bio />
                 </body>
             </div>
         </div>
