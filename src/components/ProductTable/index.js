@@ -18,18 +18,25 @@ export default function ProductTable(){
     const displayProducts = products
                             ? products.map(product => {
                                 return (
-                                    <>
-                                    <tr>
+                                    <tr key={product.id}>
                                         <td>
-                                            <img src={product.image} alt="product" />
+                                            <img 
+                                                src={product.image} 
+                                                alt="product"
+                                                />
                                         </td>
                                         <td>
-                                            {product.title}
-                                            {product.description}
-                                            {product.price}
+                                            <div>
+                                                Title: {product.title}
+                                            </div>
+                                            <div>
+                                            Description: {product.description}
+                                            </div>
+                                            <div>
+                                            Price(€): {product.price}
+                                            </div>
                                         </td>
                                     </tr>
-                                    </>
                                 )
                             })
                             : "Loading Products..."
@@ -41,7 +48,9 @@ export default function ProductTable(){
                     textAlign: "center"
                 }}>
                     <tr>
-                        <strong>Products</strong>
+                        <th>
+                            <strong>Products</strong>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
