@@ -5,8 +5,12 @@ import {
     Button,
     Col
 } from "react-bootstrap"
+import { useDispatch } from "react-redux"
+
+import { newUser } from "../../store/User/actions"
 
 export default function SignUpPage(){
+    const dispatch = useDispatch()
     const [firstName, set_FirstName] = useState("")
     const [lastName, set_LastName] = useState("")
     const [email, set_Email] = useState("")
@@ -24,6 +28,24 @@ export default function SignUpPage(){
         console.log("address:", address)
         console.log("DOB:", dateOfBirth)
         console.log("password:", password)
+
+        dispatch(newUser(
+            firstName,
+            lastName,
+            email,
+            phone,
+            address,
+            dateOfBirth,
+            password
+        ))
+
+        set_FirstName("")
+        set_LastName("")
+        set_Email("")
+        set_Phone("")
+        set_Address("")
+        set_DateOfBirth("")
+        set_Password("")
     }
 
     return(

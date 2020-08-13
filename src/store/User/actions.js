@@ -24,3 +24,30 @@ export function getUser(email, password){
         }
     }
 }
+
+export function newUser(
+    firstName,
+    lastName,
+    email,
+    phone,
+    address,
+    dateOfBirth,
+    password){
+        return async function thunk4(dispatch, getState){
+            try{
+                const userSignedUp = await axios.post(`${apiUrl}/signup`,{
+                    firstName,
+                    lastName,
+                    email,
+                    phone,
+                    address,
+                    dateOfBirth,
+                    password,
+                })
+                console.log("new user test", userSignedUp)
+
+            } catch(error){
+                console.log(error.message)
+            }
+        }
+    }
