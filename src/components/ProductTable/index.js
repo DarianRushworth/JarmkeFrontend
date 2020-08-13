@@ -13,7 +13,7 @@ export default function ProductTable(){
     const history = useHistory()
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
-    console.log("products in state test", products)
+    // console.log("products in state test", products)
 
     
     function renderOnce(){

@@ -20,7 +20,7 @@ export default function ProfilePage(){
     const [Address, set_Address] = useState("")
     const [DateOfBirth, set_DateOfBirth] = useState("")
     const user = useSelector(selectUser)
-    console.log("user test", user)
+    // console.log("user test", user)
 
     const fullName = `${user.firstName} ${user.lastName}`
 

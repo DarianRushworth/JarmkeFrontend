@@ -9,7 +9,7 @@ import { selectProduct } from "../../store/Products/selectors"
 export default function ProductDetails(){
     const dispatch = useDispatch()
     const product = useSelector(selectProduct)
-    console.log("product test", product)
+    // console.log("product test", product)
     const idNeeded = parseInt(useParams().id)
     // console.log("params test", idNeeded)
 

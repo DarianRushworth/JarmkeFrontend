@@ -21,13 +21,13 @@ export default function SignUpPage(){
 
     function onSubmit(event){
         event.preventDefault()
-        console.log("first Name:", firstName)
-        console.log("last Name:", lastName)
-        console.log("email:", email)
-        console.log("phone:", phone)
-        console.log("address:", address)
-        console.log("DOB:", dateOfBirth)
-        console.log("password:", password)
+        // console.log("first Name:", firstName)
+        // console.log("last Name:", lastName)
+        // console.log("email:", email)
+        // console.log("phone:", phone)
+        // console.log("address:", address)
+        // console.log("DOB:", dateOfBirth)
+        // console.log("password:", password)
 
         dispatch(newUser(
             firstName,
