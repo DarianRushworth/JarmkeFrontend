@@ -35,7 +35,7 @@ export function getSpecificProduct(id){
     return async function thunk5(dispatch, getState){
         try{
             const product = await axios.get(`${apiUrl}/products/${id}`)
-            // console.log("product test", product)
+            console.log("product test", product)
 
             dispatch(setProductDetails(product.data))
 
