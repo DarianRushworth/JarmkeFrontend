@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { Table, Button } from "react-bootstrap"
 
 import { getSpecificProduct } from "../../store/Products/actions"
-import { selectProducts } from "../../store/Products/selectors"
+import { selectProduct } from "../../store/Products/selectors"
 
 export default function ProductDetails(){
     const dispatch = useDispatch()
-    const product = useSelector(selectProducts)
+    const product = useSelector(selectProduct)
     console.log("product test", product)
     const idNeeded = parseInt(useParams().id)
     // console.log("params test", idNeeded)
@@ -18,61 +18,56 @@ export default function ProductDetails(){
         dispatch(getSpecificProduct(idNeeded))
     }, [dispatch, idNeeded])
 
-    const display = product.length === 1
-                            ?   product.map(item => {
-                                return (
-                                    <Table key={item.id}>
-                                        <thead
-                                        style={{
-                                            textAlign: "center"
-                                        }}>
-                                            <tr>
-                                                <th>
-                                                    <strong>{item.title}</strong>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <img
-                                                    src={item.image}
-                                                    alt="product"
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <div>
-                                                        Description:
-                                                    </div>
-                                                    <div>
-                                                        {item.description}
-                                                    </div>
-                                                    <div>
-                                                        Metal:
-                                                    </div>
-                                                    <div>
-                                                        {item.metal}
-                                                    </div>
-                                                    <div>
-                                                        Price:
-                                                    </div>
-                                                    <div>
-                                                        {item.price}
-                                                    </div>
-                                                    <div>
-                                                        Units in Stock:
-                                                    </div>
-                                                    <div>
-                                                        {item.unitsInStock}
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-
-                                    )
-                                })
-                                : "Loading..."
+    const display = product.id
+                        ?  <Table>
+                                <thead
+                                style={{
+                                    textAlign: "center"
+                                }}>
+                                    <tr>
+                                        <th>
+                                            <strong>{product.title}</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img
+                                            src={product.image}
+                                            alt="product"
+                                            />
+                                        </td>
+                                        <td>
+                                            <div>
+                                                Description:
+                                            </div>
+                                            <div>
+                                                {product.description}
+                                            </div>
+                                            <div>
+                                                Metal:
+                                            </div>
+                                            <div>
+                                                {product.metal}
+                                            </div>
+                                            <div>
+                                                Price:
+                                            </div>
+                                            <div>
+                                                {product.price}
+                                            </div>
+                                            <div>
+                                                Units in Stock:
+                                            </div>
+                                            <div>
+                                                {product.unitsInStock}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        : "Loading..."
     return (
         <div>
             {display}

@@ -12,7 +12,7 @@ export function getOwnerDetails(){
     return async function thunk1(dispatch, getState){
         try{
             const ownerFetched = await axios.get(`${apiUrl}/me`)
-            console.log("response test", ownerFetched)
+            // console.log("response test", ownerFetched)
 
             const owner = ownerFetched
                             ? ownerFetched.data

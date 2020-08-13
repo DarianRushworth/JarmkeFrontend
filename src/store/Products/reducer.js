@@ -1,6 +1,6 @@
 const initialState = {
-    allJewellery: null,
-    specificPiece: null
+    allJewellery: [ ],
+    specificPiece: { }
 }
 
 export default function productsReducer(state = initialState, action){
@@ -13,7 +13,7 @@ export default function productsReducer(state = initialState, action){
         case "SET_PRODUCTS":
             return {
                 ...state,
-                allJewellery: action.payload
+                allJewellery: [...state.allJewellery ,...action.payload]
             }
 
             default:

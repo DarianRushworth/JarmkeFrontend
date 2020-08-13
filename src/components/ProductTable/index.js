@@ -5,6 +5,7 @@ import { useHistory } from "react-router"
 
 
 import { getProducts } from "../../store/Products/actions"
+import { getMoreProducts } from "../../store/Products/actions"
 import { selectProducts } from "../../store/Products/selectors"
 import "./index.css"
 
@@ -12,19 +13,25 @@ export default function ProductTable(){
     const history = useHistory()
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
-    // console.log("products in state test", products)
+    console.log("products in state test", products)
 
+    
+    function renderOnce(){
+        if(products.length === 0){
+            dispatch(getProducts())
+        }
+    }
     useEffect(() => {
-        dispatch(getProducts())
-    }, [dispatch])
+        renderOnce()
+    }, [renderOnce])
 
     function redirect(event){
         history.push(`/moreDetails/${event.target.value}`)
         // console.log("value for id test", event.target.value)
     }
 
-    function getMoreProducts(){
-        dispatch(getProducts())
+    function MoreProducts(){
+        dispatch(getMoreProducts())
     }
 
     const displayProducts = products.length >= 2
@@ -77,7 +84,7 @@ export default function ProductTable(){
                 textAlign: "center"
             }}>
                 <button
-                 onClick={getMoreProducts}>
+                 onClick={MoreProducts}>
                     Load More!
                 </button>
             </div>
