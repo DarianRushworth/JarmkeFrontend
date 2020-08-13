@@ -6,15 +6,25 @@ import {
     Col
 } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
+
+import { getUser } from "../../store/User/actions"
 
 export default function LoginPage(){
+    const dispatch = useDispatch()
     const [email, set_Email] = useState("")
     const [password, set_Password] = useState("")
 
     function onSubmit(event){
         event.preventDefault()
-        console.log("Email test:", email)
-        console.log("Password test:", password)
+        // console.log("Email test:", email)
+        // console.log("Password test:", password)
+
+        dispatch(getUser(email, password))
+
+        set_Email("")
+        set_Password("")
+
     }
 
     return(
@@ -40,7 +50,7 @@ export default function LoginPage(){
                         Password:
                     </Form.Label>
                     <Form.Control 
-
+                        value={password}
                         onChange={(event) => set_Password(event.target.value)}
                         type="password"
                         placeholder="Password"
