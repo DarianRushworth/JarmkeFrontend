@@ -60,3 +60,19 @@ export function newUser(
             }
         }
 }
+
+export function getFavorites(token){
+    return async function thunk7(dispatch, getState){
+        try{
+            const favorites = await axios.get(`${apiUrl}/favorites`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log("favorites test", favorites)
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
