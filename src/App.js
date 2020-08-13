@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage"
 import SignUpPage from "./pages/Sign-UpPage"
 import ProductDetails from "./pages/ProductDetails"
 import Navigation from "./components/Navigation"
+import Profilepage from "./pages/ProfilePage"
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
           <Route
             path="/moreDetails/:id"
             component={ProductDetails}
+          />
+          <Route
+            path="/profilePage"
+            component={Profilepage}
           />
         </Switch>
     </div>
