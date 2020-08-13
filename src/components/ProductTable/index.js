@@ -1,12 +1,15 @@
 import React, { useEffect } from "react"
 import { Table, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router"
+
 
 import { getProducts } from "../../store/Products/actions"
 import { selectProducts } from "../../store/Products/selectors"
 import "./index.css"
 
 export default function ProductTable(){
+    const history = useHistory()
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
     // console.log("products in state test", products)
@@ -14,6 +17,11 @@ export default function ProductTable(){
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])
+
+    function redirect(event){
+        history.push(`/moreDetails/${event.target.value}`)
+        // console.log("value for id test", event.target.value)
+    }
 
     function getMoreProducts(){
         dispatch(getProducts())
@@ -34,14 +42,13 @@ export default function ProductTable(){
                                                 Title: {product.title}
                                             </div>
                                             <div>
-                                            Description: {product.description}
-                                            </div>
-                                            <div>
                                             Price(€): {product.price}
                                             </div>
                                             <div>
-                                                <Button>
-                                                    Buy Me!
+                                                <Button 
+                                                onClick={redirect}
+                                                value={product.id}>
+                                                    Check Me Out!
                                                 </Button>
                                             </div>
                                         </td>
