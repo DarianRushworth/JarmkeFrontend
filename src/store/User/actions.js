@@ -1,6 +1,13 @@
 import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
+function setFavorites(favoriteData){
+    return {
+        type: "SET_FAVORITE",
+        payload: favoriteData
+    }
+}
+
 function setNewUser(userData){
     return {
         type: "SET_NEW_USER",
@@ -69,7 +76,9 @@ export function getFavorites(token){
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log("favorites test", favorites)
+            // console.log("favorites test", favorites)
+
+            dispatch(setFavorites(favorites.data.products))
 
         } catch(error){
             console.log(error.message)

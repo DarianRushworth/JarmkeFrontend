@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap"
 
 export default function UserOrders(props){
     const user = props.data
-    console.log("user test for orders", user)
+    // console.log("user test for orders", user)
 
     const displayOrders = user.orders.map(order => {
         const colorPicker = order.completed
