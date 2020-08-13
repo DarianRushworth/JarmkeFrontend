@@ -1,6 +1,13 @@
 import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
+function setNewUser(userData){
+    return {
+        type: "SET_NEW_USER",
+        payload: userData
+    }
+}
+
 function setUser(userData){
     return {
         type: "SET_USER",
@@ -15,7 +22,7 @@ export function getUser(email, password){
                 email, 
                 password,
             })
-            console.log("user check test:", userCheck)
+            // console.log("user check test:", userCheck)
 
             dispatch(setUser(userCheck.data))
 
@@ -44,7 +51,9 @@ export function newUser(
                     dateOfBirth,
                     password,
                 })
-                console.log("new user test", userSignedUp)
+                // console.log("new user test", userSignedUp)
+
+                dispatch(setNewUser(userSignedUp.data))
 
             } catch(error){
                 console.log(error.message)
