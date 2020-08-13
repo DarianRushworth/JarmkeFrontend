@@ -21,16 +21,14 @@ export default function HomePage(){
 
                 </header>
             </div>
-            <div>
-                <body
-                    style={
-                        {
-                            backgroundImage: `url(${imageUrl})`
-                        }
+            <div
+                style={
+                    {
+                        backgroundImage: `url(${imageUrl})`
                     }
-                    className="HomeImage">
+                }
+                className="HomeImage">
                     <Bio />
-                </body>
             </div>
         </div>
         <footer>
