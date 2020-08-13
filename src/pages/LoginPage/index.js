@@ -64,7 +64,7 @@ export default function LoginPage(){
                         Log Me In
                     </Button>
                 </Form.Group>
-                <Link>
+                <Link to="/signup">
                     Sign-up Here.
                 </Link>
             </Form>
