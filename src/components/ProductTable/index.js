@@ -18,8 +18,9 @@ export default function ProductTable(){
         dispatch(getProducts())
     }, [dispatch])
 
-    function redirect(){
-        history.push("/moreDetails")
+    function redirect(event){
+        history.push(`/moreDetails/${event.target.value}`)
+        // console.log("value for id test", event.target.value)
     }
 
     function getMoreProducts(){
@@ -44,7 +45,9 @@ export default function ProductTable(){
                                             Price(€): {product.price}
                                             </div>
                                             <div>
-                                                <Button>
+                                                <Button 
+                                                onClick={redirect}
+                                                value={product.id}>
                                                     Check Me Out!
                                                 </Button>
                                             </div>

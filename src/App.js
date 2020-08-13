@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage"
 import ProductPage from "./pages/ProductsPage"
 import LoginPage from "./pages/LoginPage"
 import SignUpPage from "./pages/Sign-UpPage"
+import ProductDetails from "./pages/ProductDetails"
 import Navigation from "./components/Navigation"
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
           <Route
             path="/signup"
             component={SignUpPage}
+          />
+          <Route
+            path="/moreDetails/:id"
+            component={ProductDetails}
           />
         </Switch>
     </div>
