@@ -59,4 +59,4 @@ export function newUser(
                 console.log(error.message)
             }
         }
-    }
+}
