@@ -8,7 +8,7 @@ import { selectOwner } from "../../store/Owner/selectors"
 export default function ContactDetails(){
     const dispatch = useDispatch()
     const owner = useSelector(selectOwner)
-    console.log("owner test(selector)", owner)
+    // console.log("owner test(selector)", owner)
 
     useEffect(() => {
         

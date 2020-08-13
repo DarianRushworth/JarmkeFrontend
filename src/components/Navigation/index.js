@@ -16,7 +16,7 @@ export default function Navigation() {
                         ? <NavBarItem path="/" linkText={welcomeMessage} />
                         : <Nav.Item>BeDazzle Yourself</Nav.Item>
 
-    console.log("user test", user)
+    // console.log("user test", user)
     return (
         <Navbar bg="light" expand="lg">
             <Navbar.Brand as={NavLink} to="/">
