@@ -10,13 +10,7 @@ export default function HomePage(){
 
     return(
         <div>
-        <div 
-            style={
-                {
-                    backgroundImage: `url(${imageUrl})`
-                }
-            }
-            className="HomeImage">
+        <div>
             <div>
                 <header>
                     <Jumbotron>
@@ -28,7 +22,13 @@ export default function HomePage(){
                 </header>
             </div>
             <div>
-                <body>
+                <body
+                    style={
+                        {
+                            backgroundImage: `url(${imageUrl})`
+                        }
+                    }
+                    className="HomeImage">
                     <Bio />
                 </body>
             </div>
