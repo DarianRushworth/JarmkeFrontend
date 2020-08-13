@@ -19,7 +19,7 @@ export default function ProductTable(){
         dispatch(getProducts())
     }
 
-    const displayProducts = products
+    const displayProducts = products.length <= 2
                             ? products.map(product => {
                                 return (
                                     <tr key={product.id}>
