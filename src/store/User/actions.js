@@ -1,6 +1,13 @@
 import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
+function setFavorites(favoriteData){
+    return {
+        type: "SET_FAVORITE",
+        payload: favoriteData
+    }
+}
+
 function setNewUser(userData){
     return {
         type: "SET_NEW_USER",
@@ -59,4 +66,22 @@ export function newUser(
                 console.log(error.message)
             }
         }
+}
+
+export function getFavorites(token){
+    return async function thunk7(dispatch, getState){
+        try{
+            const favorites = await axios.get(`${apiUrl}/favorites`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            // console.log("favorites test", favorites)
+
+            dispatch(setFavorites(favorites.data.products))
+
+        } catch(error){
+            console.log(error.message)
+        }
     }
+}

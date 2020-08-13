@@ -8,6 +8,7 @@ import {
     Col
 } from "react-bootstrap"
 
+import Usersfavorites from "../../components/UsersFavorites"
 import UserOrders from "../../components/UserOrders"
 import { selectUser } from "../../store/User/selectors"
 
@@ -90,6 +91,7 @@ export default function ProfilePage(){
                 </Form>
             </Container>
             <UserOrders data={user}/>
+            <Usersfavorites data={user} />
         </div>
     )
 }

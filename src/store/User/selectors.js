@@ -1,3 +1,7 @@
 export const selectUser = state => {
-    return state.user
+    return state.user.data
+}
+
+export const selectFavorites = state => {
+    return state.user.favorites
 }
