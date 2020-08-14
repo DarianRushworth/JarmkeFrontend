@@ -26,3 +26,20 @@ export function getOrderedProducts(id, token){
         }
     }
 }
+
+export function removeProduct(orderId, productId, token){
+    return async function thunk11(dispatch, getState){
+        try{
+            const getRidOf = await axios.delete(`${apiUrl}/checkout/${orderId}/product/${productId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            // console.log("action test", getRidOf)
+            dispatch(setOrderProducts(getRidOf.data.notInCart))
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
