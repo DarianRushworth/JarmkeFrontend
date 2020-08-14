@@ -27,6 +27,7 @@ export default function Navigation() {
                 <Nav style={{ width: "100%" }} fill>
                     <NavBarItem path="/productsPage" linkText="Store" />
                     {navDisplay}
+                    <NavBarItem path="/cartCheckout" linkText="🛒" />
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

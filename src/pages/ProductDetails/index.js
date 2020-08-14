@@ -18,6 +18,7 @@ export default function ProductDetails(){
     useEffect(() => {
         dispatch(getSpecificProduct(idNeeded))
     }, [dispatch, idNeeded])
+    
 
     const display = product.id
                         ?  <Table>
