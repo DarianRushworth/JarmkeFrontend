@@ -11,13 +11,13 @@ function setOrderProducts(OrderData){
 export function getOrderedProducts(id, token){
     return async function thunk10(dispatch, getState){
         try{
-            console.log("do I get here")
+            // console.log("do I get here")
             const cartProducts = await axios.get(`${apiUrl}/checkout/${id}`,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log("fetched cart test", cartProducts)
+            // console.log("fetched cart test", cartProducts)
 
             dispatch(setOrderProducts(cartProducts.data))
 

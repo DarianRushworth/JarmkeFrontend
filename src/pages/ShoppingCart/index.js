@@ -7,18 +7,26 @@ import {
 } from "react-bootstrap"
 import { useHistory } from "react-router"
 
+import ProductsOrdered from "../../components/ProductsOrdered"
 import { selectUser } from "../../store/User/selectors"
 import { getOrderedProducts } from "../../store/Order/actions"
+import { selectOrderData } from "../../store/Order/selectors"
 
 export default function ShoppingCart(){
     const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     // console.log("user test", user)
+    const orderData = useSelector(selectOrderData)
+    // console.log("order data test", orderData)
+
+    if(!user){
+        history.push("/")
+    }
 
     const order = user.orders.find(order => order.completed === false)
     // console.log("order test(CART)", order)
-    
+
     if(!order){
         history.push("/productsPage")
     }
@@ -34,6 +42,7 @@ export default function ShoppingCart(){
             <h1>
                 Check out your future Gems!
             </h1>
+            <ProductsOrdered data={orderData}/>
             <div>
                 <Container>
                     <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
