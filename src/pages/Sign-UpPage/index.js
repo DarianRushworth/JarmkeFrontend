@@ -6,11 +6,13 @@ import {
     Col
 } from "react-bootstrap"
 import { useDispatch } from "react-redux"
+import { useHistory } from "react-router"
 
 import { newUser } from "../../store/User/actions"
 
 export default function SignUpPage(){
     const dispatch = useDispatch()
+    const history = useHistory()
     const [firstName, set_FirstName] = useState("")
     const [lastName, set_LastName] = useState("")
     const [email, set_Email] = useState("")
@@ -38,6 +40,8 @@ export default function SignUpPage(){
             dateOfBirth,
             password
         ))
+
+        history.push("/productsPage")
 
         set_FirstName("")
         set_LastName("")
