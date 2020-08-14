@@ -7,11 +7,13 @@ import {
 } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
+import { useHistory } from "react-router"
 
 import { getUser } from "../../store/User/actions"
 
 export default function LoginPage(){
     const dispatch = useDispatch()
+    const history = useHistory()
     const [email, set_Email] = useState("")
     const [password, set_Password] = useState("")
 
@@ -21,6 +23,8 @@ export default function LoginPage(){
         // console.log("Password test:", password)
 
         dispatch(getUser(email, password))
+
+        history.push("/")
 
         set_Email("")
         set_Password("")
