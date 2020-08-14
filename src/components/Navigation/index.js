@@ -9,12 +9,26 @@ import { selectUser } from "../../store/User/selectors"
 
 export default function Navigation() {
     const user = useSelector(selectUser)
+    // console.log("user nav test", user)
 
     const welcomeMessage = `Welcome ${user.firstName} ${user.lastName}`
 
+    const amountOfOrders = () => {
+        const newArr = user.id > 0
+                        ? user.orders.filter(order => {
+                             return order.completed === false
+                        })
+                        : [ ]
+        return newArr.length
+    }
+
     const navDisplay = user.email
-                        ? <NavBarItem path="/profilePage" linkText={welcomeMessage} />
-                        : <NavBarItem path="/login" linkText="Login" />
+        ? <>
+          <NavBarItem path="/profilePage" linkText={welcomeMessage} />
+          <NavBarItem path="/cartCheckout" linkText={`🛒${amountOfOrders()}`} />
+          </>
+        : <NavBarItem path="/login" linkText="Login" />
+
 
     // console.log("user test", user)
     return (

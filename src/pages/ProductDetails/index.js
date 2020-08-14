@@ -6,11 +6,15 @@ import { Table, Button } from "react-bootstrap"
 import HeartButton from "../../components/HeartButton"
 import { getSpecificProduct } from "../../store/Products/actions"
 import { selectProduct } from "../../store/Products/selectors"
+import { addProduct } from "../../store/Order/actions"
+import { selectUser } from "../../store/User/selectors"
 
 export default function ProductDetails(){
     const dispatch = useDispatch()
     const product = useSelector(selectProduct)
     // console.log("product test", product)
+    const user = useSelector(selectUser)
+    // console.log("user test", user)
     const idNeeded = parseInt(useParams().id)
     // console.log("params test", idNeeded)
 
@@ -18,6 +22,10 @@ export default function ProductDetails(){
     useEffect(() => {
         dispatch(getSpecificProduct(idNeeded))
     }, [dispatch, idNeeded])
+    
+    function addToCart(id, token){
+        dispatch(addProduct(id, token))
+    }
 
     const display = product.id
                         ?  <Table>
@@ -65,7 +73,10 @@ export default function ProductDetails(){
                                                 {product.unitsInStock}
                                             </div>
                                             <div>
-                                                <Button>
+                                                <Button
+                                                value={product.id}
+                                                onClick={(event) => addToCart(
+                                                    parseInt(event.target.value), user.token)}>
                                                     Add to Cart!
                                                 </Button>
                                             </div>

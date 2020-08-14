@@ -8,6 +8,7 @@ import SignUpPage from "./pages/Sign-UpPage"
 import ProductDetails from "./pages/ProductDetails"
 import Navigation from "./components/Navigation"
 import Profilepage from "./pages/ProfilePage"
+import ShoppingCart from './pages/ShoppingCart';
 
 function App() {
   return (
@@ -39,6 +40,10 @@ function App() {
           <Route
             path="/profilePage"
             component={Profilepage}
+          />
+          <Route
+            path="/cartCheckout"
+            component={ShoppingCart}
           />
         </Switch>
     </div>
