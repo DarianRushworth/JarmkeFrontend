@@ -1,14 +1,17 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Table } from "react-bootstrap"
+import { useHistory } from "react-router"
 
 import { getFavorites } from "../../store/User/actions"
 import { selectFavorites } from "../../store/User/selectors"
 
 export default function UsersFavorites(props){
     const dispatch = useDispatch()
+    const history = useHistory()
     const favorites = useSelector(selectFavorites)
     // console.log("favorites out of state", favorites)
+
 
     const displayFavorites = favorites.length >= 2
                             ? favorites.map(favorite => {
@@ -18,19 +21,21 @@ export default function UsersFavorites(props){
                                             key={favorite.id}
                                             src={favorite.image}
                                             alt="product"
-                                            value={favorite.id} />
+                                            onClick={(event) => history.push(`/moreDetails/${favorite.id}`)} />
                                         </td>
                                 )
                             })
                             : "Loading..."
 
-    useEffect(() => {
-        renderOnce()
-    }, [])
-
     function renderOnce(){
+        if(favorites.length === 0)
         dispatch(getFavorites(props.data.token))
     }
+
+    useEffect(() => {
+        renderOnce()
+    }, [renderOnce])
+
     return (
         <div>
             <Table>
