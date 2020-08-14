@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
 
-import { newFavorite } from "../../store/User/actions"
+import { newFavorite, removeFavorite } from "../../store/User/actions"
 import { selectFavorites } from "../../store/User/selectors"
 import { selectUser } from "../../store/User/selectors"
 import "./index.css"
@@ -20,6 +20,7 @@ export default function HeartButton(props){
     const displayHeart = favoriteOrNot
                         ? <button
                             className="heart"
+                            onClick={() => unFavoriteThis(product.id, user.token)}
                             >❤</button>
                         : <button
                             className="heart"
@@ -28,6 +29,9 @@ export default function HeartButton(props){
 
     function favoriteThis(id, token){
         dispatch(newFavorite(id, token))
+    }
+    function unFavoriteThis(id, token){
+        dispatch(removeFavorite(id, token))
     }
 
     return (

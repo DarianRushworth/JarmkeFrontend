@@ -5,6 +5,11 @@ const initialState = {
 
 export default function userReducer(state = initialState, action){
     switch(action.type){
+        case "NOT_FAVORITE":
+            return {
+                ...state,
+                favorites: state.favorites.filter(fav => fav.id !== action.payload.id)
+            }
         case "SET_FAVORITE":
             return {
                 ...state,
