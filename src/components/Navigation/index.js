@@ -9,7 +9,7 @@ import { selectUser } from "../../store/User/selectors"
 
 export default function Navigation() {
     const user = useSelector(selectUser)
-    console.log("user nav test", user)
+    // console.log("user nav test", user)
 
     const welcomeMessage = `Welcome ${user.firstName} ${user.lastName}`
 

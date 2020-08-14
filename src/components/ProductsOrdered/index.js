@@ -8,13 +8,13 @@ import { selectUser } from "../../store/User/selectors"
 export default function ProductsOrdered(props){
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
-    console.log("user test cart", user)
+    // console.log("user test cart", user)
     const orderData = props.data
-    console.log("props test", orderData)
+    // console.log("props test", orderData)
 
     function onDelete(event){
         const productId = parseInt(event.target.value)
-        console.log("event test", productId)
+        // console.log("event test", productId)
         dispatch(removeProduct(orderData.id, productId, user.token))
     }
 
