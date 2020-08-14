@@ -1,17 +1,32 @@
-import React from "react"
-import { useSelector } from "react-redux"
+import React, { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import {
     Form,
     Container,
-    Button,
     Col
 } from "react-bootstrap"
+import { useHistory } from "react-router"
 
 import { selectUser } from "../../store/User/selectors"
+import { getOrderedProducts } from "../../store/Order/actions"
 
 export default function ShoppingCart(){
+    const history = useHistory()
+    const dispatch = useDispatch()
     const user = useSelector(selectUser)
-    console.log("user test", user)
+    // console.log("user test", user)
+
+    const order = user.orders.find(order => order.completed === false)
+    // console.log("order test(CART)", order)
+    
+    if(!order){
+        history.push("/productsPage")
+    }
+    
+    useEffect(() => {
+        dispatch(getOrderedProducts(order.id, user.token))
+    }, [dispatch])
+    
 
 
     return (
@@ -23,7 +38,7 @@ export default function ShoppingCart(){
                 <Container>
                     <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
                     <h4 className="mt-5 mb-5">
-                        Order Info:
+                        Shipping Info:
                     </h4>
                     <Form.Group controlId="formBasicShippingAddress">
                         <Form.Label>
