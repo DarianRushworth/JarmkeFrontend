@@ -1,6 +1,13 @@
 import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
+function notFavorite(favoriteData){
+    return {
+        type: "NOT_FAVORITE",
+        payload: favoriteData
+    }
+}
+
 function setFavorites(favoriteData){
     return {
         type: "SET_FAVORITE",
@@ -79,6 +86,42 @@ export function getFavorites(token){
             // console.log("favorites test", favorites)
 
             dispatch(setFavorites(favorites.data.products))
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
+
+export function newFavorite(id, token){
+    // console.log("token test", token)
+    return async function thunk8(dispatch, getState){
+        try{
+            const sendFavorite = await axios.post(`${apiUrl}/favorites/products/${id}`, {},{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            // console.log("new favorite test", sendFavorite)
+
+            dispatch(setFavorites(sendFavorite.data))
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
+
+export function removeFavorite(id, token){
+    return async function thunk9(dispatch, getState){
+        try{
+            const deleteFavorite = await axios.delete(`${apiUrl}/favorites/products/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            // console.log("remove favorite test", deleteFavorite)
+            dispatch(notFavorite(deleteFavorite.data))
 
         } catch(error){
             console.log(error.message)

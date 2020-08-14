@@ -3,6 +3,7 @@ import { useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { Table, Button } from "react-bootstrap"
 
+import HeartButton from "../../components/HeartButton"
 import { getSpecificProduct } from "../../store/Products/actions"
 import { selectProduct } from "../../store/Products/selectors"
 
@@ -63,6 +64,11 @@ export default function ProductDetails(){
                                             <div>
                                                 {product.unitsInStock}
                                             </div>
+                                            <div>
+                                                <Button>
+                                                    Add to Cart!
+                                                </Button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -71,9 +77,7 @@ export default function ProductDetails(){
     return (
         <div>
             {display}
-            <Button>
-                Add to Cart!
-            </Button>
+            <HeartButton data={product}/>
         </div>
     )
 }
