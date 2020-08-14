@@ -8,7 +8,7 @@ export default function userReducer(state = initialState, action){
         case "SET_FAVORITE":
             return {
                 ...state,
-                favorites: [...action.payload]
+                favorites: [...state.favorites, ...action.payload]
             }
         case "SET_NEW_USER":
         return {

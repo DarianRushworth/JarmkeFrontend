@@ -85,3 +85,22 @@ export function getFavorites(token){
         }
     }
 }
+
+export function newFavorite(id, token){
+    // console.log("token test", token)
+    return async function thunk8(dispatch, getState){
+        try{
+            const sendFavorite = await axios.post(`${apiUrl}/favorites/products/${id}`, {},{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            // console.log("new favorite test", sendFavorite)
+
+            dispatch(setFavorites(sendFavorite.data))
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
