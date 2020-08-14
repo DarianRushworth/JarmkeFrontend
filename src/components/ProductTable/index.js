@@ -7,6 +7,7 @@ import { useHistory } from "react-router"
 import { getProducts } from "../../store/Products/actions"
 import { getMoreProducts } from "../../store/Products/actions"
 import { selectProducts } from "../../store/Products/selectors"
+import { selectUser } from "../../store/User/selectors"
 import "./index.css"
 
 export default function ProductTable(){
@@ -14,6 +15,8 @@ export default function ProductTable(){
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
     // console.log("products in state test", products)
+    const user = useSelector(selectUser)
+    // console.log("user test", user)
 
     
     function renderOnce(){
@@ -26,8 +29,10 @@ export default function ProductTable(){
     }, [renderOnce])
 
     function redirect(event){
-        history.push(`/moreDetails/${event.target.value}`)
-        // console.log("value for id test", event.target.value)
+        const whereTo = user.id > 0
+                        ? history.push(`/moreDetails/${event.target.value}`)
+                        : history.push(`/signup`)
+        return whereTo
     }
 
     function MoreProducts(){
