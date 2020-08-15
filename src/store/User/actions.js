@@ -15,14 +15,14 @@ function setFavorites(favoriteData){
     }
 }
 
-export function setNewUser(userData){
+function setNewUser(userData){
     return {
         type: "SET_NEW_USER",
         payload: userData
     }
 }
 
-function setUser(userData){
+export function setUser(userData){
     return {
         type: "SET_USER",
         payload: userData

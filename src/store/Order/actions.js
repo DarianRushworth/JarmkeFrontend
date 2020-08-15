@@ -1,7 +1,7 @@
 import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
-import { setNewUser } from "../../store/User/actions"
+import { setUser } from "../../store/User/actions"
 
 function addOrderProduct(OrderData){
     return {
@@ -46,7 +46,7 @@ export function removeProduct(orderId, productId, token){
             })
             console.log("action test", getRidOf)
             dispatch(setOrderProducts(getRidOf.data.notInCart))
-            dispatch(setNewUser(getRidOf.data.user))
+            dispatch(setUser(getRidOf.data.user))
 
         } catch(error){
             console.log(error.message)

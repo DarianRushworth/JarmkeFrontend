@@ -23,7 +23,7 @@ export default function userReducer(state = initialState, action){
         case "SET_USER":
             return {
                 ...state,
-                data: action.payload
+                data: {...state.data, ...action.payload}
             }
 
             default:

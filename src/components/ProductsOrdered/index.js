@@ -1,11 +1,13 @@
 import React, { useState } from "react"
 import { Table, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router"
 
 import { removeProduct } from "../../store/Order/actions"
 import { selectUser } from "../../store/User/selectors"
 
 export default function ProductsOrdered(props){
+    const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     // console.log("user test cart", user)
@@ -16,6 +18,10 @@ export default function ProductsOrdered(props){
         const productId = parseInt(event.target.value)
         // console.log("event test", productId)
         dispatch(removeProduct(orderData.id, productId, user.token))
+    }
+
+    if(orderData.products < 1){
+        history.push("/")
     }
 
     const displayOrder = orderData.id >= 1
@@ -56,7 +62,7 @@ export default function ProductsOrdered(props){
                                 </td>
                             )
                         })
-                        : "Loading Products..."
+                        : "Loading..."
     return (
         <div>
             <Table>
