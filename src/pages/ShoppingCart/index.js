@@ -180,7 +180,7 @@ export default function ShoppingCart(){
                     </Form.Group>
                     <Form.Group>
                     <Button
-                    href="/"
+                    href="/payment"
                     variant="info">
                         Payment Details
                     </Button>
