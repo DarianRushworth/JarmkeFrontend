@@ -14,14 +14,14 @@ export default function ProductsOrdered(props){
     const orderData = props.data
     // console.log("props test", orderData)
 
+    if(orderData.products < 1){
+        history.push("/")
+    }
+
     function onDelete(event){
         const productId = parseInt(event.target.value)
         // console.log("event test", productId)
         dispatch(removeProduct(orderData.id, productId, user.token))
-    }
-
-    if(orderData.products < 1){
-        history.push("/")
     }
 
     const displayOrder = orderData.id >= 1

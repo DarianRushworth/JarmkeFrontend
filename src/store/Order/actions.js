@@ -62,9 +62,10 @@ export function addProduct(id, token){
                     Authorization: `Bearer ${token}`
                 }
             })
-            // console.log("updated Order test", updatedOrder)
+            console.log("updated Order test", updatedOrder)
 
             dispatch(addOrderProduct(updatedOrder.data.newIncart))
+            dispatch(setUser(updatedOrder.data.user))
 
         } catch(error){
             console.log(error.message)
