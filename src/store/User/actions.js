@@ -15,7 +15,7 @@ function setFavorites(favoriteData){
     }
 }
 
-function setNewUser(userData){
+export function setNewUser(userData){
     return {
         type: "SET_NEW_USER",
         payload: userData

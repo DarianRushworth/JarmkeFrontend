@@ -1,6 +1,8 @@
 import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
+import { setNewUser } from "../../store/User/actions"
+
 function addOrderProduct(OrderData){
     return {
         type: "ADD_ORDER_PRODUCT",
@@ -24,7 +26,7 @@ export function getOrderedProducts(id, token){
                     Authorization: `Bearer ${token}`
                 }
             })
-            // console.log("fetched cart test", cartProducts)
+            console.log("fetched cart test", cartProducts)
 
             dispatch(setOrderProducts(cartProducts.data))
 
@@ -42,8 +44,9 @@ export function removeProduct(orderId, productId, token){
                     Authorization: `Bearer ${token}`
                 }
             })
-            // console.log("action test", getRidOf)
+            console.log("action test", getRidOf)
             dispatch(setOrderProducts(getRidOf.data.notInCart))
+            dispatch(setNewUser(getRidOf.data.user))
 
         } catch(error){
             console.log(error.message)
