@@ -22,7 +22,7 @@ function setNewUser(userData){
     }
 }
 
-function setUser(userData){
+export function setUser(userData){
     return {
         type: "SET_USER",
         payload: userData
