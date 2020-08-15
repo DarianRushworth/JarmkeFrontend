@@ -4,17 +4,22 @@ import {
     Form,
     Container,
     Col,
-    Button
+    Button,
+    Alert
 } from "react-bootstrap"
 import { useHistory } from "react-router"
 
 import ProductsOrdered from "../../components/ProductsOrdered"
 import { selectUser } from "../../store/User/selectors"
-import { getOrderedProducts, addShipping } from "../../store/Order/actions"
+import { 
+    getOrderedProducts, 
+    addShipping,
+    addShippingAddress  } from "../../store/Order/actions"
 import { selectOrderData } from "../../store/Order/selectors"
 
 export default function ShoppingCart(){
     const [display, set_Display] = useState(false)
+    const [message, set_Message] = useState(false)
     const [streetName, set_StreetName] = useState("")
     const [houseNumber, set_HouseNumber] = useState("")
     const [postalCode, set_PostalCode] = useState("")
@@ -49,9 +54,27 @@ export default function ShoppingCart(){
 
     function onSubmit(event){
         event.preventDefault()
-        console.log(`
-        address: ${streetName} ${houseNumber}, ${postalCode}, ${district}`)
+        const address =
+        `${streetName} ${houseNumber}, ${postalCode}, ${district}`
+        dispatch(addShippingAddress(user.token, address))
+        set_Display(false)
+        set_Message(true)
     }
+    const alertMessage = message
+            ? <Alert variant="success">
+                <Alert.Heading>
+                    Address Shipping To:
+                </Alert.Heading>
+                <hr />
+                <p>
+                    {`${streetName} ${houseNumber}, ${postalCode}, ${district}`}
+                </p>
+                <Button
+                    onClick={() => set_Message(false)}>
+                    Close
+                </Button>
+            </Alert>
+            : ""
         
     const otherAddress = display
         ?
@@ -120,6 +143,7 @@ export default function ShoppingCart(){
             </h1>
             <ProductsOrdered data={orderData}/>
             <div>
+                {alertMessage}
                 <Container>
                     <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
                     <h4 className="mt-5 mb-5">
@@ -153,6 +177,13 @@ export default function ShoppingCart(){
                             <option
                             value="false">No Thanks!</option>
                         </Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                    <Button
+                    href="/"
+                    variant="info">
+                        Payment Details
+                    </Button>
                     </Form.Group>
                     </Form>
                 </Container>

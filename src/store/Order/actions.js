@@ -93,3 +93,21 @@ export function addShipping(token, shipping){
         }
     }
 }
+
+export function addShippingAddress(token, address){
+    return async function thunk14(dispatch, getState){
+        try{
+            const updateAddress = await axios.patch(`${apiUrl}/updateAddress`,{
+                shippingAddress: address
+            },{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log("update happened", updateAddress)
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
