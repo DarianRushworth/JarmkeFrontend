@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Table, Button } from "react-bootstrap"
+import { Table, Button, InputGroup, FormControl, Col } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 
@@ -79,6 +79,24 @@ export default function ProductsOrdered(props){
                     </tr>
                 </tbody>
             </Table>
+            <div>
+                <InputGroup as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
+                    <InputGroup.Prepend>
+                        <InputGroup.Text>
+                                €
+                        </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl 
+                    aria-label="Total of Products(in Euros)"
+                    placeholder={orderData.total}
+                    disabled />
+                    <InputGroup.Append>
+                        <InputGroup.Text>
+                            .00
+                        </InputGroup.Text>
+                    </InputGroup.Append>
+                </InputGroup>
+            </div>
         </div>
     )
 } 

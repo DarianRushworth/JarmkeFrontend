@@ -72,3 +72,24 @@ export function addProduct(id, token){
         }
     }
 }
+
+export function addShipping(token, shipping){
+    return async function thunk13(dispatch, getState){
+        try{
+            const shippingUpdated = await axios.patch(`${apiUrl}/checkout/updateCart`,{
+                expressShipping: shipping
+            },{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log("update went well", shippingUpdated)
+
+            dispatch(setUser(shippingUpdated.data.user))
+            dispatch(addOrderProduct(shippingUpdated.data.order))
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}

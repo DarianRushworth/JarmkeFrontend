@@ -9,7 +9,7 @@ import { useHistory } from "react-router"
 
 import ProductsOrdered from "../../components/ProductsOrdered"
 import { selectUser } from "../../store/User/selectors"
-import { getOrderedProducts } from "../../store/Order/actions"
+import { getOrderedProducts, addShipping } from "../../store/Order/actions"
 import { selectOrderData } from "../../store/Order/selectors"
 
 export default function ShoppingCart(){
@@ -34,6 +34,12 @@ export default function ShoppingCart(){
     useEffect(() => {
         dispatch(getOrderedProducts(order.id, user.token))
     }, [dispatch])
+
+    function sendShipping(shipping, token){
+        if(shipping === "true"){
+            dispatch(addShipping(token, shipping))
+        }
+    }
     
 
 
@@ -55,7 +61,6 @@ export default function ShoppingCart(){
                         </Form.Label>
                         <Form.Control 
                         as="select"
-                        placeholder="User Address"
                         required>
                             <option>My Address</option>
                             <option>Some Where Else</option>
@@ -65,12 +70,15 @@ export default function ShoppingCart(){
                         <Form.Label>
                             Express Shipping:
                         </Form.Label>
-                        <Form.Control 
+                        <Form.Control
+                        onChange={(event) => sendShipping(event.target.value, user.token)} 
                         as="select"
-                        placeholder="--select-option--"
                         required>
-                            <option>Yes Please!</option>
-                            <option>No Thanks!</option>
+                            <option>--Select-Shipping--</option>
+                            <option
+                            value="true">Yes Please, within 5 working days(€50)</option>
+                            <option
+                            value="false">No Thanks!</option>
                         </Form.Control>
                     </Form.Group>
                     </Form>
