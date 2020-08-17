@@ -8,16 +8,23 @@ import {
     Alert
 } from "react-bootstrap"
 import { useHistory } from "react-router"
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
+import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js'
 
+import CardDetails from "../../components/CardDetails"
 import ProductsOrdered from "../../components/ProductsOrdered"
 import { selectUser } from "../../store/User/selectors"
 import { 
     getOrderedProducts, 
     addShipping,
-    addShippingAddress  } from "../../store/Order/actions"
+    addShippingAddress,  
+    addPayment} from "../../store/Order/actions"
 import { selectOrderData } from "../../store/Order/selectors"
 
 export default function ShoppingCart(){
+    const stripe = useStripe()
+    const elements = useElements()
     const [display, set_Display] = useState(false)
     const [message, set_Message] = useState(false)
     const [streetName, set_StreetName] = useState("")
@@ -36,7 +43,7 @@ export default function ShoppingCart(){
     }
 
     const order = user.orders.find(order => order.completed === false)
-    console.log("order test(CART)", order)
+    // console.log("order test(CART)", order)
 
     if(!order){
         history.push("/productsPage")
@@ -52,6 +59,29 @@ export default function ShoppingCart(){
         }
     }
 
+    const submitted = async (event) => {
+        event.preventDefault()
+
+        if(!stripe || !elements){
+            return
+        }
+        const response = await stripe.confirmCardPayment("{CLIENT_SECRET}", {
+            payment_method: {
+                card: elements.getElement(CardElement),
+                billing_details: {
+                    name: "DAz",
+                }
+            }
+        })
+        if(response.error){
+            console.log(response.error.message)
+        } else {
+            if(response.paymentIntent.status === "succeeded"){
+                console.log("success")
+            }
+        }
+    }
+
     function onSubmit(event){
         event.preventDefault()
         const address =
@@ -62,18 +92,49 @@ export default function ShoppingCart(){
     }
     const alertMessage = message
             ? <Alert variant="success">
+                <Form as={Col} md={{span: 6, offset: 3}} className="mt-5"
+                      onSubmit={(event) => event.preventDefault()}>
                 <Alert.Heading>
-                    Address Shipping To:
+                    Payment Details:
                 </Alert.Heading>
                 <hr />
                 <p>
-                    {`${streetName} ${houseNumber}, ${postalCode}, ${district}`}
+                    Shipping Address:
+                    <hr />
+                    {orderData.shippingAddress}
+                    <hr />
+                    Products:
+                    <div>
+                        <ul>
+                        {orderData.products.map(product => {
+                            return (
+                                <li>{product.title}</li>
+                            )
+                        })}
+                        </ul>
+                    </div>
+                    <hr />
+                    Total: €{orderData.total}
                 </p>
+                <CardDetails />
+                <hr />
+                <div>
                 <Button
-                    onClick={() => set_Message(false)}>
-                    Close
+                    onClick={() => {
+                        set_Message(false)
+                        dispatch(addPayment(orderData.total, "eur"))}}>
+                    Pay
                 </Button>
-            </Alert>
+                <Button
+                    variant="danger"
+                    onClick={() => {
+                        set_Message(false)
+                    }}>
+                    Abort
+                </Button>
+                </div>
+                </Form>
+                </Alert>
             : ""
         
     const otherAddress = display
@@ -156,10 +217,15 @@ export default function ShoppingCart(){
                         <Form.Control 
                         as="select"
                         required>
-                            <option>{user.address}</option>
+                            <option
+                            onClick={() => {
+                                dispatch(addShippingAddress(user.address))
+                                set_Message(true)}}
+                            >{user.address}</option>
                             <option
                             value="elseWhere"
-                            onClick={() => set_Display(true)}>Some Where Else</option>
+                            onClick={() => set_Display(true)}
+                            >Some Where Else</option>
                         </Form.Control>
                     </Form.Group>
                     {otherAddress}
@@ -177,13 +243,6 @@ export default function ShoppingCart(){
                             <option
                             value="false">No Thanks!</option>
                         </Form.Control>
-                    </Form.Group>
-                    <Form.Group>
-                    <Button
-                    href="/payment"
-                    variant="info">
-                        Payment Details
-                    </Button>
                     </Form.Group>
                     </Form>
                 </Container>

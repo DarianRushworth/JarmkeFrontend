@@ -1,16 +1,13 @@
-import React, { useState } from "react"
+import React from "react"
 import { Table, Button, InputGroup, FormControl, Col } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 
 import { removeProduct } from "../../store/Order/actions"
-import { selectUser } from "../../store/User/selectors"
 
 export default function ProductsOrdered(props){
     const history = useHistory()
     const dispatch = useDispatch()
-    const user = useSelector(selectUser)
-    // console.log("user test cart", user)
     const orderData = props.data
     // console.log("props test", orderData)
 

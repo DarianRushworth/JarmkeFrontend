@@ -2,6 +2,7 @@ import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
 import { setUser } from "../../store/User/actions"
+import { useDispatch } from "react-redux"
 
 function addOrderProduct(OrderData){
     return {
@@ -110,6 +111,7 @@ export function addShippingAddress(address){
                 }
             })
             console.log("update happened", updateAddress)
+            dispatch(setOrderProducts(updateAddress.data))
 
         } catch(error){
             console.log(error.message)

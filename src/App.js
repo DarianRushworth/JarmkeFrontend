@@ -10,8 +10,11 @@ import ProductDetails from "./pages/ProductDetails"
 import Navigation from "./components/Navigation"
 import Profilepage from "./pages/ProfilePage"
 import ShoppingCart from './pages/ShoppingCart';
-import PaymentPage from './pages/PaymentPage';
 import { validateUser } from "./store/User/actions"
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from "@stripe/stripe-js"
+
+const stripePromise = loadStripe("pk_test_51HGVaXE1l9Lb6wo5PB3AAwHvhJxQvN3AHSNc9KOijpgpcB44vjw5IgF1MX09Rl5T1WFHQe7HtQS3UP0oNkNFJMiz00zLZRunTA")
 
 function App() {
   const dispatch = useDispatch()
@@ -50,14 +53,12 @@ function App() {
             path="/profilePage"
             component={Profilepage}
           />
+          <Elements stripe={stripePromise}>
           <Route
             path="/cartCheckout"
             component={ShoppingCart}
           />
-          <Route
-            path="/payment"
-            component={PaymentPage}
-          />
+          </Elements>
         </Switch>
     </div>
   );
