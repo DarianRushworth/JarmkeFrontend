@@ -111,3 +111,22 @@ export function addShippingAddress(token, address){
         }
     }
 }
+
+export function addPayment(token, total, moneyValue){
+    return async function thunk15(dispatch, getState){
+        try{
+            const clientSecret = await axios.post(`${apiUrl}/payment`,{
+                amount: total,
+                currency: moneyValue,
+            },{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log("payment test", clientSecret.json())
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}

@@ -1,19 +1,29 @@
 import React from "react";
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
 
 import NavBarItem from "./NavBarItem"
-import { selectUser } from "../../store/User/selectors"
+import { selectUser, selectToken } from "../../store/User/selectors"
+import { removeUser } from "../../store/User/actions"
+import { Button } from "react-bootstrap";
 
 export default function Navigation() {
+    const dispatch = useDispatch()
     const user = useSelector(selectUser)
     console.log("user nav test", user)
+    const tokenNeeded = useSelector(selectToken)
+    console.log("token test", tokenNeeded)
 
     const welcomeMessage = `Welcome ${user.firstName} ${user.lastName}`
+    console.log(user.orders)
+
 
     const amountOfOrders = () => {
+        if(user.orders === undefined){
+            return 0
+        }
         const orderThere = user.orders.find(order => {
             return order.completed === false
        })
@@ -23,10 +33,11 @@ export default function Navigation() {
         return amountToDisplay
     }
 
-    const navDisplay = user.email
+    const navDisplay = tokenNeeded
         ? <>
           <NavBarItem path="/profilePage" linkText={welcomeMessage} />
           <NavBarItem path="/cartCheckout" linkText={`🛒${amountOfOrders()}`} />
+          <Button onClick={() => dispatch(removeUser())}>Logout</Button>
           </>
         : <NavBarItem path="/login" linkText="Login" />
 

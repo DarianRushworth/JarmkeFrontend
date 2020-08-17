@@ -1,6 +1,15 @@
 import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
+import { selectToken } from "./selectors"
+
+function validUser(data){
+    return {
+        type: "VALID_USER",
+        payload: data,
+    }
+}
+
 function notFavorite(favoriteData){
     return {
         type: "NOT_FAVORITE",
@@ -43,6 +52,37 @@ export function getUser(email, password){
         } catch(error){
             console.log(error.message)
         }
+    }
+}
+
+export function validateUser(){
+    return async function thunk15(dispatch, getState){
+        const token = selectToken(getState())
+        console.log("token action test", token)
+
+        if(token === null){
+            return
+        }
+
+        try{
+            const user = await axios.get(`${apiUrl}/user`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log("user test action", user)
+            dispatch(validUser(user.data))
+
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
+
+export function removeUser(){
+    return {
+        type: "REMOVE_USER"
     }
 }
 

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
 import HomePage from "./pages/HomePage"
 import ProductPage from "./pages/ProductsPage"
@@ -10,8 +11,15 @@ import Navigation from "./components/Navigation"
 import Profilepage from "./pages/ProfilePage"
 import ShoppingCart from './pages/ShoppingCart';
 import PaymentPage from './pages/PaymentPage';
+import { validateUser } from "./store/User/actions"
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(validateUser())
+  }, [dispatch])
+
   return (
     <div className="App">
       <header className="App-header">

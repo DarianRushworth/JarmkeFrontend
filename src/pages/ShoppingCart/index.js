@@ -36,7 +36,7 @@ export default function ShoppingCart(){
     }
 
     const order = user.orders.find(order => order.completed === false)
-    // console.log("order test(CART)", order)
+    console.log("order test(CART)", order)
 
     if(!order){
         history.push("/productsPage")
