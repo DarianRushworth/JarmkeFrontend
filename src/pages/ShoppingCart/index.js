@@ -43,12 +43,12 @@ export default function ShoppingCart(){
     }
     
     useEffect(() => {
-        dispatch(getOrderedProducts(order.id, user.token))
+        dispatch(getOrderedProducts(order.id))
     }, [dispatch])
 
     function sendShipping(shipping, token){
         if(shipping === "true"){
-            dispatch(addShipping(token, shipping))
+            dispatch(addShipping(shipping))
         }
     }
 
@@ -56,7 +56,7 @@ export default function ShoppingCart(){
         event.preventDefault()
         const address =
         `${streetName} ${houseNumber}, ${postalCode}, ${district}`
-        dispatch(addShippingAddress(user.token, address))
+        dispatch(addShippingAddress(address))
         set_Display(false)
         set_Message(true)
     }

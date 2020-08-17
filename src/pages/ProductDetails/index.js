@@ -23,8 +23,8 @@ export default function ProductDetails(){
         dispatch(getSpecificProduct(idNeeded))
     }, [dispatch, idNeeded])
     
-    function addToCart(id, token){
-        dispatch(addProduct(id, token))
+    function addToCart(id){
+        dispatch(addProduct(id))
     }
 
     const display = product.id

@@ -20,18 +20,18 @@ export default function HeartButton(props){
     const displayHeart = favoriteOrNot
                         ? <button
                             className="heart"
-                            onClick={() => unFavoriteThis(product.id, user.token)}
+                            onClick={() => unFavoriteThis(product.id)}
                             >❤</button>
                         : <button
                             className="heart"
-                            onClick={() => favoriteThis(product.id, user.token)}
+                            onClick={() => favoriteThis(product.id)}
                             >♡</button>
 
-    function favoriteThis(id, token){
-        dispatch(newFavorite(id, token))
+    function favoriteThis(id){
+        dispatch(newFavorite(id))
     }
-    function unFavoriteThis(id, token){
-        dispatch(removeFavorite(id, token))
+    function unFavoriteThis(id){
+        dispatch(removeFavorite(id))
     }
 
     return (

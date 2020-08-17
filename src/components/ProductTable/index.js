@@ -32,7 +32,7 @@ export default function ProductTable(){
     function redirect(event){
 
         if(user.id > 0){
-            dispatch(getFavorites(user.token))
+            dispatch(getFavorites())
         }
         const whereTo = user.id > 0
                         ? history.push(`/moreDetails/${event.target.value}`)

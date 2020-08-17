@@ -17,13 +17,14 @@ function setOrderProducts(OrderData){
     }
 }
 
-export function getOrderedProducts(id, token){
+export function getOrderedProducts(id){
     return async function thunk10(dispatch, getState){
+        const tokenNeeded = getState().user.token
         try{
             // console.log("do I get here")
             const cartProducts = await axios.get(`${apiUrl}/checkout/${id}`,{
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${tokenNeeded}`
                 }
             })
             console.log("fetched cart test", cartProducts)
@@ -36,12 +37,13 @@ export function getOrderedProducts(id, token){
     }
 }
 
-export function removeProduct(orderId, productId, token){
+export function removeProduct(orderId, productId){
     return async function thunk11(dispatch, getState){
+        const tokenNeeded = getState().user.token
         try{
             const getRidOf = await axios.delete(`${apiUrl}/checkout/${orderId}/product/${productId}`, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${tokenNeeded}`
                 }
             })
             console.log("action test", getRidOf)
@@ -54,12 +56,13 @@ export function removeProduct(orderId, productId, token){
     }
 }
 
-export function addProduct(id, token){
+export function addProduct(id){
     return async function thunk12(dispatch, getState){
+        const tokenNeeded = getState().user.token
         try{
             const updatedOrder = await axios.post(`${apiUrl}/products/${id}/shoppingCart`, {},{
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${tokenNeeded}`
                 }
             })
             console.log("updated Order test", updatedOrder)
@@ -73,14 +76,15 @@ export function addProduct(id, token){
     }
 }
 
-export function addShipping(token, shipping){
+export function addShipping(shipping){
     return async function thunk13(dispatch, getState){
+        const tokenNeeded = getState().user.token
         try{
             const shippingUpdated = await axios.patch(`${apiUrl}/checkout/updateCart`,{
                 expressShipping: shipping
             },{
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${tokenNeeded}`
                 }
             })
             console.log("update went well", shippingUpdated)
@@ -94,14 +98,15 @@ export function addShipping(token, shipping){
     }
 }
 
-export function addShippingAddress(token, address){
+export function addShippingAddress(address){
     return async function thunk14(dispatch, getState){
+        const tokenNeeded = getState().user.token
         try{
             const updateAddress = await axios.patch(`${apiUrl}/updateAddress`,{
                 shippingAddress: address
             },{
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${tokenNeeded}`
                 }
             })
             console.log("update happened", updateAddress)
@@ -112,18 +117,19 @@ export function addShippingAddress(token, address){
     }
 }
 
-export function addPayment(token, total, moneyValue){
+export function addPayment(total, moneyValue){
     return async function thunk15(dispatch, getState){
+        const tokenNeeded = getState().user.token
         try{
             const clientSecret = await axios.post(`${apiUrl}/payment`,{
                 amount: total,
                 currency: moneyValue,
             },{
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("payment test", clientSecret.json())
+            console.log("payment test", clientSecret)
 
         } catch(error){
             console.log(error.message)

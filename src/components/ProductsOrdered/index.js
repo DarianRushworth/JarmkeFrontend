@@ -21,7 +21,7 @@ export default function ProductsOrdered(props){
     function onDelete(event){
         const productId = parseInt(event.target.value)
         // console.log("event test", productId)
-        dispatch(removeProduct(orderData.id, productId, user.token))
+        dispatch(removeProduct(orderData.id, productId))
     }
 
     const displayOrder = orderData.id >= 1

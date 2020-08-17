@@ -12,12 +12,12 @@ import { Button } from "react-bootstrap";
 export default function Navigation() {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
-    console.log("user nav test", user)
+    // console.log("user nav test", user)
     const tokenNeeded = useSelector(selectToken)
-    console.log("token test", tokenNeeded)
+    // console.log("token test", tokenNeeded)
 
     const welcomeMessage = `Welcome ${user.firstName} ${user.lastName}`
-    console.log(user.orders)
+    // console.log(user.orders)
 
 
     const amountOfOrders = () => {
