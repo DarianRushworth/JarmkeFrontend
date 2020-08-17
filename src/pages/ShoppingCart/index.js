@@ -53,10 +53,8 @@ export default function ShoppingCart(){
         dispatch(getOrderedProducts(order.id))
     }, [dispatch])
 
-    function sendShipping(shipping, token){
-        if(shipping === "true"){
-            dispatch(addShipping(shipping))
-        }
+    function sendShipping(shipping){
+        dispatch(addShipping(shipping))
     }
 
     const submitted = async (event) => {
@@ -98,12 +96,25 @@ export default function ShoppingCart(){
                     Payment Details:
                 </Alert.Heading>
                 <hr />
+                <div>
                 <p>
-                    Shipping Address:
-                    <hr />
-                    {orderData.shippingAddress}
-                    <hr />
-                    Products:
+                    <div>
+                        Shipping Address:
+                    </div>
+                    <div>
+                        {orderData.shippingAddress}
+                        <hr />
+                    </div>
+                    <div>
+                        Express Shipping:
+                    </div>
+                    <div>
+                        {JSON.stringify(orderData.expressShipping)}
+                        <hr />
+                    </div>
+                    <div>
+                        Products:
+                    </div>
                     <div>
                         <ul>
                         {orderData.products.map(product => {
@@ -112,12 +123,21 @@ export default function ShoppingCart(){
                             )
                         })}
                         </ul>
+                        <hr />
                     </div>
-                    <hr />
-                    Total: €{orderData.total}
+                    <div>
+                        Total:
+                    </div>
+                    <div>
+                        €{orderData.total}
+                        <hr />
+                    </div>
                 </p>
-                <CardDetails />
-                <hr />
+                </div>
+                <div>
+                    <CardDetails />
+                    <hr />
+                </div>
                 <div>
                 <Button
                     onClick={() => {
@@ -234,7 +254,9 @@ export default function ShoppingCart(){
                             Express Shipping:
                         </Form.Label>
                         <Form.Control
-                        onChange={(event) => sendShipping(event.target.value, user.token)} 
+                        onChange={(event) => {
+                            console.log(event.target.value)
+                            sendShipping(event.target.value)}} 
                         as="select"
                         required>
                             <option>--Select-Shipping--</option>
