@@ -31,7 +31,7 @@ export default function ProductsOrdered(props){
                                         width: "18rem"
                                     }}>
                                     <img
-                                    className="car-img-top" 
+                                    className="card-img-top" 
                                     src={product.image}
                                     alt=""/>
                                     <div className="card-body">
