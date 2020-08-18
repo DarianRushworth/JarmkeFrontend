@@ -39,12 +39,6 @@ export default function ProductDetails(){
                     backgroundImage: `url(${jumboUrl})`,
                     height: 200,
                 }}>
-                <Image 
-                    src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597761872/JarmkeBrandingFinal_fdlp0g.jpg"
-                    style={{
-                        width: 200,
-                        height: 100,
-                    }}/>
             </Jumbotron>
             <Container fluid>
                 <Row>

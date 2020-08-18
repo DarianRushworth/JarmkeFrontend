@@ -4,9 +4,12 @@ import "./index.css"
 import Bio from "../../components/Bio"
 import ContactDetails from "../../components/ContactDetails"
 
-const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761978/IMG-1292_zrtuom.jpg"
+const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597785938/TryMore_bf1nas.jpg"
 const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761569/IMG-1796_m8rmvr.jpg"
 
+const message = 
+`jarmke
+jewellery`
 export default function HomePage(){
 
     return(
@@ -20,12 +23,9 @@ export default function HomePage(){
                         backgroundImage: `url(${jumboUrl})`,
                         height: 200,
                     }}>
-                        <Image
-                            src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597761872/JarmkeBrandingFinal_fdlp0g.jpg"
-                            style={{
-                                width: 200,
-                                height: 100,
-                            }} />
+                        <h1 className="BrandH1">
+                            {message}
+                        </h1>
                     </Jumbotron>
 
                 </header>

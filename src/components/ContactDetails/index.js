@@ -23,7 +23,13 @@ export default function ContactDetails(){
                 </Row>
                 <Row md={6} >
                     <Col xs={10} >
-                        <strong>Email:</strong>
+                    <Image 
+                                src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597782162/Email_ekc5jr.jpg"
+                                roundedCircle 
+                                style={{
+                                   width: 30,
+                                   height: 30,
+                                }}/>
                     </Col>
                     <Col>
                         {owner.email}
@@ -31,14 +37,20 @@ export default function ContactDetails(){
                 </Row>
                 <Row md={6}>
                     <Col xs={10}>
-                    <strong>Phone:</strong>
+                    <Image 
+                                src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597782043/Phone_qwzmwu.jpg"
+                                roundedCircle 
+                                style={{
+                                   width: 30,
+                                   height: 30,
+                                }}/>
                     </Col>
                     <Col>
                         +{owner.phone}
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
+                <Row md={6}>
+                    <Col xs={10}>
                         <a href="https://www.instagram.com/_jarmke/">
                             <Image 
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS6EGPAjV4cLjO4uE5FjAIBvTcyWONzY-wAXw&usqp=CAU"
@@ -48,6 +60,9 @@ export default function ContactDetails(){
                                    height: 30,
                                 }}/>
                         </a>
+                    </Col>
+                    <Col>
+                        @_jarmke
                     </Col>
                 </Row>
             </Container>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+
 .HomeImage {
   background-position: center;
   background-repeat: no-repeat;
@@ -7,4 +9,9 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+.BrandH1 {
+  color: white;
+  font-family: "Allura", cursive;
+  font-size: 76px;
 }
