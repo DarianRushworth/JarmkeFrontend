@@ -3,16 +3,13 @@ import { CardElement } from "@stripe/react-stripe-js"
 import "./index.css"
 
 export default function CardDetails(){
-  // const stripe = useStripe()
-  // const element = useElements()
-
-    const CardOption = {
+    const CardSetup = {
       iconStyle: 'solid',
       style: {
         base: {
           
           iconColor: '#c4f0ff',
-          color: '#fff',
+          color: '#000000',
           fontWeight: 500,
           fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
           fontSize: '16px',
@@ -25,14 +22,13 @@ export default function CardDetails(){
           color: '#ffc7ee',
         },
       },
-    };
-    
+    }
 
     return (
         <label>
           Card Details
           <div>
-            <CardElement options={CardOption}/>
+            <CardElement options={CardSetup}/>
           </div>
         </label>
     )

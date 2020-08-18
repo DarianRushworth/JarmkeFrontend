@@ -2,9 +2,8 @@ import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
 import { setUser } from "../../store/User/actions"
-import { useDispatch } from "react-redux"
 
-function addOrderProduct(OrderData){
+export function addOrderProduct(OrderData){
     return {
         type: "ADD_ORDER_PRODUCT",
         payload: OrderData
@@ -119,19 +118,19 @@ export function addShippingAddress(address){
     }
 }
 
-export function addPayment(total, moneyValue){
+export function addPayment(total){
     return async function thunk15(dispatch, getState){
         const tokenNeeded = getState().user.token
         try{
-            const clientSecret = await axios.post(`${apiUrl}/payment`,{
-                amount: total,
-                currency: moneyValue,
+            const userOrder = await axios.patch(`${apiUrl}/payment`,{
+                amount: total
             },{
                 headers: {
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("payment test", clientSecret)
+            console.log("updated order test", userOrder)
+            dispatch(setUser(userOrder.data))
 
         } catch(error){
             console.log(error.message)

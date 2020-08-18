@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import axios from 'axios';
 import {
     Form,
     Container,
@@ -8,19 +9,19 @@ import {
     Alert
 } from "react-bootstrap"
 import { useHistory } from "react-router"
-import { Elements } from "@stripe/react-stripe-js"
-import { loadStripe } from "@stripe/stripe-js"
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js'
 
 import CardDetails from "../../components/CardDetails"
 import ProductsOrdered from "../../components/ProductsOrdered"
 import { selectUser } from "../../store/User/selectors"
 import { 
+    addPayment,
     getOrderedProducts, 
     addShipping,
     addShippingAddress,  
-    addPayment} from "../../store/Order/actions"
+    addOrderProduct} from "../../store/Order/actions"
 import { selectOrderData } from "../../store/Order/selectors"
+import { apiUrl } from "../../config/constants"
 
 export default function ShoppingCart(){
     const stripe = useStripe()
@@ -37,6 +38,8 @@ export default function ShoppingCart(){
     // console.log("user test", user)
     const orderData = useSelector(selectOrderData)
     // console.log("order data test", orderData)
+
+    const tokenNeeded =user.token
 
     if(!user){
         history.push("/")
@@ -60,10 +63,27 @@ export default function ShoppingCart(){
     const submitted = async (event) => {
         event.preventDefault()
 
+        const address =
+        `${streetName} ${houseNumber}, ${postalCode}, ${district}`
+        dispatch(addShippingAddress(address))
+        
+        set_Display(false)
+        set_Message(true)
+
         if(!stripe || !elements){
             return
         }
-        const response = await stripe.confirmCardPayment("{CLIENT_SECRET}", {
+
+        const clientSecret = await axios.post(`${apiUrl}/payment`,{
+            amount: orderData.total*100,
+            currency: "eur",
+        },{
+            headers: {
+                Authorization: `Bearer ${tokenNeeded}`
+            }
+        })
+        console.log('secret matias', clientSecret);
+        const response = await stripe.confirmCardPayment(clientSecret.data.client_secret, {
             payment_method: {
                 card: elements.getElement(CardElement),
                 billing_details: {
@@ -71,10 +91,14 @@ export default function ShoppingCart(){
                 }
             }
         })
+        console.log('success a', response)
         if(response.error){
             console.log(response.error.message)
         } else {
             if(response.paymentIntent.status === "succeeded"){
+                history.push("/profilePage")
+                dispatch(addOrderProduct(clientSecret.data.order))
+                dispatch(addPayment(orderData.total))
                 console.log("success")
             }
         }
@@ -91,29 +115,38 @@ export default function ShoppingCart(){
     const alertMessage = message
             ? <Alert variant="success">
                 <Form as={Col} md={{span: 6, offset: 3}} className="mt-5"
-                      onSubmit={(event) => event.preventDefault()}>
+                      onSubmit={submitted}>
                 <Alert.Heading>
                     Payment Details:
                 </Alert.Heading>
                 <hr />
                 <div>
-                <p>
                     <div>
-                        Shipping Address:
+                        <p>
+                            Shipping Address:
+                        </p>
                     </div>
                     <div>
-                        {orderData.shippingAddress}
+                        <p>
+                            {orderData.shippingAddress}
+                        </p>
                         <hr />
                     </div>
                     <div>
-                        Express Shipping:
+                        <p>
+                            Express Shipping:
+                        </p>
                     </div>
                     <div>
-                        {JSON.stringify(orderData.expressShipping)}
+                        <p>
+                            {JSON.stringify(orderData.expressShipping)}
+                        </p>
                         <hr />
                     </div>
                     <div>
-                        Products:
+                        <p>
+                            Products:
+                        </p>
                     </div>
                     <div>
                         <ul>
@@ -126,13 +159,16 @@ export default function ShoppingCart(){
                         <hr />
                     </div>
                     <div>
-                        Total:
+                        <p>
+                            Total:
+                        </p>
                     </div>
                     <div>
-                        €{orderData.total}
+                        <p>
+                            €{orderData.total}
+                        </p>
                         <hr />
                     </div>
-                </p>
                 </div>
                 <div>
                     <CardDetails />
@@ -140,9 +176,11 @@ export default function ShoppingCart(){
                 </div>
                 <div>
                 <Button
-                    onClick={() => {
+                    onClick={(e) => {
                         set_Message(false)
-                        dispatch(addPayment(orderData.total, "eur"))}}>
+                      //  dispatch(addPayment(orderData.total*100, "eur"))}}
+                      submitted(e)
+                    }}>
                     Pay
                 </Button>
                 <Button
@@ -219,6 +257,11 @@ export default function ShoppingCart(){
 
     return (
         <div>
+            <head>
+                <script
+                    src="https://js.stripe.com/v3/"
+                ></script>
+            </head>
             <h1>
                 Check out your future Gems!
             </h1>
