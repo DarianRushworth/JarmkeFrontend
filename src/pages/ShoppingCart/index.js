@@ -87,7 +87,10 @@ export default function ShoppingCart(){
             payment_method: {
                 card: elements.getElement(CardElement),
                 billing_details: {
-                    name: "DAz",
+                    name: `${user.firstName} ${user.lastName}`,
+                    email: user.email,
+                    phone: user.phone,
+                    address: user.address,
                 }
             }
         })

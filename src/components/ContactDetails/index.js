@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
-import { Table } from "react-bootstrap"
+import { Image, Container, Col, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
+import "./index.css"
 
 import { getOwnerDetails } from "../../store/Owner/actions"
 import { selectOwner } from "../../store/Owner/selectors"
@@ -14,48 +15,41 @@ export default function ContactDetails(){
         
         dispatch(getOwnerDetails())
     }, [dispatch])
+    
     return(
-        <div>
-            <Table>
-                <thead>
-                    <tr>
-                        <th>
-                            <strong>Contact Deatils</strong>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Email:
-                        </td>
-                        <td>
-                            {owner.email}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Phone:
-                        </td>
-                        <td>
-                            +{owner.phone}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="https://www.instagram.com/_jarmke/">
-                                <img 
+            <Container className="Contact" fluid>
+                <Row>
+                    <strong>Contact Details</strong>
+                </Row>
+                <Row md={6} >
+                    <Col xs={10} >
+                        <strong>Email:</strong>
+                    </Col>
+                    <Col>
+                        {owner.email}
+                    </Col>
+                </Row>
+                <Row md={6}>
+                    <Col xs={10}>
+                    <strong>Phone:</strong>
+                    </Col>
+                    <Col>
+                        +{owner.phone}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <a href="https://www.instagram.com/_jarmke/">
+                            <Image 
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS6EGPAjV4cLjO4uE5FjAIBvTcyWONzY-wAXw&usqp=CAU"
-                                alt=""
+                                roundedCircle 
                                 style={{
-                                    width: 30,
-                                    height: 30,
-                                }} />
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </Table>
-        </div>
+                                   width: 30,
+                                   height: 30,
+                                }}/>
+                        </a>
+                    </Col>
+                </Row>
+            </Container>
     )
 }
