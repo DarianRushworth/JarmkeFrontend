@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import axios from 'axios';
 import {
     Form,
     Container,
@@ -8,16 +9,23 @@ import {
     Alert
 } from "react-bootstrap"
 import { useHistory } from "react-router"
+import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js'
 
+import CardDetails from "../../components/CardDetails"
 import ProductsOrdered from "../../components/ProductsOrdered"
 import { selectUser } from "../../store/User/selectors"
 import { 
+    addPayment,
     getOrderedProducts, 
     addShipping,
-    addShippingAddress  } from "../../store/Order/actions"
+    addShippingAddress,  
+    addOrderProduct} from "../../store/Order/actions"
 import { selectOrderData } from "../../store/Order/selectors"
+import { apiUrl } from "../../config/constants"
 
 export default function ShoppingCart(){
+    const stripe = useStripe()
+    const elements = useElements()
     const [display, set_Display] = useState(false)
     const [message, set_Message] = useState(false)
     const [streetName, set_StreetName] = useState("")
@@ -31,6 +39,8 @@ export default function ShoppingCart(){
     const orderData = useSelector(selectOrderData)
     // console.log("order data test", orderData)
 
+    const tokenNeeded =user.token
+
     if(!user){
         history.push("/")
     }
@@ -43,12 +53,54 @@ export default function ShoppingCart(){
     }
     
     useEffect(() => {
-        dispatch(getOrderedProducts(order.id, user.token))
+        dispatch(getOrderedProducts(order.id))
     }, [dispatch])
 
-    function sendShipping(shipping, token){
-        if(shipping === "true"){
-            dispatch(addShipping(token, shipping))
+    function sendShipping(shipping){
+        dispatch(addShipping(shipping))
+    }
+
+    const submitted = async (event) => {
+        event.preventDefault()
+
+        const address =
+        `${streetName} ${houseNumber}, ${postalCode}, ${district}`
+        dispatch(addShippingAddress(address))
+        
+        set_Display(false)
+        set_Message(true)
+
+        if(!stripe || !elements){
+            return
+        }
+
+        const clientSecret = await axios.post(`${apiUrl}/payment`,{
+            amount: orderData.total*100,
+            currency: "eur",
+        },{
+            headers: {
+                Authorization: `Bearer ${tokenNeeded}`
+            }
+        })
+        console.log('secret matias', clientSecret);
+        const response = await stripe.confirmCardPayment(clientSecret.data.client_secret, {
+            payment_method: {
+                card: elements.getElement(CardElement),
+                billing_details: {
+                    name: "DAz",
+                }
+            }
+        })
+        console.log('success a', response)
+        if(response.error){
+            console.log(response.error.message)
+        } else {
+            if(response.paymentIntent.status === "succeeded"){
+                history.push("/profilePage")
+                dispatch(addOrderProduct(clientSecret.data.order))
+                dispatch(addPayment(orderData.total))
+                console.log("success")
+            }
         }
     }
 
@@ -56,24 +108,91 @@ export default function ShoppingCart(){
         event.preventDefault()
         const address =
         `${streetName} ${houseNumber}, ${postalCode}, ${district}`
-        dispatch(addShippingAddress(user.token, address))
+        dispatch(addShippingAddress(address))
         set_Display(false)
         set_Message(true)
     }
     const alertMessage = message
             ? <Alert variant="success">
+                <Form as={Col} md={{span: 6, offset: 3}} className="mt-5"
+                      onSubmit={submitted}>
                 <Alert.Heading>
-                    Address Shipping To:
+                    Payment Details:
                 </Alert.Heading>
                 <hr />
-                <p>
-                    {`${streetName} ${houseNumber}, ${postalCode}, ${district}`}
-                </p>
+                <div>
+                    <div>
+                        <p>
+                            Shipping Address:
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            {orderData.shippingAddress}
+                        </p>
+                        <hr />
+                    </div>
+                    <div>
+                        <p>
+                            Express Shipping:
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            {JSON.stringify(orderData.expressShipping)}
+                        </p>
+                        <hr />
+                    </div>
+                    <div>
+                        <p>
+                            Products:
+                        </p>
+                    </div>
+                    <div>
+                        <ul>
+                        {orderData.products.map(product => {
+                            return (
+                                <li>{product.title}</li>
+                            )
+                        })}
+                        </ul>
+                        <hr />
+                    </div>
+                    <div>
+                        <p>
+                            Total:
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            €{orderData.total}
+                        </p>
+                        <hr />
+                    </div>
+                </div>
+                <div>
+                    <CardDetails />
+                    <hr />
+                </div>
+                <div>
                 <Button
-                    onClick={() => set_Message(false)}>
-                    Close
+                    onClick={(e) => {
+                        set_Message(false)
+                      //  dispatch(addPayment(orderData.total*100, "eur"))}}
+                      submitted(e)
+                    }}>
+                    Pay
                 </Button>
-            </Alert>
+                <Button
+                    variant="danger"
+                    onClick={() => {
+                        set_Message(false)
+                    }}>
+                    Abort
+                </Button>
+                </div>
+                </Form>
+                </Alert>
             : ""
         
     const otherAddress = display
@@ -138,6 +257,11 @@ export default function ShoppingCart(){
 
     return (
         <div>
+            <head>
+                <script
+                    src="https://js.stripe.com/v3/"
+                ></script>
+            </head>
             <h1>
                 Check out your future Gems!
             </h1>
@@ -156,10 +280,15 @@ export default function ShoppingCart(){
                         <Form.Control 
                         as="select"
                         required>
-                            <option>{user.address}</option>
+                            <option
+                            onClick={() => {
+                                dispatch(addShippingAddress(user.address))
+                                set_Message(true)}}
+                            >{user.address}</option>
                             <option
                             value="elseWhere"
-                            onClick={() => set_Display(true)}>Some Where Else</option>
+                            onClick={() => set_Display(true)}
+                            >Some Where Else</option>
                         </Form.Control>
                     </Form.Group>
                     {otherAddress}
@@ -168,7 +297,9 @@ export default function ShoppingCart(){
                             Express Shipping:
                         </Form.Label>
                         <Form.Control
-                        onChange={(event) => sendShipping(event.target.value, user.token)} 
+                        onChange={(event) => {
+                            console.log(event.target.value)
+                            sendShipping(event.target.value)}} 
                         as="select"
                         required>
                             <option>--Select-Shipping--</option>
@@ -177,13 +308,6 @@ export default function ShoppingCart(){
                             <option
                             value="false">No Thanks!</option>
                         </Form.Control>
-                    </Form.Group>
-                    <Form.Group>
-                    <Button
-                    href="/"
-                    variant="info">
-                        Payment Details
-                    </Button>
                     </Form.Group>
                     </Form>
                 </Container>

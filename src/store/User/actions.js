@@ -1,6 +1,15 @@
 import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
+import { selectToken } from "./selectors"
+
+function validUser(data){
+    return {
+        type: "VALID_USER",
+        payload: data,
+    }
+}
+
 function notFavorite(favoriteData){
     return {
         type: "NOT_FAVORITE",
@@ -46,6 +55,37 @@ export function getUser(email, password){
     }
 }
 
+export function validateUser(){
+    return async function thunk15(dispatch, getState){
+        const token = selectToken(getState())
+        console.log("token action test", token)
+
+        if(token === null){
+            return
+        }
+
+        try{
+            const user = await axios.get(`${apiUrl}/user`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log("user test action", user)
+            dispatch(validUser(user.data))
+
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
+
+export function removeUser(){
+    return {
+        type: "REMOVE_USER"
+    }
+}
+
 export function newUser(
     firstName,
     lastName,
@@ -75,12 +115,14 @@ export function newUser(
         }
 }
 
-export function getFavorites(token){
+export function getFavorites(){
     return async function thunk7(dispatch, getState){
+        const tokenNeeded = getState().user.token
+        console.log(tokenNeeded)
         try{
-            const favorites = await axios.get(`${apiUrl}/favorites`,{
+            const favorites = await axios.get(`${apiUrl}/favorites/fav`,{
                 headers:{
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${tokenNeeded}`
                 }
             })
             // console.log("favorites test", favorites)
@@ -93,13 +135,14 @@ export function getFavorites(token){
     }
 }
 
-export function newFavorite(id, token){
+export function newFavorite(id){
     // console.log("token test", token)
     return async function thunk8(dispatch, getState){
+        const tokenNeeded = getState().user.token
         try{
             const sendFavorite = await axios.post(`${apiUrl}/favorites/products/${id}`, {},{
                 headers:{
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${tokenNeeded}`
                 }
             })
             // console.log("new favorite test", sendFavorite)
@@ -112,12 +155,13 @@ export function newFavorite(id, token){
     }
 }
 
-export function removeFavorite(id, token){
+export function removeFavorite(id){
     return async function thunk9(dispatch, getState){
+        const tokenNeeded = getState().user.token
         try{
             const deleteFavorite = await axios.delete(`${apiUrl}/favorites/products/${id}`, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${tokenNeeded}`
                 }
             })
             // console.log("remove favorite test", deleteFavorite)

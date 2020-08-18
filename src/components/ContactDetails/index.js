@@ -43,10 +43,15 @@ export default function ContactDetails(){
                     </tr>
                     <tr>
                         <td>
-                            Instagram:
-                        </td>
-                        <td>
-                            Try link Instagram here
+                            <a href="https://www.instagram.com/_jarmke/">
+                                <img 
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS6EGPAjV4cLjO4uE5FjAIBvTcyWONzY-wAXw&usqp=CAU"
+                                alt=""
+                                style={{
+                                    width: 30,
+                                    height: 30,
+                                }} />
+                            </a>
                         </td>
                     </tr>
                 </tbody>

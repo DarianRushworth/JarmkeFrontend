@@ -6,7 +6,7 @@ import { useHistory } from "react-router"
 import { getFavorites } from "../../store/User/actions"
 import { selectFavorites } from "../../store/User/selectors"
 
-export default function UsersFavorites(props){
+export default function UsersFavorites(){
     const dispatch = useDispatch()
     const history = useHistory()
     const favorites = useSelector(selectFavorites)
@@ -29,7 +29,7 @@ export default function UsersFavorites(props){
 
     function renderOnce(){
         if(favorites.length === 0)
-        dispatch(getFavorites(props.data.token))
+        dispatch(getFavorites())
     }
 
     useEffect(() => {
