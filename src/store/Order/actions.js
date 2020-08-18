@@ -27,7 +27,7 @@ export function getOrderedProducts(id){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("fetched cart test", cartProducts)
+            // console.log("fetched cart test", cartProducts)
 
             dispatch(setOrderProducts(cartProducts.data))
 
@@ -46,7 +46,7 @@ export function removeProduct(orderId, productId){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("action test", getRidOf)
+            // console.log("action test", getRidOf)
             dispatch(setOrderProducts(getRidOf.data.notInCart))
             dispatch(setUser(getRidOf.data.user))
 
@@ -65,7 +65,7 @@ export function addProduct(id){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("updated Order test", updatedOrder)
+            // console.log("updated Order test", updatedOrder)
 
             dispatch(addOrderProduct(updatedOrder.data.newIncart))
             dispatch(setUser(updatedOrder.data.user))
@@ -87,7 +87,7 @@ export function addShipping(shipping){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("update went well", shippingUpdated)
+            // console.log("update went well", shippingUpdated)
 
             dispatch(setUser(shippingUpdated.data.user))
             dispatch(addOrderProduct(shippingUpdated.data.order))
@@ -109,7 +109,7 @@ export function addShippingAddress(address){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("update happened", updateAddress)
+            // console.log("update happened", updateAddress)
             dispatch(setOrderProducts(updateAddress.data))
 
         } catch(error){
@@ -129,7 +129,7 @@ export function addPayment(total){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("updated order test", userOrder)
+            // console.log("updated order test", userOrder)
             dispatch(setUser(userOrder.data))
 
         } catch(error){

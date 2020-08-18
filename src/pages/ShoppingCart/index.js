@@ -82,7 +82,7 @@ export default function ShoppingCart(){
                 Authorization: `Bearer ${tokenNeeded}`
             }
         })
-        console.log('secret matias', clientSecret);
+        // console.log('secret matias', clientSecret);
         const response = await stripe.confirmCardPayment(clientSecret.data.client_secret, {
             payment_method: {
                 card: elements.getElement(CardElement),
@@ -91,7 +91,7 @@ export default function ShoppingCart(){
                 }
             }
         })
-        console.log('success a', response)
+        // console.log('success a', response)
         if(response.error){
             console.log(response.error.message)
         } else {
@@ -99,7 +99,7 @@ export default function ShoppingCart(){
                 history.push("/profilePage")
                 dispatch(addOrderProduct(clientSecret.data.order))
                 dispatch(addPayment(orderData.total))
-                console.log("success")
+                // console.log("success")
             }
         }
     }
@@ -178,8 +178,7 @@ export default function ShoppingCart(){
                 <Button
                     onClick={(e) => {
                         set_Message(false)
-                      //  dispatch(addPayment(orderData.total*100, "eur"))}}
-                      submitted(e)
+                        submitted(e)
                     }}>
                     Pay
                 </Button>

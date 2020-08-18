@@ -58,7 +58,7 @@ export function getUser(email, password){
 export function validateUser(){
     return async function thunk15(dispatch, getState){
         const token = selectToken(getState())
-        console.log("token action test", token)
+        // console.log("token action test", token)
 
         if(token === null){
             return
@@ -70,7 +70,7 @@ export function validateUser(){
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log("user test action", user)
+            // console.log("user test action", user)
             dispatch(validUser(user.data))
 
 
@@ -118,7 +118,7 @@ export function newUser(
 export function getFavorites(){
     return async function thunk7(dispatch, getState){
         const tokenNeeded = getState().user.token
-        console.log(tokenNeeded)
+        // console.log(tokenNeeded)
         try{
             const favorites = await axios.get(`${apiUrl}/favorites/fav`,{
                 headers:{
