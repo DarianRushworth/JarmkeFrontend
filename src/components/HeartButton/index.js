@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { newFavorite, removeFavorite } from "../../store/User/actions"
 import { selectFavorites } from "../../store/User/selectors"
 import "./index.css"
+import { Button } from "react-bootstrap"
 
 export default function HeartButton(props){
     const dispatch = useDispatch()
@@ -15,14 +16,14 @@ export default function HeartButton(props){
     const favoriteOrNot = favorites.find(favorite => product.id === favorite.id)
 
     const displayHeart = favoriteOrNot
-                        ? <button
-                            className="heart"
+                        ? <Button
+                            variant="outline-danger"
                             onClick={() => unFavoriteThis(product.id)}
-                            >❤</button>
-                        : <button
-                            className="heart"
+                            >❤</Button>
+                        : <Button
+                            variant="outline-danger"
                             onClick={() => favoriteThis(product.id)}
-                            >♡</button>
+                            >♡</Button>
 
     function favoriteThis(id){
         dispatch(newFavorite(id))
