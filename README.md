@@ -27,6 +27,8 @@ On the Frontend I used:
 With both my backend and frontend firing together I could finally start putting all of these features in place:
 1. Paginaiton
 
+![Pagination-gif](https://github.com/DarianRushworth/JarmkeFrontend/blob/development/Pagination-gif.gif)
+
 2. Favoriting Products
  
  ![Animated GIF-downsized_large](https://github.com/DarianRushworth/JarmkeFrontend/blob/development/Animated%20GIF-downsized_large.gif)
