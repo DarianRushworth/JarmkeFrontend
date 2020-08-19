@@ -42,4 +42,4 @@ With both my backend and frontend firing together I could finally start putting 
 6. Payment Methods
     * Confirmation of all Details
     * Upon successful payment redirect to user profile, to see completed order.
-    [gitTest](https://media.giphy.com/media/ZEYVVhuuiXYYk0j6gB/giphy.gif)
+    ![Animated GIF-downsized_large](https://github.com/DarianRushworth/ReadGifs)
