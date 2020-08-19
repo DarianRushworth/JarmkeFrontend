@@ -1,68 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Jarmke Jewellery
 
-## Available Scripts
+Jarmke is a brand of jewellery made by Kristina Jarmke Matthews, this is a web shop that I am busy constructing to suit her wants.
 
-In the project directory, you can run:
+The first meeting, we gathered and spoke about the processes she would like her site to have and the information she would like available.
+After this I created my backend project board [BackendBoard](https://github.com/DarianRushworth/JarmkeBackend/projects/1)
+, to plan out the information I needed from Kristina, and double check the placements of the authentication routers.
 
-### `npm start`
+On the Backend, I used:
+* Sequelize
+* Postgres
+* express
+* Middlewares
+* JWT's
+* Stripe
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Now that both Kristina and I were happy with the way the backend was firing, we approached her disires on the visual aspect and the reactivity of her web shop.
+I came up with my frontend project board [FrontendBoard](https://github.com/DarianRushworth/JarmkeFrontend/projects/1), and to get and idea of a MVP, I drew up this [WireFrame](https://wireframepro.mockflow.com/editor.jsp?editor=off&publicid=M3d569fc6bbefd9c8a4d90c62e6340b9b1597063988156&projectid=Mf67a0a5723037b0e16e2c4b00e0a22de1597054524825&perm=Owner#/page/546d0e2db7494ddcb0f911044f3eb80d)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+On the Frontend I used:
+* React
+* Redux
+* Axios
+* React-Bootstrap
+* Stripe
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+With both my backend and frontend firing together I could finally start putting all of these features in place:
+1. Paginaiton
+2. Favoriting Products
+3. User Profile Page
+    * Update user information
+    * Shows all Orders belonging to user
+    * Presents all favoured products
+4. Adding/Removing from Cart
+    * Updates the number of items in the Cart
+    * Changes the total of the Cart
+    * If no active order, one is made upon adding product.
+5. Revising Shipping Details
+    * Shipping to another address, pop up new address form
+    * Express Shipping, updates the total accrodingly
+    * Both get updated on the order 
+6. Payment Methods
+    * Confirmation of all Details
+    * Upon successful payment redirect to user profile, to see completed order.
