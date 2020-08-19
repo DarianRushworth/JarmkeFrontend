@@ -3,12 +3,15 @@ import {
     Form,
     Container,
     Button,
-    Col
+    Col,
+    Jumbotron
 } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 
 import { newUser } from "../../store/User/actions"
+
+const jumboIamge = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597845473/IMG_5481_etie1o.jpg"
 
 export default function SignUpPage(){
     const dispatch = useDispatch()
@@ -53,6 +56,15 @@ export default function SignUpPage(){
     }
 
     return(
+        <div>
+        <Jumbotron style={
+            {
+                backgroundImage: `url(${jumboIamge})`,
+                height: 250,
+            }
+        }   className="JumboImage">
+
+        </Jumbotron>
         <Container>
             <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
                 <h1 className="mt-5 mb-5">
@@ -145,5 +157,6 @@ export default function SignUpPage(){
                 </Form.Group>
             </Form>
         </Container>
+        </div>
     )
 }
