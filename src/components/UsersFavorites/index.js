@@ -42,7 +42,7 @@ export default function UsersFavorites(){
                 <thead>
                     <tr>
                         <th>
-                            <strong>Favorites:</strong>
+                            <h1>Favorites:</h1>
                         </th>
                     </tr>
                 </thead>

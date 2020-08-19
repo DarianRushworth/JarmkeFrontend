@@ -40,7 +40,7 @@ export default function ProductDetails(){
                     height: 200,
                 }}>
             </Jumbotron>
-            <Container fluid>
+            <Container fluid className="card-top">
                 <Row>
                     <Col>
                     <div 

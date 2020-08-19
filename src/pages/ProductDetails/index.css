@@ -3,6 +3,9 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+.card {
+  text-align: center;
+}
 .card-text {
   color: #000;
   text-align: center;
