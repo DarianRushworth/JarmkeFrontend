@@ -42,4 +42,4 @@ With both my backend and frontend firing together I could finally start putting 
 6. Payment Methods
     * Confirmation of all Details
     * Upon successful payment redirect to user profile, to see completed order.
-    ![Animated GIF-downsized_large](https://github.com/DarianRushworth/ReadGifs)
+    ![Animated GIF-downsized_large](https://github.com/DarianRushworth/JarmkeFrontend)
