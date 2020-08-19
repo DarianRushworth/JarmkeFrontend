@@ -54,3 +54,5 @@ With both my backend and frontend firing together I could finally start putting 
 6. Payment Methods
     * Confirmation of all Details
     * Upon successful payment redirect to user profile, to see completed order
+    
+    ![Payment](https://github.com/DarianRushworth/JarmkeFrontend/blob/development/Payment.gif)
