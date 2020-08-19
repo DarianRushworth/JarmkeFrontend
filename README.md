@@ -48,6 +48,9 @@ With both my backend and frontend firing together I could finally start putting 
     * Shipping to another address, pop up new address form
     * Express Shipping, updates the total accrodingly
     * Both get updated on the order 
+    
+![UpdateShipping](https://github.com/DarianRushworth/JarmkeFrontend/blob/development/UpdateShipping.gif)
+    
 6. Payment Methods
     * Confirmation of all Details
     * Upon successful payment redirect to user profile, to see completed order
