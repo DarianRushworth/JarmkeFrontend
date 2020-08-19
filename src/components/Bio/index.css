@@ -1,12 +1,5 @@
-h3 {
+.BioDiv {
     text-align: center;
-    color: #33ccff;
-}
-p {
-    text-align: center;
-    color: #33ccff;
-}
-ul {
-    text-align: center;
-    color: #33ccff;
+    color: #000000;
+    font-weight: bold;
 }

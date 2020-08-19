@@ -1,13 +1,16 @@
 import React, { useEffect } from "react"
 import { useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { Table, Button } from "react-bootstrap"
+import { Button, Jumbotron, Container, Col, Image, Row } from "react-bootstrap"
 
 import HeartButton from "../../components/HeartButton"
 import { getSpecificProduct } from "../../store/Products/actions"
 import { selectProduct } from "../../store/Products/selectors"
 import { addProduct } from "../../store/Order/actions"
 import { selectUser } from "../../store/User/selectors"
+import "./index.css"
+
+const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597769832/IMG-6327_ssonf4.jpg"
 
 export default function ProductDetails(){
     const dispatch = useDispatch()
@@ -27,68 +30,67 @@ export default function ProductDetails(){
         dispatch(addProduct(id))
     }
 
-    const display = product.id
-                        ?  <Table>
-                                <thead
-                                style={{
-                                    textAlign: "center"
-                                }}>
-                                    <tr>
-                                        <th>
-                                            <strong>{product.title}</strong>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <img
-                                            src={product.image}
-                                            alt="product"
-                                            />
-                                        </td>
-                                        <td>
-                                            <div>
-                                                Description:
-                                            </div>
-                                            <div>
-                                                {product.description}
-                                            </div>
-                                            <div>
-                                                Metal:
-                                            </div>
-                                            <div>
-                                                {product.metal}
-                                            </div>
-                                            <div>
-                                                Price:
-                                            </div>
-                                            <div>
-                                                {product.price}
-                                            </div>
-                                            <div>
-                                                Units in Stock:
-                                            </div>
-                                            <div>
-                                                {product.unitsInStock}
-                                            </div>
-                                            <div>
-                                                <Button
-                                                value={product.id}
-                                                onClick={(event) => addToCart(
-                                                    parseInt(event.target.value), user.token)}>
-                                                    Add to Cart!
-                                                </Button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        : "Loading..."
+    
     return (
         <div>
-            {display}
-            <HeartButton data={product}/>
+            <Jumbotron
+                className="JumboImage"
+                style={{
+                    backgroundImage: `url(${jumboUrl})`,
+                    height: 200,
+                }}>
+            </Jumbotron>
+            <Container>
+                <Row>
+                    <Col md={{span:3, offset: 3}}>
+                    <div 
+                        key={product.id}
+                        className="card"
+                        style={{
+                        width: "21rem"
+                    }}>
+                        <Image 
+                            className="card-img-top"
+                            src={product.image}
+                            alt=""/>
+                            <div className="card-body">
+                                <h5 className="card-title"
+                                    style={{
+                                        textAlign: "right"
+                                    }}>
+                                    {product.title}
+                                    <div style={{
+                                        textAlign: "left"
+                                    }}>
+                                        <HeartButton data={product} />
+                                    </div>
+                                </h5>
+                                <p className="card-text">
+                                    {product.description}
+                                </p>
+                            </div>
+                            <div className="card-body"> 
+                                <p className="card-p">
+                                    Units in Stock : {product.unitsInStock}
+                                </p>
+                            </div>
+                                <ul className="list-group list-group-flush">
+                                    <li className="list-group-item">{product.metal}</li>
+                                    <li className="list-group-item">€{product.price}</li>
+                                </ul>
+                                <div className="card-body">
+                                    <Button
+                                        value={product.id}
+                                        variant="info"
+                                        onClick={(event) => addToCart(
+                                            parseInt(event.target.value))}>
+                                            Add To Cart
+                                    </Button>
+                                </div>
+                    </div>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 }

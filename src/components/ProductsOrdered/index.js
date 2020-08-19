@@ -1,9 +1,11 @@
 import React from "react"
-import { Table, Button, InputGroup, FormControl, Col } from "react-bootstrap"
+import { Table, Button, InputGroup, FormControl, Col, Container, Jumbotron, Row } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 
 import { removeProduct } from "../../store/Order/actions"
+
+const jumboImage ="https://res.cloudinary.com/djzjepmnr/image/upload/v1597827679/IMG-6987_bjm8x8.jpg"
 
 export default function ProductsOrdered(props){
     const history = useHistory()
@@ -24,14 +26,14 @@ export default function ProductsOrdered(props){
     const displayOrder = orderData.id >= 1
                         ? orderData.products.map(product => {
                             return (
-                                <td>
+                                <Col md={{span: 3, offset: 1}}>
                                 <div key={product.id}
                                     className="card"
                                     style={{
                                         width: "18rem"
                                     }}>
                                     <img
-                                    className="car-img-top" 
+                                    className="card-img-top" 
                                     src={product.image}
                                     alt=""/>
                                     <div className="card-body">
@@ -56,44 +58,27 @@ export default function ProductsOrdered(props){
                                         </Button>
                                     </div>
                                 </div>
-                                </td>
+                                </Col>
                             )
                         })
                         : "Loading..."
     return (
         <div>
-            <Table>
-                <thead>
-                    <tr>
-                        <th>
-                            Products Ordered
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        {displayOrder}
-                    </tr>
-                </tbody>
-            </Table>
-            <div>
-                <InputGroup as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-                    <InputGroup.Prepend>
-                        <InputGroup.Text>
-                                €
-                        </InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl 
-                    aria-label="Total of Products(in Euros)"
-                    placeholder={orderData.total}
-                    disabled />
-                    <InputGroup.Append>
-                        <InputGroup.Text>
-                            .00
-                        </InputGroup.Text>
-                    </InputGroup.Append>
-                </InputGroup>
-            </div>
+            <Jumbotron
+                className="JumboImage"
+                style={
+                    {
+                        backgroundImage: `url(${jumboImage})`,
+                        height: 250,
+                    }
+                }>
+
+            </Jumbotron>
+            <Container fluid>
+                <Row>
+                    {displayOrder}
+                </Row>
+            </Container>
         </div>
     )
 } 

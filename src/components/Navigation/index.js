@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import NavBarItem from "./NavBarItem"
 import { selectUser, selectToken } from "../../store/User/selectors"
 import { removeUser } from "../../store/User/actions"
-import { Button } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 
 export default function Navigation() {
     const dispatch = useDispatch()
@@ -44,13 +44,22 @@ export default function Navigation() {
 
     // console.log("user test", user)
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark"  variant={{
+            color: "white"
+        }} expand="lg">
             <Navbar.Brand as={NavLink} to="/">
-                Jarmke
+                <Image 
+                    src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597756099/bf45652b-4f53-4be9-9273-b966efc24f36_mecqom.png"
+                    roundedCircle
+                    style={{
+                        width: 55,
+                        height: 55,
+                    }} />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav style={{ width: "100%" }} fill>
+                <Nav style={{ 
+                    width: "100%"}} fill>
                     <NavBarItem path="/productsPage" linkText="Store" />
                     {navDisplay}
                 </Nav>

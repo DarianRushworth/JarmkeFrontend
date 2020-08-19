@@ -1,11 +1,15 @@
 import React from "react"
-import { Jumbotron } from "react-bootstrap"
+import { Jumbotron, Image } from "react-bootstrap"
 import "./index.css"
 import Bio from "../../components/Bio"
 import ContactDetails from "../../components/ContactDetails"
 
-const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597221407/IMG_5465_gmhofp.jpg"
+const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597827684/NewHome_axx8u7.jpg"
+const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761569/IMG-1796_m8rmvr.jpg"
 
+const message = 
+`jarmke
+jewellery`
 export default function HomePage(){
 
     return(
@@ -13,9 +17,14 @@ export default function HomePage(){
         <div>
             <div>
                 <header>
-                    <Jumbotron>
-                        <h1>
-                            Home Page
+                    <Jumbotron
+                    className="JumboImage"
+                    style={{
+                        backgroundImage: `url(${jumboUrl})`,
+                        height: 200,
+                    }}>
+                        <h1 className="BrandH1">
+                            {message}
                         </h1>
                     </Jumbotron>
 
@@ -31,9 +40,13 @@ export default function HomePage(){
                     <Bio />
             </div>
         </div>
-        <footer>
-            <ContactDetails />
-        </footer>
+        <div style={{
+            backgroundColor: "#526f85",
+        }}>
+            <footer>
+                <ContactDetails />
+            </footer>
+        </div>
         </div>
     )
 }

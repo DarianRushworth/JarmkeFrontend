@@ -1,6 +1,6 @@
 import React, { useState} from "react"
 import { useSelector } from "react-redux"
-import { Jumbotron } from "react-bootstrap"
+import { Jumbotron, Row } from "react-bootstrap"
 import {
     Form,
     Container,
@@ -11,6 +11,8 @@ import {
 import Usersfavorites from "../../components/UsersFavorites"
 import UserOrders from "../../components/UserOrders"
 import { selectUser } from "../../store/User/selectors"
+
+const jumboImage = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761978/IMG-1292_zrtuom.jpg"
 
 export default function ProfilePage(){
     const [FirstName, set_FirstName] = useState("")
@@ -30,13 +32,21 @@ export default function ProfilePage(){
 
     return (
         <div>
-            <Jumbotron>
-                {fullName}
+            <Jumbotron 
+            className="JumboImage"
+            style={
+                {
+                    backgroundImage: `url(${jumboImage})`,
+                    height: 250,
+                }
+            }>
             </Jumbotron>
-            <Container>
-                <Form s={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-                <h1 className="mt-5 mb-5">
-                    User Data:
+            <Container fluid>
+                <Row>
+                <Col>
+                <Form>
+                <h1>
+                    User Details:
                 </h1>
                 <Form.Group controlId="formBasicFirstName">
                     <Form.Control 
@@ -89,8 +99,15 @@ export default function ProfilePage(){
                     </Button>
                 </Form.Group>
                 </Form>
+                </Col>
+                <Col>
+                <h1>
+                    Order Details:
+                </h1>
+                <UserOrders data={user}/>
+                </Col>
+                </Row>
             </Container>
-            <UserOrders data={user}/>
             <Usersfavorites data={user} />
         </div>
     )

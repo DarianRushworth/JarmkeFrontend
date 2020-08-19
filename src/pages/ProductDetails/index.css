@@ -1,0 +1,19 @@
+.JumboImage {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+.card {
+  text-align: center;
+}
+.card-text {
+  color: #000;
+  text-align: center;
+}
+.card-p {
+  color: #000;
+  text-align: center;
+}
+.card-body {
+  text-align: center;
+}
