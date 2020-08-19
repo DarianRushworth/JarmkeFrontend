@@ -55,4 +55,4 @@ With both my backend and frontend firing together I could finally start putting 
     * Confirmation of all Details
     * Upon successful payment redirect to user profile, to see completed order
     
-    ![Payment](https://github.com/DarianRushworth/JarmkeFrontend/blob/development/Payment.gif)
+![Payment](https://github.com/DarianRushworth/JarmkeFrontend/blob/development/Payment.gif)
