@@ -41,6 +41,9 @@ With both my backend and frontend firing together I could finally start putting 
     * Updates the number of items in the Cart
     * Changes the total of the Cart
     * If no active order, one is made upon adding product.
+    
+![UpdateCart](https://github.com/DarianRushworth/JarmkeFrontend/blob/development/UpdateCart.gif)
+    
 5. Revising Shipping Details
     * Shipping to another address, pop up new address form
     * Express Shipping, updates the total accrodingly
