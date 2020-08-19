@@ -6,13 +6,15 @@ import {
     Container,
     Col,
     Button,
-    Alert
+    Alert,
+    Row
 } from "react-bootstrap"
 import { useHistory } from "react-router"
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js'
 
 import CardDetails from "../../components/CardDetails"
 import ProductsOrdered from "../../components/ProductsOrdered"
+import PaymentTotal from "../../components/PaymentTotal"
 import { selectUser } from "../../store/User/selectors"
 import { 
     addPayment,
@@ -264,15 +266,16 @@ export default function ShoppingCart(){
                     src="https://js.stripe.com/v3/"
                 ></script>
             </head>
-            <h1>
-                Check out your future Gems!
-            </h1>
             <ProductsOrdered data={orderData}/>
+            <Container fluid>
+                    {alertMessage}
+                </Container>
             <div>
-                {alertMessage}
-                <Container>
-                    <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-                    <h4 className="mt-5 mb-5">
+                <Container fluid>
+                    <Row>
+                    <Col md={{span: 3, offset: 3}}>
+                    <Form>
+                    <h4>
                         Shipping Info:
                     </h4>
                     <Form.Group controlId="formBasicShippingAddress">
@@ -284,8 +287,7 @@ export default function ShoppingCart(){
                         required>
                             <option
                             onClick={() => {
-                                dispatch(addShippingAddress(user.address))
-                                set_Message(true)}}
+                                dispatch(addShippingAddress(user.address))}}
                             >{user.address}</option>
                             <option
                             value="elseWhere"
@@ -301,7 +303,8 @@ export default function ShoppingCart(){
                         <Form.Control
                         onChange={(event) => {
                             console.log(event.target.value)
-                            sendShipping(event.target.value)}} 
+                            sendShipping(event.target.value)
+                            set_Message(true)}} 
                         as="select"
                         required>
                             <option>--Select-Shipping--</option>
@@ -312,6 +315,14 @@ export default function ShoppingCart(){
                         </Form.Control>
                     </Form.Group>
                     </Form>
+                    <Col>
+                    <h4>
+                        Total:
+                    </h4>
+                        <PaymentTotal data={orderData} />
+                    </Col>
+                    </Col>
+                    </Row>
                 </Container>
             </div>
         </div>

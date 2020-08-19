@@ -40,9 +40,9 @@ export default function ProductDetails(){
                     height: 200,
                 }}>
             </Jumbotron>
-            <Container fluid className="card-top">
+            <Container>
                 <Row>
-                    <Col>
+                    <Col md={{span:3, offset: 3}}>
                     <div 
                         key={product.id}
                         className="card"
