@@ -27,6 +27,7 @@ On the Frontend I used:
 With both my backend and frontend firing together I could finally start putting all of these features in place:
 1. Paginaiton
 2. Favoriting Products
+ ![Animated GIF-downsized_large](https://github.com/DarianRushworth/JarmkeFrontend/blob/development/Animated%20GIF-downsized_large.gif)
 3. User Profile Page
     * Update user information
     * Shows all Orders belonging to user
@@ -41,5 +42,4 @@ With both my backend and frontend firing together I could finally start putting 
     * Both get updated on the order 
 6. Payment Methods
     * Confirmation of all Details
-    * Upon successful payment redirect to user profile, to see completed order.
-    ![Animated GIF-downsized_large](https://github.com/DarianRushworth/JarmkeFrontend/blob/development/Animated%20GIF-downsized_large.gif)
+    * Upon successful payment redirect to user profile, to see completed order
