@@ -5,3 +5,7 @@ img {
 .infoCell {
     width: 220px;
 }
+.list-group-item {
+    color: #000000;
+    text-align: center;
+}

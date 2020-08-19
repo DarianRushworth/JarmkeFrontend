@@ -3,11 +3,11 @@ import "./index.css"
 
 export default function Bio(){
     return(
-        <div>
+        <div className="BioDiv">
             <h3>
                 What Is My Mission:
             </h3>
-            <div className="headP">
+            <div>
                 <div>
                 <p>
                     Kristina Jarmke Matthews has produced a jewellery collection that creates 
@@ -24,7 +24,7 @@ export default function Bio(){
                     In her Collection she has highlighted four areas of focus each with their own
                     mini-colloction:
                     </p>
-                    <div>
+                    <div className="BioUl">
                         <ul>
                             <li>Fibromyalgia</li>
                             <li>Depression</li>

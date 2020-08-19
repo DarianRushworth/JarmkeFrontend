@@ -47,7 +47,7 @@ export default function ProductDetails(){
                         key={product.id}
                         className="card"
                         style={{
-                        width: "25rem"
+                        width: "21rem"
                     }}>
                         <Image 
                             className="card-img-top"
@@ -70,7 +70,7 @@ export default function ProductDetails(){
                                 </p>
                             </div>
                             <div className="card-body"> 
-                                <p>
+                                <p className="card-p">
                                     Units in Stock : {product.unitsInStock}
                                 </p>
                             </div>
