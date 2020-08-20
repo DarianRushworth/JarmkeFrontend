@@ -1,0 +1,11 @@
+img {
+    width: 300px;
+    height: 300px;
+}
+.infoCell {
+    width: 220px;
+}
+.list-group-item {
+    color: #000000;
+    text-align: center;
+}
