@@ -1,5 +1,5 @@
 import React from "react"
-import { Jumbotron, Image } from "react-bootstrap"
+import { Jumbotron } from "react-bootstrap"
 import "./index.css"
 import Bio from "../../components/Bio"
 import ContactDetails from "../../components/ContactDetails"

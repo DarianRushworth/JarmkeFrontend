@@ -6,7 +6,6 @@ import { useHistory } from "react-router"
 
 import { getProducts } from "../../store/Products/actions"
 import { getMoreProducts } from "../../store/Products/actions"
-import { getFavorites } from "../../store/User/actions"
 import { selectProducts } from "../../store/Products/selectors"
 import { selectUser } from "../../store/User/selectors"
 import LoadingSpinner  from "../LoadingSpinner"
