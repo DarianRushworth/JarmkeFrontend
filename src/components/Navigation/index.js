@@ -49,11 +49,11 @@ export default function Navigation() {
         }} expand="lg">
             <Navbar.Brand as={NavLink} to="/">
                 <Image 
-                    src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597756099/bf45652b-4f53-4be9-9273-b966efc24f36_mecqom.png"
+                    src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597914048/LogoEdit_jsikpf.jpg"
                     roundedCircle
                     style={{
-                        width: 55,
-                        height: 55,
+                        width: 60,
+                        height: 60,
                     }} />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

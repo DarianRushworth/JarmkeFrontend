@@ -1,9 +1,10 @@
 import React from "react"
-import { Table, Button, InputGroup, FormControl, Col, Container, Jumbotron, Row } from "react-bootstrap"
+import {Button, Col, Container, Jumbotron, Row } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 
 import { removeProduct } from "../../store/Order/actions"
+import LoadingSpinner from "../LoadingSpinner"
 
 const jumboImage ="https://res.cloudinary.com/djzjepmnr/image/upload/v1597827679/IMG-6987_bjm8x8.jpg"
 
@@ -61,7 +62,7 @@ export default function ProductsOrdered(props){
                                 </Col>
                             )
                         })
-                        : "Loading..."
+                        : <LoadingSpinner />
     return (
         <div>
             <Jumbotron

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Table, Button, Container, Image, Row, Col, Jumbotron } from "react-bootstrap"
+import {Button, Container, Image, Row, Col, Jumbotron } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 
@@ -9,6 +9,7 @@ import { getMoreProducts } from "../../store/Products/actions"
 import { getFavorites } from "../../store/User/actions"
 import { selectProducts } from "../../store/Products/selectors"
 import { selectUser } from "../../store/User/selectors"
+import LoadingSpinner  from "../LoadingSpinner"
 import "./index.css"
 
 const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597766391/Kristina_Matthews_Extra_Lifestyle_smaller_wcusal.jpg"
@@ -22,14 +23,11 @@ export default function ProductTable(){
     // console.log("user test", user)
 
     
-    function renderOnce(){
-        if(products.length === 0){
-            dispatch(getProducts())
-        }
-    }
     useEffect(() => {
-        renderOnce()
-    }, [renderOnce])
+        if(products.length === 0){
+        dispatch(getProducts())
+        }
+    }, [dispatch, products.length])
 
     function redirect(event){
 
@@ -49,8 +47,9 @@ export default function ProductTable(){
     const displayProducts = products.length >= 2
                             ? products.map(product => {
                                 return (
-                                    <Col>
-                                        <div key={product.id}
+                                    <Col
+                                        key={product.id}>
+                                        <div
                                         className="card"
                                         style={{
                                             width: "18rem"
@@ -79,7 +78,7 @@ export default function ProductTable(){
                                         </div>
                                     </Col>
                                 )})
-                            : "Loading Products..."
+                            : <LoadingSpinner />
     return(
         <div>
         <Jumbotron

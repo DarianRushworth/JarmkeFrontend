@@ -56,7 +56,7 @@ export default function ShoppingCart(){
     
     useEffect(() => {
         dispatch(getOrderedProducts(order.id))
-    }, [dispatch])
+    }, [dispatch, order.id])
 
     function sendShipping(shipping){
         dispatch(addShipping(shipping))

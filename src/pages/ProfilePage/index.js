@@ -24,8 +24,6 @@ export default function ProfilePage(){
     const user = useSelector(selectUser)
     // console.log("user test", user)
 
-    const fullName = `${user.firstName} ${user.lastName}`
-
     function onSubmit(event){
         event.preventDefault()
     }
@@ -46,7 +44,7 @@ export default function ProfilePage(){
                 <Col>
                 <Form>
                 <h1>
-                    User Details:
+                    User's Details:
                 </h1>
                 <Form.Group controlId="formBasicFirstName">
                     <Form.Control 
