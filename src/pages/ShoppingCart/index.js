@@ -115,7 +115,6 @@ export default function ShoppingCart(){
         `${streetName} ${houseNumber}, ${postalCode}, ${district}`
         dispatch(addShippingAddress(address))
         set_Display(false)
-        set_Message(true)
     }
     const alertMessage = message
             ? <Alert variant="success">

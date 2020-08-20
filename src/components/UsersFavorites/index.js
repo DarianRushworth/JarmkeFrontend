@@ -33,7 +33,7 @@ export default function UsersFavorites(){
         if(favorites.length === 0){
             dispatch(getFavorites())
         }
-    }, [dispatch, favorites.length])
+    }, [dispatch, favorites.length, favorites.id])
 
     return (
         <div>
