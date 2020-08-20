@@ -7,7 +7,6 @@ import HeartButton from "../../components/HeartButton"
 import { getSpecificProduct } from "../../store/Products/actions"
 import { selectProduct } from "../../store/Products/selectors"
 import { addProduct } from "../../store/Order/actions"
-import { selectUser } from "../../store/User/selectors"
 import "./index.css"
 
 const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597769832/IMG-6327_ssonf4.jpg"
@@ -16,8 +15,6 @@ export default function ProductDetails(){
     const dispatch = useDispatch()
     const product = useSelector(selectProduct)
     // console.log("product test", product)
-    const user = useSelector(selectUser)
-    // console.log("user test", user)
     const idNeeded = parseInt(useParams().id)
     // console.log("params test", idNeeded)
 

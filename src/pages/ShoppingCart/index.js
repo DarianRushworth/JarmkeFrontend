@@ -56,7 +56,7 @@ export default function ShoppingCart(){
     
     useEffect(() => {
         dispatch(getOrderedProducts(order.id))
-    }, [dispatch])
+    }, [dispatch, order.id])
 
     function sendShipping(shipping){
         dispatch(addShipping(shipping))
@@ -115,7 +115,6 @@ export default function ShoppingCart(){
         `${streetName} ${houseNumber}, ${postalCode}, ${district}`
         dispatch(addShippingAddress(address))
         set_Display(false)
-        set_Message(true)
     }
     const alertMessage = message
             ? <Alert variant="success">

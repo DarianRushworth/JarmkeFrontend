@@ -17,7 +17,7 @@ export default function UserOrders(props){
                                 color: "red"
                             }
         return (
-            <tr>
+            <tr key={order.id}>
                 <td style={colorPicker}>
                     {order.total}
                 </td>

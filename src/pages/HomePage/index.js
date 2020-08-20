@@ -8,7 +8,7 @@ const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597909463/
 const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761569/IMG-1796_m8rmvr.jpg"
 
 const message = 
-`jarmke
+`jarmké
 jewellery`
 export default function HomePage(){
 

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Table } from "react-bootstrap"
+import { Container, Col, Row, Image } from "react-bootstrap"
 import { useHistory } from "react-router"
 
 import { getFavorites } from "../../store/User/actions"
 import { selectFavorites } from "../../store/User/selectors"
+import LoadingSpinner from "../LoadingSpinner"
 
 export default function UsersFavorites(){
     const dispatch = useDispatch()
@@ -16,42 +17,36 @@ export default function UsersFavorites(){
     const displayFavorites = favorites.length >= 2
                             ? favorites.map(favorite => {
                                 return (
-                                        <td>
-                                            <img
-                                            key={favorite.id}
+                                        <Col key={favorite.id}>
+                                            <Image
+                                            rounded
                                             src={favorite.image}
                                             alt="product"
-                                            onClick={(event) => history.push(`/moreDetails/${favorite.id}`)} />
-                                        </td>
+                                            onClick={() => history.push(`/moreDetails/${favorite.id}`)} />
+                                        </Col>
                                 )
                             })
-                            : "Loading..."
+                            : <LoadingSpinner />
 
-    function renderOnce(){
-        if(favorites.length === 0)
-        dispatch(getFavorites())
-    }
-
+                            
     useEffect(() => {
-        renderOnce()
-    }, [renderOnce])
+        if(favorites.length === 0){
+            dispatch(getFavorites())
+        }
+    }, [dispatch, favorites.length, favorites.id])
 
     return (
         <div>
-            <Table>
-                <thead>
-                    <tr>
-                        <th>
-                            <h1>Favorites:</h1>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        {displayFavorites}
-                    </tr>
-                </tbody>
-            </Table>
+            <Container>
+                <Row>
+                    <h1>
+                        User Favorites:
+                    </h1>
+                </Row>
+                <Row>
+                    {displayFavorites}
+                </Row>
+            </Container>
         </div>
     )
 }
