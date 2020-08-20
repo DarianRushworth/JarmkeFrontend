@@ -5,14 +5,16 @@ I am a 24 year old, South African male, who now reseides in the Netherlands. I h
 have challenged myself to acquire new knowledge within the web development industry. After 2 months I am putting out my first portfolio.
 I love being around people and working as a team, BBQ's at my house... the African way. Any time I can get out and about I love being in nature and going for walks, I am also extremely pationiate about cooking and the creativity that goes into amazing meals.
 
+### What is Jarmke
 Jarmke is a brand of jewellery made by Kristina Jarmke Matthews, this is a web shop that I am busy constructing to suit her wants.
 She would like a web shop to be able to sell her jewellery as she doesnt have a store front as of yet, but with the beauty of the web do you really need one? 
 
+### Planning under went
 The first meeting, we gathered and spoke about the processes she would like her site to have and the information she would like available.
 After this I created my backend project board [BackendBoard](https://github.com/DarianRushworth/JarmkeBackend/projects/1)
 , to plan out the information I needed from Kristina, and double check the placements of the authentication routers.
 
-On the Backend, I used:
+### Backend Technologies
 * Sequelize
 * Postgres
 * express
@@ -23,13 +25,14 @@ On the Backend, I used:
 Now that both Kristina and I were happy with the way the backend was firing, we approached her disires on the visual aspect and the reactivity of her web shop.
 I came up with my frontend project board [FrontendBoard](https://github.com/DarianRushworth/JarmkeFrontend/projects/1), and to get and idea of a MVP, I drew up this [WireFrame](https://wireframepro.mockflow.com/editor.jsp?editor=off&publicid=M3d569fc6bbefd9c8a4d90c62e6340b9b1597063988156&projectid=Mf67a0a5723037b0e16e2c4b00e0a22de1597054524825&perm=Owner#/page/546d0e2db7494ddcb0f911044f3eb80d)
 
-On the Frontend I used:
+### Frontend Technologies
 * React
 * Redux
 * Axios
 * React-Bootstrap
 * Stripe
 
+### Key Features
 With both my backend and frontend firing together I could finally start putting all of these features in place:
 1. Paginaiton
 
