@@ -4,7 +4,7 @@ import "./index.css"
 import Bio from "../../components/Bio"
 import ContactDetails from "../../components/ContactDetails"
 
-const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597827684/NewHome_axx8u7.jpg"
+const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597909463/NewHomeBlur_inz2fw.jpg"
 const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761569/IMG-1796_m8rmvr.jpg"
 
 const message = 
