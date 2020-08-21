@@ -8,6 +8,8 @@ I love being around people and working as a team, BBQ's at my house... the Afric
 ### What is Jarmke
 Jarmke is a brand of jewellery made by Kristina Jarmke Matthews, this is a web shop that I am busy constructing to suit her wants.
 She would like a web shop to be able to sell her jewellery as she doesnt have a store front as of yet, but with the beauty of the web do you really need one? 
+### Working version
+Follow this link to find the working version thus far. [JarmkeJewellery](https://flamboyant-goodall-aafafa.netlify.app/)
 
 ### Planning under went
 The first meeting, we gathered and spoke about the processes she would like her site to have and the information she would like available.
