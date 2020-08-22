@@ -92,7 +92,7 @@ export default function ProfilePage(){
                 </Form.Group>
                 <Form.Group>
                     <Button
-                        variant="info"
+                        variant="outline-info"
                         type="submit"
                         onClick={onSubmit}>
                         Make Adjustments!
