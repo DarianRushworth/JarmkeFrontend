@@ -1,10 +1,5 @@
 # Jarmke Jewellery
 
-### Darian Rushworth
-I am a 24 year old, South African male, who now reseides in the Netherlands. I have been working in the hospitality industry for far to long and now 
-have challenged myself to acquire new knowledge within the web development industry. After 2 months I am putting out my first portfolio.
-I love being around people and working as a team, BBQ's at my house... the African way. Any time I can get out and about I love being in nature and going for walks, I am also extremely pationiate about cooking and the creativity that goes into amazing meals.
-
 ### What is Jarmke
 Jarmke is a brand of jewellery made by Kristina Jarmke Matthews, this is a web shop that I am busy constructing to suit her wants.
 She would like a web shop to be able to sell her jewellery as she doesnt have a store front as of yet, but with the beauty of the web do you really need one? 
