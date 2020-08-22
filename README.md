@@ -9,7 +9,7 @@ Follow this link to find the working version thus far. [JarmkeJewellery](https:/
 ### Planning under went
 The first meeting, we gathered and spoke about the processes she would like her site to have and the information she would like available.
 After this I created my backend project board [BackendBoard](https://github.com/DarianRushworth/JarmkeBackend/projects/1)
-, to plan out the information I needed from Kristina, and double check the placements of the authentication routers.
+, to plan out the information I needed from Kristina, and double check the placements of the authentication routers. I used 6 models with two join tables, which you can see within this [DatabaseDiagram](https://dbdiagram.io/d/5f313f2f08c7880b65c5b6f9)
 
 ### Backend Technologies
 * Sequelize
