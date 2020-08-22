@@ -5,6 +5,7 @@
   }
 .card {
   text-align: center;
+  border: 5px solid #42c2f5;
 }
 .card-text {
   color: #000;

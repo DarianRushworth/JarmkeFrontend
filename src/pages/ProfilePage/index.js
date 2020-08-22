@@ -43,7 +43,9 @@ export default function ProfilePage(){
                 <Row>
                 <Col>
                 <Form>
-                <h1>
+                <h1 style={{
+                    fontFamily: "cursive"
+                }}>
                     User's Details:
                 </h1>
                 <Form.Group controlId="formBasicFirstName">
@@ -99,7 +101,9 @@ export default function ProfilePage(){
                 </Form>
                 </Col>
                 <Col>
-                <h1>
+                <h1 style={{
+                    fontFamily: "cursive",
+                }}>
                     Order Details:
                 </h1>
                 <UserOrders data={user}/>
