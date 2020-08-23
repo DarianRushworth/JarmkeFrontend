@@ -1,7 +1,6 @@
 import React from "react"
 import { Jumbotron, Carousel, Image } from "react-bootstrap"
 import "./index.css"
-import ContactDetails from "../../components/ContactDetails"
 import { Link } from "react-router-dom"
 
 // const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597909463/NewHomeBlur_inz2fw.jpg"
@@ -99,13 +98,6 @@ export default function HomePage(){
                         </Carousel.Item>
                     </Carousel>
             </div>
-        </div>
-        <div style={{
-            backgroundColor: "#526f85",
-        }}>
-            <footer>
-                <ContactDetails />
-            </footer>
         </div>
         </div>
     )
