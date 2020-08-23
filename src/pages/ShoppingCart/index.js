@@ -7,7 +7,6 @@ import {
     Col,
     Button,
     Alert,
-    Row
 } from "react-bootstrap"
 import { useHistory } from "react-router"
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js'
@@ -116,6 +115,11 @@ export default function ShoppingCart(){
         dispatch(addShippingAddress(address))
         set_Display(false)
     }
+
+    const expressMessage = JSON.stringify(orderData.expressShipping) === "false"
+                        ? "No express shipping has been added."
+                        :"Express shipping has been added, expect your package in 5 working days."
+
     const alertMessage = message
             ? <Alert variant="success">
                 <Form as={Col} md={{span: 6, offset: 3}} className="mt-5"
@@ -143,7 +147,7 @@ export default function ShoppingCart(){
                     </div>
                     <div>
                         <p>
-                            {JSON.stringify(orderData.expressShipping)}
+                            {expressMessage}
                         </p>
                         <hr />
                     </div>
@@ -156,7 +160,9 @@ export default function ShoppingCart(){
                         <ul>
                         {orderData.products.map(product => {
                             return (
-                                <li>{product.title}</li>
+                                <li style={{
+                                    display: "list-item",
+                                }}>{product.title}</li>
                             )
                         })}
                         </ul>
@@ -255,7 +261,7 @@ export default function ShoppingCart(){
                 </Button>
             </Form.Group>
         </Container>
-        : "Double Check Your Address"
+        : <hr />
 
 
     return (
@@ -266,62 +272,69 @@ export default function ShoppingCart(){
                 ></script>
             </head>
             <ProductsOrdered data={orderData}/>
-            <Container fluid>
-                    {alertMessage}
-                </Container>
+            <Container>
+                {alertMessage}
+            </Container>
             <div>
                 <Container fluid>
-                    <Row>
-                    <Col md={{span: 3, offset: 3}}>
-                    <Form>
-                    <h4>
-                        Shipping Info:
-                    </h4>
-                    <Form.Group controlId="formBasicShippingAddress">
-                        <Form.Label>
-                            Shipping Address:
-                        </Form.Label>
-                        <Form.Control 
-                        as="select"
-                        required>
-                            <option
-                            onClick={() => {
-                                dispatch(addShippingAddress(user.address))}}
-                            >{user.address}</option>
-                            <option
-                            value="elseWhere"
-                            onClick={() => set_Display(true)}
-                            >Some Where Else</option>
-                        </Form.Control>
-                    </Form.Group>
-                    {otherAddress}
-                    <Form.Group controlId="formBasicExpressShipping">
-                        <Form.Label>
-                            Express Shipping:
-                        </Form.Label>
-                        <Form.Control
-                        onChange={(event) => {
-                            console.log(event.target.value)
-                            sendShipping(event.target.value)
-                            set_Message(true)}} 
-                        as="select"
-                        required>
-                            <option>--Select-Shipping--</option>
-                            <option
-                            value="true">Yes Please, within 5 working days(€50)</option>
-                            <option
-                            value="false">No Thanks!</option>
-                        </Form.Control>
-                    </Form.Group>
-                    </Form>
                     <Col>
-                    <h4>
-                        Total:
-                    </h4>
-                        <PaymentTotal data={orderData} />
+                        <div className="card"
+                            style={{ width: "27rem"}}>
+                            <div className="card-body">
+                                <h4 className="card-title">
+                                    Shipping Information
+                                </h4>
+                            </div>
+                        <div className="card-body">
+                        <Form>
+                            <Form.Group controlId="formBasicShippingAddress">
+                                <Form.Label>
+                                    Shipping Address:
+                                </Form.Label>
+                                <Form.Control 
+                                    as="select"
+                                    required>
+                                <option
+                                    onClick={() => {
+                                        set_Display(false)
+                                        dispatch(addShippingAddress(user.address))}}
+                                >{user.address}</option>
+                                <option
+                                    value="elseWhere"
+                                    onClick={() => set_Display(true)}
+                                >Some Where Else</option>
+                                </Form.Control>
+                            </Form.Group>
+                                {otherAddress}
+                                <Form.Group controlId="formBasicExpressShipping">
+                                    <Form.Label>
+                                        Express Shipping:
+                                    </Form.Label>
+                                    <Form.Control
+                                        onChange={(event) => {
+                                            sendShipping(event.target.value)
+                                            set_Message(true)}} 
+                                        as="select"
+                                        required>
+                                        <option>--Select-Shipping--</option>
+                                        <option
+                                            value="true">Yes Please, within 5 working days(€50)</option>
+                                        <option
+                                            value="false">No Thanks!</option>
+                                    </Form.Control>
+                                </Form.Group>
+                        </Form>
+                        <div className="card-body">
+                            <h6 style={{
+                                textAlign: "left",
+                            }}>
+                                Total:
+                            </h6>
+                            <PaymentTotal data={orderData} />
+                        </div>
+                        </div>
+                    </div>
                     </Col>
-                    </Col>
-                    </Row>
                 </Container>
             </div>
         </div>

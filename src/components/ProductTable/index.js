@@ -46,11 +46,14 @@ export default function ProductTable(){
                                                 : "silver"
                                 return (
                                     <Col
-                                        key={product.id}>
+                                        key={product.id}
+                                        style={{
+                                            paddingTop: 10,
+                                        }}>
                                         <div
                                         className="card"
                                         style={{
-                                            width: "18rem"
+                                            width: "18rem",
                                         }}>
                                             <Image 
                                                 className="card-img-top"
