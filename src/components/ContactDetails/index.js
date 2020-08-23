@@ -23,7 +23,7 @@ export default function ContactDetails(){
     }
     
     return(
-        <Container>
+        <Container fluid>
         <Row>
             <Col xs={12} md={8}>
                 <h2 style={{
@@ -43,12 +43,12 @@ export default function ContactDetails(){
         <Row>
             <Col>
                 <Image 
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTpZ4d2bVmyOhUZ0W0YyFgyiyUDENP7IOK7UA&usqp=CAU"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSEH_3qLSdFoDkWTSEUMoj6IevjAgdf99hxQQ&usqp=CAU"
                     alt="Email Logo"
                     rounded
                     style={{
-                        height: 30,
-                        width: 30,
+                        height: 20,
+                        width: 20,
                     }} />
                     {owner.email}
             </Col>
@@ -58,12 +58,12 @@ export default function ContactDetails(){
                 paddingTop: 20,
             }}>
             <Image 
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTkwOs7_zHl5ukfCD2-YwCT8WbYXyRCKgj7dw&usqp=CAU"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrELLkJfngeqCTqkZ1Gh6CTFJ4vKfC4FfpaA&usqp=CAU"
                     alt="Phone Logo"
                     rounded
                     style={{
-                        height: 28,
-                        width: 28,
+                        height: 20,
+                        width: 20,
                     }} />
                     +{owner.phone}
             </Col>
@@ -79,34 +79,38 @@ export default function ContactDetails(){
                     paddingTop: 10,
                 }}>
             <Button
-                variant="outline-danger"
+                variant="outline-warning"
                 onClick={redirect}>
                 Register for Free
             </Button>
             </Col>
-            <Col xs={6} md={{span: 3, offset: 2}}>
-            <ul>
-        <li>
+            <Col xs={6} md={2}>
+                <a href="https://www.linkedin.com/in/kristina-jarmk%C3%A9-matthews-2671a3101/">
                 <Image 
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWl-__Cv45Tlw4YFU3pIsRwHaKOHbiCIxn1g&usqp=CAU"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST2Ov1fr2BdlWyRkTdsOTJYiq1FNfi_qO7Kg&usqp=CAU"
                     alt="LinkedIn Link"
                     rounded
                     style={{
-                        height: 60,
-                        width: 60,
-                    }}/>                           
-        </li>
-        <li>
+                        height: 40,
+                        width: 30,
+                        paddingTop: 10,
+                    }}/>
+                </a>
+                    Kristina Jarmké Matthews
+            </Col>                           
+            <Col xs={6} md={{span: 1, offset: 1}}>
+                <a href="https://www.instagram.com/_jarmke/">
                 <Image 
-                    src="https://img.icons8.com/carbon-copy/2x/instagram-new.png"
+                    src="https://res.cloudinary.com/djzjepmnr/image/upload/v1598186039/Insta_sywn89.jpg"
                     alt="Instagram Link"
                     rounded
                     style={{
-                        height: 60,
-                        width: 60,
+                        height: 40,
+                        width: 30,
+                        paddingTop: 10,
                     }}/>
-        </li>
-    </ul>
+                </a>
+                    @_jarmke
             </Col>
         </Row>
     </Container>
