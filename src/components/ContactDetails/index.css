@@ -1,3 +1,9 @@
 .Contact {
     color: #ffffff;
 }
+ul li {
+    display: inline;
+}
+.horLine {
+    border: 1px solid white;
+}

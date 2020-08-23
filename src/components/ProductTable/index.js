@@ -41,25 +41,35 @@ export default function ProductTable(){
 
     const displayProducts = products.length >= 2
                             ? products.map(product => {
+                                const metalColor = product.metal === "Gold"
+                                                ? "gold"
+                                                : "silver"
                                 return (
                                     <Col
-                                        key={product.id}>
+                                        key={product.id}
+                                        style={{
+                                            paddingTop: 10,
+                                        }}>
                                         <div
                                         className="card"
                                         style={{
-                                            width: "18rem"
+                                            width: "18rem",
                                         }}>
                                             <Image 
                                                 className="card-img-top"
                                                 src={product.image}
                                                 alt=""/>
                                             <div className="card-body">
-                                                <h5 className="card-title">
+                                                <h6 className="card-title"
+                                                    style={{
+                                                        fontFamily: "sans-serif"
+                                                    }}>
                                                     {product.title}
-                                                </h5>
+                                                </h6>
                                             </div>
                                                 <ul className="list-group list-group-flush">
-                                                    <li className="list-group-item">{product.metal}</li>
+                                                    <li className="list-group-item"
+                                                        style={{color: metalColor}}>{product.metal}</li>
                                                     <li className="list-group-item">€{product.price}</li>
                                                 </ul>
                                                 <div className="card-body">
