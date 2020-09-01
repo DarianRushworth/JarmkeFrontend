@@ -120,7 +120,10 @@ export function newUser(
                 dispatch(setNewUser(userSignedUp.data))
 
             } catch(error){
-                console.log(error.message)
+                console.log(error.response)
+                if(error){
+                    dispatch(errorHandle(error.response))
+                }
             }
         }
 }
