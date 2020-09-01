@@ -19,9 +19,13 @@ export default function UsersFavorites(){
                                 return (
                                         <Col key={favorite.id}>
                                             <Image
-                                            rounded
+                                            roundedCircle
                                             src={favorite.image}
                                             alt="product"
+                                            style={{
+                                                width: 171,
+                                                height: 180,
+                                            }}
                                             onClick={() => history.push(`/moreDetails/${favorite.id}`)} />
                                         </Col>
                                 )
@@ -39,10 +43,20 @@ export default function UsersFavorites(){
         <div>
             <Container>
                 <Row>
-                    <h1>
+                    <h1 style={{
+                        fontFamily: "cursive",
+                    }}>
                         User Favorites:
                     </h1>
                 </Row>
+                <Row>
+                        <p
+                        style={{
+                            color: "white",
+                        }}>
+                            (Click an image to see further details)
+                        </p>
+                    </Row>
                 <Row>
                     {displayFavorites}
                 </Row>

@@ -6,7 +6,10 @@ export default function UserOrders(props){
     const user = props.data
     // console.log("user test for orders", user)
 
-    const displayOrders = user.orders.map(order => {
+    const ordersSorted = user.orders.sort(( a, b) => {return a.completed - b.completed})
+    console.log("ordered orders test", ordersSorted)
+
+    const displayOrders = ordersSorted.map(order => {
         const colorPicker = order.completed
                             ? {
                                 textAlign: "center",
@@ -17,7 +20,11 @@ export default function UserOrders(props){
                                 color: "red"
                             }
         return (
-            <tr key={order.id}>
+            <tr 
+            key={order.id}
+            style={{
+                backgroundColor: "#051b24",
+            }}>
                 <td style={colorPicker}>
                     {order.total}
                 </td>
