@@ -6,16 +6,20 @@ import {
     Col,
     Jumbotron
 } from "react-bootstrap"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 
 import { newUser } from "../../store/User/actions"
+import { selectError } from "../../store/User/selectors"
+import Errors from "../../components/Errors"
 
 const jumboIamge = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597845473/IMG_5481_etie1o.jpg"
 
 export default function SignUpPage(){
     const dispatch = useDispatch()
     const history = useHistory()
+    const errorRecieved = useSelector(selectError)
+    const errorMessage = errorRecieved.data
     const [firstName, set_FirstName] = useState("")
     const [lastName, set_LastName] = useState("")
     const [email, set_Email] = useState("")
@@ -44,8 +48,6 @@ export default function SignUpPage(){
             password
         ))
 
-        history.push("/productsPage")
-
         set_FirstName("")
         set_LastName("")
         set_Email("")
@@ -53,6 +55,12 @@ export default function SignUpPage(){
         set_Address("")
         set_DateOfBirth("")
         set_Password("")
+    }
+
+    const displayError = () => {
+        if(errorMessage){
+            return <Errors error={errorMessage} />
+        }
     }
 
     return(
@@ -65,6 +73,7 @@ export default function SignUpPage(){
         }   className="JumboImage">
 
         </Jumbotron>
+        {displayError()}
         <Container>
             <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
                 <h1 className="mt-5 mb-5">

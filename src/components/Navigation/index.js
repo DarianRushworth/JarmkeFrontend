@@ -16,7 +16,9 @@ export default function Navigation() {
     const tokenNeeded = useSelector(selectToken)
     // console.log("token test", tokenNeeded)
 
-    const welcomeMessage = `Welcome ${user.firstName} ${user.lastName}`
+    const welcomeMessage = user === undefined
+    ? "Error"
+    :`Welcome ${user.firstName} ${user.lastName}`
     // console.log(user.orders)
 
 

@@ -5,3 +5,7 @@ export const selectProducts = state => {
 export const selectProduct = state => {
     return state.products.specificPiece
 }
+
+export const selectError = state => {
+    return state.products.error
+}

@@ -2,10 +2,17 @@ const initialState = {
     token: localStorage.getItem("token"),
     favorites: [ ],
     data: { },
+    error: { }
 }
 
 export default function userReducer(state = initialState, action){
     switch(action.type){
+        case "ERROR_HANDLE":
+            return {
+                error: {
+                    ...action.payload
+                }
+            }
         case "VALID_USER":
             return {
                 ...state,

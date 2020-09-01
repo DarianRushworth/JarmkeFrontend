@@ -1,6 +1,13 @@
 import axios from "axios"
 import { apiUrl } from "../../config/constants"
 
+function errorHandle(data){
+    return {
+        type: "ERROR_HANDLE",
+        payload: data,
+    }
+}
+
 function setProductDetails(product){
     return {
         type: "SET_PRODUCT_DETAILS",
@@ -53,7 +60,9 @@ export function getSpecificProduct(id){
             dispatch(setProductDetails(product.data))
 
         } catch(error){
-            console.log(error.message)
+            if(error){
+                dispatch(errorHandle(error.response))
+            }
         }
     }
 }

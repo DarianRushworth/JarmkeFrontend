@@ -5,8 +5,9 @@ import { Button, Jumbotron, Container, Col, Image, Row } from "react-bootstrap"
 
 import HeartButton from "../../components/HeartButton"
 import { getSpecificProduct } from "../../store/Products/actions"
-import { selectProduct } from "../../store/Products/selectors"
+import { selectProduct, selectError } from "../../store/Products/selectors"
 import { addProduct } from "../../store/Order/actions"
+import Errors from "../../components/Errors"
 import "./index.css"
 
 const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597769832/IMG-6327_ssonf4.jpg"
@@ -17,6 +18,14 @@ export default function ProductDetails(){
     // console.log("product test", product)
     const idNeeded = parseInt(useParams().id)
     // console.log("params test", idNeeded)
+    const errorRecieved = useSelector(selectError)
+    const errorMessage = errorRecieved.data
+
+    const displayError = () => {
+        if(errorMessage){
+            return <Errors error={errorMessage} />
+        }
+    }
 
 
     useEffect(() => {
@@ -37,6 +46,7 @@ export default function ProductDetails(){
                     height: 200,
                 }}>
             </Jumbotron>
+            {displayError()}
             <Container>
                 <Row>
                     <Col md={{span:3, offset: 3}}>
