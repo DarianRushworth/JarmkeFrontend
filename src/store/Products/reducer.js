@@ -1,10 +1,17 @@
 const initialState = {
     allJewellery: [ ],
-    specificPiece: { }
+    specificPiece: { },
+    error: { },
 }
 
 export default function productsReducer(state = initialState, action){
     switch(action.type){
+        case "ERROR_HANDLE":
+            return {
+                error: {
+                    ...action.payload
+                }
+            }
         case "SET_PRODUCT_DETAILS":
             return {
                 ...state,

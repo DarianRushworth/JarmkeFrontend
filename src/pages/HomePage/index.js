@@ -2,14 +2,27 @@ import React from "react"
 import { Jumbotron, Carousel, Image } from "react-bootstrap"
 import "./index.css"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 
-// const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597909463/NewHomeBlur_inz2fw.jpg"
+import { selectError } from "../../store/User/selectors"
+import Errors from "../../components/Errors"
+
 const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761569/IMG-1796_m8rmvr.jpg"
 
 const message = 
 `jarmké
 jewellery`
 export default function HomePage(){
+    const errorRecieved = useSelector(selectError)
+    const errorMessage = errorRecieved.message
+
+    const errorDisplay = () => {
+        if(errorMessage){
+            return (
+                <Errors error={errorMessage} />
+            )
+        }
+    }
 
     return(
         <div>
@@ -26,9 +39,9 @@ export default function HomePage(){
                             {message}
                         </h1>
                     </Jumbotron>
-
                 </header>
             </div>
+            {errorDisplay()}
             <div>
                     <Carousel className="HomeImage">
                         <Carousel.Item style={
