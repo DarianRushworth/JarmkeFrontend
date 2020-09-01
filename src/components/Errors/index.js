@@ -3,10 +3,7 @@ import { Modal, Button } from "react-bootstrap"
 
 export default function Errors(props){
     const [display, set_Display] = useState(true)
-    console.log("display", display)
-
     const errorMessage = props.error
-    console.log("error message", errorMessage)
 
     function exit(){
         set_Display(false)

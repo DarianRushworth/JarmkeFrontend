@@ -19,11 +19,7 @@ export default function SignUpPage(){
     const dispatch = useDispatch()
     const history = useHistory()
     const errorRecieved = useSelector(selectError)
-    console.log("error", errorRecieved)
-
     const errorMessage = errorRecieved.data
-    console.log("error message", errorMessage)
-
     const [firstName, set_FirstName] = useState("")
     const [lastName, set_LastName] = useState("")
     const [email, set_Email] = useState("")

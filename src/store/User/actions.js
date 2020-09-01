@@ -57,7 +57,7 @@ export function getUser(email, password){
             dispatch(setUser(userCheck.data))
 
         } catch(error){
-            console.log(error.response.data)
+            // console.log(error.response.data)
             if(error){
                 dispatch(errorHandle(error.response.data))
             }
@@ -120,7 +120,7 @@ export function newUser(
                 dispatch(setNewUser(userSignedUp.data))
 
             } catch(error){
-                console.log(error.response)
+                // console.log(error.response)
                 if(error){
                     dispatch(errorHandle(error.response))
                 }

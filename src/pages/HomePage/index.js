@@ -14,10 +14,7 @@ const message =
 jewellery`
 export default function HomePage(){
     const errorRecieved = useSelector(selectError)
-    console.log("error", errorRecieved)
-
     const errorMessage = errorRecieved.message
-    console.log("message", errorMessage)
 
     const errorDisplay = () => {
         if(errorMessage){
