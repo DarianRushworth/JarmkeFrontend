@@ -9,3 +9,7 @@ export const selectFavorites = state => {
 export const selectToken = state => {
     return state.user.token
 }
+
+export const selectError = state => {
+    return state.user.error
+}

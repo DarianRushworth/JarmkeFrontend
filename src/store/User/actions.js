@@ -3,6 +3,13 @@ import { apiUrl } from "../../config/constants"
 
 import { selectToken } from "./selectors"
 
+function errorHandle(data){
+    return {
+        type: "ERROR_HANDLE",
+        payload: data,
+    }
+}
+
 function validUser(data){
     return {
         type: "VALID_USER",
@@ -45,12 +52,15 @@ export function getUser(email, password){
                 email, 
                 password,
             })
-            // console.log("user check test:", userCheck)
-
+            console.log("user check test:", userCheck)
+            
             dispatch(setUser(userCheck.data))
 
         } catch(error){
-            console.log(error.message)
+            console.log(error.response.data)
+            if(error){
+                dispatch(errorHandle(error.response.data))
+            }
         }
     }
 }

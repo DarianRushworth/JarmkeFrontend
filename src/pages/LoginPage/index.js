@@ -4,7 +4,8 @@ import {
     Container,
     Button,
     Col,
-    Jumbotron
+    Jumbotron,
+    Modal
 } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
@@ -19,19 +20,26 @@ export default function LoginPage(){
     const history = useHistory()
     const [email, set_Email] = useState("")
     const [password, set_Password] = useState("")
+    const [display, set_Display] = useState(false)
 
     function onSubmit(event){
         event.preventDefault()
         // console.log("Email test:", email)
         // console.log("Password test:", password)
+        if(email === "" || password === ""){
+            set_Display(true) 
+        } else {
+            dispatch(getUser(email, password))
 
-        dispatch(getUser(email, password))
+            set_Email("")
+            set_Password("")
 
-        history.push("/")
+            history.push("/")
+        }
 
-        set_Email("")
-        set_Password("")
-
+    }
+    function exit(){
+        set_Display(false)
     }
 
     return(
@@ -44,6 +52,28 @@ export default function LoginPage(){
         }   className="JumboImage">
 
         </Jumbotron>
+        <Modal
+            show={display}
+            onHide={exit}
+            backdrop="static"
+            keyboard={false}>
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    Oops, Email/Password wasn't read!?!
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                Please carefully retype your email and password.
+                No room for errors. Please click close to exit message.
+            </Modal.Body>
+            <Modal.Footer>
+                <Button 
+                    variant="outline-info"
+                    onClick={exit}>
+                    Close
+                </Button>
+            </Modal.Footer>
+        </Modal>
         <Container>
             <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
                 <h1 className="mt-5 mb-5">
