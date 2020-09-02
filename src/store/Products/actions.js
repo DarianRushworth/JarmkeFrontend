@@ -25,7 +25,7 @@ function setProducts(products){
 export function getProducts(){
     return async function thunk2(dispatch, getState){
         try{
-            const productsFound = await axios.get(`${apiUrl}/products?offset=0&limit=6`)
+            const productsFound = await axios.get(`https://jarmke-backend.herokuapp.com/products?offset=0&limit=6`)
             // console.log("response test", productsFound)
             
             dispatch(setProducts(productsFound.data.products))
