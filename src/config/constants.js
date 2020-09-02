@@ -1,1 +1,1 @@
-export const apiUrl = process.env.API_URL
+export const apiUrl = process.env.API_URL || 'https://jarmke-backend.herokuapp.com'
