@@ -48,6 +48,10 @@ export default function SignUpPage(){
             password
         ))
 
+        if(!errorMessage){
+            history.push("/")
+        }
+
         set_FirstName("")
         set_LastName("")
         set_Email("")
