@@ -33,13 +33,6 @@ export default function userReducer(state = initialState, action){
             return {
                 ...initialState, token: null
             }
-        case "SET_NEW_USER":
-            localStorage.setItem("token")
-        return {
-            ...state,
-            token: { ...action.payload.token},
-            data: {...state.data, ...action.payload}
-        }
         case "SET_USER":
             if(!localStorage.getItem("token")){
                 localStorage.setItem("token", action.payload.token)
