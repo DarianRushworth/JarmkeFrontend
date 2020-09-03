@@ -31,13 +31,6 @@ function setFavorites(favoriteData){
     }
 }
 
-function setNewUser(userData){
-    return {
-        type: "SET_NEW_USER",
-        payload: userData
-    }
-}
-
 export function setUser(userData){
     return {
         type: "SET_USER",
@@ -115,9 +108,9 @@ export function newUser(
                     dateOfBirth,
                     password,
                 })
-                // console.log("new user test", userSignedUp)
+                console.log("new user test", userSignedUp.data)
 
-                dispatch(setNewUser(userSignedUp.data))
+                dispatch(setUser(userSignedUp.data))
 
             } catch(error){
                 // console.log(error.response)
