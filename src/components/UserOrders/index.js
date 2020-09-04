@@ -6,6 +6,13 @@ export default function UserOrders(props){
     const user = props.data
     // console.log("user test for orders", user)
 
+    if(!user.orders){
+        return (
+        <h4>
+            Go makes some orders!
+        </h4>
+        )}
+
     const ordersSorted = user.orders.sort(( a, b) => {return a.completed - b.completed})
     console.log("ordered orders test", ordersSorted)
 
