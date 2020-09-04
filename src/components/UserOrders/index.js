@@ -14,7 +14,7 @@ export default function UserOrders(props){
         )}
 
     const ordersSorted = user.orders.sort(( a, b) => {return a.completed - b.completed})
-    console.log("ordered orders test", ordersSorted)
+    // console.log("ordered orders test", ordersSorted)
 
     const displayOrders = ordersSorted.map(order => {
         const colorPicker = order.completed
