@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import axios from 'axios';
 import {
@@ -44,18 +44,28 @@ export default function ShoppingCart(){
 
     if(!user){
         history.push("/")
-    }
+    } 
 
     const order = user.orders.find(order => order.completed === false)
     // console.log("order test(CART)", order)
 
     if(!order){
-        history.push("/productsPage")
+        return (
+            <h3 style={{
+                fontFamily: "cursive",
+                color: "white",
+                textAlign: "center",
+            }}>
+                Get clicking, no products in cart.
+            </h3>
+        )
+    } else {
+        dispatch(getOrderedProducts(order.id))
     }
     
-    useEffect(() => {
-        dispatch(getOrderedProducts(order.id))
-    }, [dispatch, order.id])
+    // useEffect(() => {
+    //     dispatch(getOrderedProducts(order.id))
+    // }, [dispatch, order.id])
 
     function sendShipping(shipping){
         dispatch(addShipping(shipping))
