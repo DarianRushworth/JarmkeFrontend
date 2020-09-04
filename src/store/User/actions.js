@@ -151,7 +151,7 @@ export function newFavorite(id){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            // console.log("new favorite test", sendFavorite)
+            console.log("new favorite test", sendFavorite)
 
             dispatch(setFavorites(sendFavorite.data))
 

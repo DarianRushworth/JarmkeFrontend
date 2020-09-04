@@ -26,7 +26,7 @@ export default function userReducer(state = initialState, action){
         case "SET_FAVORITE":
             return {
                 ...state,
-                favorites: [...state.favorites, ...action.payload]
+                favorites: [...state.favorites, action.payload]
             }
         case "REMOVE_USER":
             localStorage.removeItem("token")
