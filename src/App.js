@@ -10,7 +10,6 @@ import ProductDetails from "./pages/ProductDetails"
 import Navigation from "./components/Navigation"
 import Profilepage from "./pages/ProfilePage"
 import ShoppingCart from './pages/ShoppingCart';
-import ContactDetails from "./components/ContactDetails"
 import { validateUser } from "./store/User/actions"
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from "@stripe/stripe-js"
@@ -62,9 +61,6 @@ function App() {
           />
           </Elements>
         </Switch>
-        <footer className="contactFoot">
-          <ContactDetails />
-        </footer>
     </div>
   );
 }

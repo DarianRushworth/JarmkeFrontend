@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 
 import { selectError } from "../../store/User/selectors"
 import Errors from "../../components/Errors"
+import ContactDetails from "../../components/ContactDetails"
 
 const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761569/IMG-1796_m8rmvr.jpg"
 
@@ -111,6 +112,9 @@ export default function HomePage(){
                         </Carousel.Item>
                     </Carousel>
             </div>
+            <footer className="contact_footer">
+                <ContactDetails />
+            </footer>
         </div>
         </div>
     )

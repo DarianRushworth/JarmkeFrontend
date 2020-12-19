@@ -10,10 +10,14 @@ import {
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
+import "./index.css";
 
 import { getUser } from "../../store/User/actions"
 
 const jumboImage = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597845845/IMG_5539_qpvufa.jpg"
+const message = 
+`jarmké
+jewellery`
 
 export default function LoginPage(){
     const dispatch = useDispatch()
@@ -43,7 +47,7 @@ export default function LoginPage(){
     }
 
     return(
-        <div>
+        <div className="main_container">
         <Jumbotron style={
             {
                 backgroundImage: `url(${jumboImage})`,
@@ -74,13 +78,22 @@ export default function LoginPage(){
                 </Button>
             </Modal.Footer>
         </Modal>
+        <div className="form_container">
         <Container>
             <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-                <h1 className="mt-5 mb-5">
-                    Login
+                <h1
+                    style={{
+                        fontFamily: "Allura",
+                    }}>
+                    {message}
                 </h1>
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>
+                    <Form.Label
+                        style={{
+                            fontFamily: "Allura",
+                            fontSize: 20,
+                            fontWeight: "bold"
+                        }}>
                         Email:
                     </Form.Label>
                     <Form.Control
@@ -92,7 +105,12 @@ export default function LoginPage(){
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>
+                    <Form.Label
+                        style={{
+                            fontFamily: "Allura",
+                            fontSize: 20,
+                            fontWeight: "bold"
+                        }}>
                         Password:
                     </Form.Label>
                     <Form.Control 
@@ -115,6 +133,7 @@ export default function LoginPage(){
                 </Link>
             </Form>
         </Container>
+        </div>
         </div>
     )
 }
