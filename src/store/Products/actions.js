@@ -39,9 +39,10 @@ export function getProducts(){
 export function getMoreProducts(){
     return async function thunk5(dispatch, getState){
         const productLength = getState().products.allJewellery.length
-        // console.log("length test", productLength)
+        console.log("length test", productLength)
         try{
             const moreProducts = await axios.get(`${apiUrl}/products?offset=${productLength}&limit=6`)
+            console.log("response", moreProducts)
 
             dispatch(setProducts(moreProducts.data.products))
 
