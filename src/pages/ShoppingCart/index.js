@@ -7,6 +7,7 @@ import { selectOrderData } from "../../store/Order/selectors"
 import { getOrderedProducts } from "../../store/Order/actions"
 import { selectUser } from "../../store/User/selectors"
 import { Button } from "react-bootstrap"
+import "./index.css"
 
 export default function ShoppingCart(){
     const dispatch = useDispatch()
@@ -34,6 +35,7 @@ export default function ShoppingCart(){
             <div className="button_checkout">
                 <Button
                     variant="info"
+                    className="button"
                     onClick={() => history.push("/purchase")}
                 >Proceed To Checkout</Button>
             </div>
