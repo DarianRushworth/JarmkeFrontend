@@ -5,7 +5,6 @@
   }
 .card {
   text-align: center;
-  border: 5px solid #42c2f5;
 }
 .card-text {
   color: #000;
@@ -17,4 +16,8 @@
 }
 .card-body {
   text-align: center;
+  background-color: #c5d5cb;
+}
+.list-group {
+  background-color: #c5d5cb;
 }

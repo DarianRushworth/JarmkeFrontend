@@ -82,18 +82,18 @@ export default function ProductDetails(){
                                 </p>
                             </div>
                                 <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">{product.metal}</li>
-                                    <li className="list-group-item">€{product.price}</li>
+                                    <li className="list-group-item" style={{ backgroundColor: "#c5d5cb"}}>{product.metal}</li>
+                                    <li className="list-group-item" style={{ backgroundColor: "#c5d5cb"}}>€{product.price}</li>
                                 </ul>
-                                <div className="card-body">
-                                    <Button
-                                        value={product.id}
-                                        variant="info"
-                                        onClick={(event) => addToCart(
-                                            parseInt(event.target.value))}>
-                                            Add To Cart
-                                    </Button>
-                                </div>
+                            <div className="card-body">
+                                <Button
+                                    value={product.id}
+                                    variant="info"
+                                    onClick={(event) => addToCart(
+                                        parseInt(event.target.value))}>
+                                        Add To Cart
+                                </Button>
+                            </div>
                     </div>
                     </Col>
                 </Row>
