@@ -13,7 +13,7 @@ export default function ProductsOrdered(props){
     const history = useHistory()
     const dispatch = useDispatch()
     const orderData = props.data
-    // console.log("props test", orderData)
+    console.log("props test", orderData)
 
     if(orderData.products < 1){
         history.push("/")
