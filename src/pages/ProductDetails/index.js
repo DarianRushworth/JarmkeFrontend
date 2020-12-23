@@ -56,6 +56,9 @@ export default function ProductDetails(){
                         style={{
                         width: "21rem"
                     }}>
+                        <div className="heart_button">
+                            <HeartButton data={product} />
+                        </div>
                         <Image 
                             className="card-img-top"
                             src={product.image}
@@ -69,7 +72,6 @@ export default function ProductDetails(){
                                     <div style={{
                                         textAlign: "left"
                                     }}>
-                                        <HeartButton data={product} />
                                     </div>
                                 </h5>
                                 <p className="card-text">

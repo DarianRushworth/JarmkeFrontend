@@ -26,3 +26,8 @@
 .list-group {
   background-color: #c5d5cb;
 }
+.heart_button {
+  position: absolute;
+  top: 30%;
+  left: 80%;
+}
