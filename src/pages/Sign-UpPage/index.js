@@ -12,6 +12,7 @@ import { useHistory } from "react-router"
 import { newUser } from "../../store/User/actions"
 import { selectError } from "../../store/User/selectors"
 import Errors from "../../components/Errors"
+import "./index.css"
 
 const jumboIamge = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597845473/IMG_5481_etie1o.jpg"
 
@@ -74,13 +75,15 @@ export default function SignUpPage(){
 
         </Jumbotron>
         {displayError()}
+        <div className="form_container_2">
         <Container>
             <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-                <h1 className="mt-5 mb-5">
-                    Sign Up!
+                <h1 className="title_sign_up">
+                    jarmké jewellery
                 </h1>
-                <Form.Group controlId="formBasicFirstName">
-                    <Form.Label>
+                <Form.Row>
+                <Form.Group as={Col} controlId="formBasicFirstName">
+                    <Form.Label className="label_form">
                         First Name:
                     </Form.Label>
                     <Form.Control 
@@ -90,8 +93,9 @@ export default function SignUpPage(){
                         placeholder="First Name Here"
                         required/>
                 </Form.Group>
-                <Form.Group controlId="formBasicLastName">
-                    <Form.Label>
+
+                <Form.Group as={Col} controlId="formBasicLastName">
+                    <Form.Label className="label_form">
                         Last Name:
                     </Form.Label>
                     <Form.Control 
@@ -101,8 +105,11 @@ export default function SignUpPage(){
                         placeholder="Last Name Here"
                         required/>
                 </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>
+                </Form.Row>
+
+                <Form.Row>
+                <Form.Group as={Col} controlId="formBasicEmail">
+                    <Form.Label className="label_form">
                         Email:
                     </Form.Label>
                     <Form.Control 
@@ -112,8 +119,9 @@ export default function SignUpPage(){
                         placeholder= "Email Here"
                         required/>
                 </Form.Group>
-                <Form.Group controlId="formBasicPhone">
-                    <Form.Label>
+
+                <Form.Group as={Col} controlId="formBasicPhone">
+                    <Form.Label className="label_form">
                         Phone (with country code):
                     </Form.Label>
                     <Form.Control 
@@ -123,8 +131,10 @@ export default function SignUpPage(){
                         placeholder="Phone Number Here"
                         required/>
                 </Form.Group>
+                </Form.Row>
+
                 <Form.Group controlId="formBasicAddress">
-                    <Form.Label>
+                    <Form.Label className="label_form">
                         Postal Address:
                     </Form.Label>
                     <Form.Control 
@@ -134,8 +144,10 @@ export default function SignUpPage(){
                         placeholder="Postal Address Here"
                         required/>
                 </Form.Group>
-                <Form.Group controlId="formBasicDateOfBirth">
-                    <Form.Label>
+
+                <Form.Row>
+                <Form.Group as={Col} controlId="formBasicDateOfBirth">
+                    <Form.Label className="label_form">
                         Date Of Birth:
                     </Form.Label>
                     <Form.Control 
@@ -145,8 +157,9 @@ export default function SignUpPage(){
                         placeholder="DOB Here"
                         required/>
                 </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>
+
+                <Form.Group as={Col} controlId="formBasicPassword">
+                    <Form.Label className="label_form">
                         Password:
                     </Form.Label>
                     <Form.Control 
@@ -156,7 +169,9 @@ export default function SignUpPage(){
                         placeholder="Password Here"
                         required/>
                 </Form.Group>
-                <Form.Group>
+                </Form.Row>
+
+                <Form.Group className="button_form">
                     <Button
                         variant="info"
                         type="submit"
@@ -166,6 +181,7 @@ export default function SignUpPage(){
                 </Form.Group>
             </Form>
         </Container>
+        </div>
         </div>
     )
 }
