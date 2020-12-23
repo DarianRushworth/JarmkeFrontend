@@ -45,7 +45,8 @@ export default function ProfilePage(){
                 <Col className="form_col">
                 <Form className="form_update">
                 <h1 style={{
-                    fontFamily: "cursive"
+                    fontFamily: "Allura",
+                    fontWeight: "bold",
                 }}>
                     User's Details:
                 </h1>
@@ -103,7 +104,8 @@ export default function ProfilePage(){
                 </Col>
                 <Col className="form_col">
                 <h1 style={{
-                    fontFamily: "cursive",
+                    fontFamily: "Allura",
+                    fontWeight: "bold",
                 }}>
                     Order Details:
                 </h1>

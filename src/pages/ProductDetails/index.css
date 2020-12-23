@@ -9,10 +9,15 @@
 .card-text {
   color: #000;
   text-align: center;
+  font-family: "Allura";
+  font-weight: bold;
+  font-size: 20px;
 }
 .card-p {
   color: #000;
   text-align: center;
+  font-family: "Allura";
+  font-weight: bold;
 }
 .card-body {
   text-align: center;

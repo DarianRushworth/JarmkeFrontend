@@ -48,7 +48,8 @@ export default function UsersFavorites(){
                 <div className="fav_row_1">
                 <Row className="fav_row_2">
                     <h1 style={{
-                        fontFamily: "cursive",
+                        fontFamily: "Allura",
+                        fontWeight: "bold",
                     }}>
                         User Favorites:
                     </h1>

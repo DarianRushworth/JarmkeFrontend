@@ -76,6 +76,8 @@ export default function ProductTable() {
                             <li className="list-group-item"
                                 style={{
                                     backgroundColor: "#c5d5cb",
+                                    fontFamily: "Allura",
+                                    fontWeight: "bold",
                                 }}>{product.metal}</li>
                             <li className="list-group-item"
                                 style={{
