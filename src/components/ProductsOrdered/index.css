@@ -1,0 +1,11 @@
+.order_col {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card-title {
+    font-family: "Allura";
+    font-weight: bold;
+    font-size: 25px;
+}

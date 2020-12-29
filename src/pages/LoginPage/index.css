@@ -2,4 +2,14 @@ JumboImage {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
+}
+
+.form_container {
+  background-color: #c5d5cb;
+  width: 25%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  -webkit-border-radius: 36px 12px;
+}

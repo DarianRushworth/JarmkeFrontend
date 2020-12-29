@@ -6,58 +6,60 @@ import { useSelector } from "react-redux"
 
 import { selectError } from "../../store/User/selectors"
 import Errors from "../../components/Errors"
+import ContactDetails from "../../components/ContactDetails"
 
 const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761569/IMG-1796_m8rmvr.jpg"
 
-const message = 
-`jarmké
+const message =
+    `jarmké
 jewellery`
-export default function HomePage(){
+export default function HomePage() {
     const errorRecieved = useSelector(selectError)
     const errorMessage = errorRecieved.message
 
     const errorDisplay = () => {
-        if(errorMessage){
+        if (errorMessage) {
             return (
                 <Errors error={errorMessage} />
             )
         }
     }
 
-    return(
-        <div>
+    return (
         <div>
             <div>
-                <header>
-                    <Jumbotron
-                    className="JumboImage"
-                    style={{
-                        backgroundImage: `url(${jumboUrl})`,
-                        height: 200,
-                    }}>
-                        <h1 className="BrandH1">
-                            {message}
-                        </h1>
-                    </Jumbotron>
-                </header>
-            </div>
-            {errorDisplay()}
-            <div>
+                <div>
+                    <header>
+                        <Jumbotron
+                            className="JumboImage"
+                            style={{
+                                backgroundImage: `url(${jumboUrl})`,
+                                height: 200,
+                            }}>
+                            <h1 className="BrandH1">
+                                {message}
+                            </h1>
+                        </Jumbotron>
+                    </header>
+                </div>
+                {errorDisplay()}
+                <div>
                     <Carousel className="HomeImage">
                         <Carousel.Item style={
                             {
                                 height: 550,
                             }
                         }>
-                            <Image 
+                            <Image
                                 className="d-block w-100 h-100"
                                 src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597234454/IMG_5531_aokgfq.jpg"
-                                alt="First Image"/>
+                                alt="First Image" />
                             <Carousel.Caption>
                                 <h3 style={{
                                     color: "black",
-                                    fontFamily: "cursive",
-                                    fontSize: 45}}>
+                                    fontFamily: "Allura",
+                                    fontSize: 45
+                                }}>
                                     We specialize in unique handcrafted pieces, that reflect special journeys
                                 </h3>
                                 <Link to="/productsPage">
@@ -70,14 +72,14 @@ export default function HomePage(){
                                 height: 550,
                             }
                         }>
-                            <Image 
+                            <Image
                                 className="d-block w-100 h-100"
                                 src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597234222/IMG_5487_wmrpnq.jpg"
-                                alt="Second Image"/>
+                                alt="Second Image" />
                             <Carousel.Caption>
                                 <h3 style={{
                                     color: "black",
-                                    fontFamily: "cursive",
+                                    fontFamily: "Allura",
                                     fontSize: 45,
                                 }}>
                                     Journeys of Physical or mental challenges that you, or your loved ones, have overcome.
@@ -92,14 +94,14 @@ export default function HomePage(){
                                 height: 550,
                             }
                         }>
-                            <Image 
+                            <Image
                                 className="d-block w-100 h-100"
                                 src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597234030/IMG_5555_gxswr0.jpg"
-                                alt="Third Image"/>
+                                alt="Third Image" />
                             <Carousel.Caption>
                                 <h3 style={{
                                     color: "black",
-                                    fontFamily: "cursive",
+                                    fontFamily: "Allura",
                                     fontSize: 45,
                                 }}>
                                     We look forward to crafting a special memory for you to cherish, forever.
@@ -110,8 +112,11 @@ export default function HomePage(){
                             </Carousel.Caption>
                         </Carousel.Item>
                     </Carousel>
+                </div>
+                <footer className="contact_footer">
+                    <ContactDetails />
+                </footer>
             </div>
-        </div>
         </div>
     )
 }

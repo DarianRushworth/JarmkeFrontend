@@ -23,7 +23,7 @@ export default function UserOrders(props){
             <tr 
             key={order.id}
             style={{
-                backgroundColor: "#051b24",
+                backgroundColor: "#9fa8a3",
             }}>
                 <td style={colorPicker}>
                     {order.total}

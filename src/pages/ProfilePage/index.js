@@ -11,6 +11,7 @@ import {
 import Usersfavorites from "../../components/UsersFavorites"
 import UserOrders from "../../components/UserOrders"
 import { selectUser } from "../../store/User/selectors"
+import "./index.css"
 
 const jumboImage = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761978/IMG-1292_zrtuom.jpg"
 
@@ -40,11 +41,12 @@ export default function ProfilePage(){
             }>
             </Jumbotron>
             <Container fluid>
-                <Row>
-                <Col>
-                <Form>
+                <Row className="form_row">
+                <Col className="form_col">
+                <Form className="form_update">
                 <h1 style={{
-                    fontFamily: "cursive"
+                    fontFamily: "Allura",
+                    fontWeight: "bold",
                 }}>
                     User's Details:
                 </h1>
@@ -100,9 +102,10 @@ export default function ProfilePage(){
                 </Form.Group>
                 </Form>
                 </Col>
-                <Col>
+                <Col className="form_col">
                 <h1 style={{
-                    fontFamily: "cursive",
+                    fontFamily: "Allura",
+                    fontWeight: "bold",
                 }}>
                     Order Details:
                 </h1>

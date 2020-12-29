@@ -1,0 +1,30 @@
+.fav_row_1 {
+    background-color: #c5d5cb;
+    max-width: fit-content;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    -webkit-border-radius: 36px 12px;
+}
+
+.fav_row_1:hover{
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.fav_row_2 {
+    justify-content: center;
+    align-items: center;
+}
+
+.fav_prod {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.fav_prod:hover {
+    transform: scale(1.07);
+}

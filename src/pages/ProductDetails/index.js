@@ -56,6 +56,9 @@ export default function ProductDetails(){
                         style={{
                         width: "21rem"
                     }}>
+                        <div className="heart_button">
+                            <HeartButton data={product} />
+                        </div>
                         <Image 
                             className="card-img-top"
                             src={product.image}
@@ -63,14 +66,9 @@ export default function ProductDetails(){
                             <div className="card-body">
                                 <h5 className="card-title"
                                     style={{
-                                        textAlign: "right"
+                                        textAlign: "center"
                                     }}>
                                     {product.title}
-                                    <div style={{
-                                        textAlign: "left"
-                                    }}>
-                                        <HeartButton data={product} />
-                                    </div>
                                 </h5>
                                 <p className="card-text">
                                     {product.description}
@@ -82,18 +80,23 @@ export default function ProductDetails(){
                                 </p>
                             </div>
                                 <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">{product.metal}</li>
-                                    <li className="list-group-item">€{product.price}</li>
+                                    <li className="list-group-item" style={{ 
+                                        backgroundColor: "#c5d5cb",
+                                        fontFamily: "Allura",
+                                        fontWeight: "bold",
+                                        }}>
+                                            {product.metal}</li>
+                                    <li className="list-group-item" style={{ backgroundColor: "#c5d5cb"}}>€{product.price}</li>
                                 </ul>
-                                <div className="card-body">
-                                    <Button
-                                        value={product.id}
-                                        variant="info"
-                                        onClick={(event) => addToCart(
-                                            parseInt(event.target.value))}>
-                                            Add To Cart
-                                    </Button>
-                                </div>
+                            <div className="card-body">
+                                <Button
+                                    value={product.id}
+                                    variant="info"
+                                    onClick={(event) => addToCart(
+                                        parseInt(event.target.value))}>
+                                        Add To Cart
+                                </Button>
+                            </div>
                     </div>
                     </Col>
                 </Row>

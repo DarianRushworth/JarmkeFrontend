@@ -5,6 +5,7 @@ import { useHistory } from "react-router"
 
 import { removeProduct } from "../../store/Order/actions"
 import LoadingSpinner from "../LoadingSpinner"
+import "./index.css"
 
 const jumboImage ="https://res.cloudinary.com/djzjepmnr/image/upload/v1597827679/IMG-6987_bjm8x8.jpg"
 
@@ -12,7 +13,7 @@ export default function ProductsOrdered(props){
     const history = useHistory()
     const dispatch = useDispatch()
     const orderData = props.data
-    // console.log("props test", orderData)
+    console.log("props test", orderData)
 
     if(orderData.products < 1){
         history.push("/")
@@ -27,7 +28,7 @@ export default function ProductsOrdered(props){
     const displayOrder = orderData.id >= 1
                         ? orderData.products.map(product => {
                             return (
-                                <Col md={{span: 3, offset: 1}}>
+                                <Col className="order_col">
                                 <div key={product.id}
                                     className="card"
                                     style={{
@@ -46,8 +47,13 @@ export default function ProductsOrdered(props){
                                         </p>
                                     </div>
                                     <ul className="list-group list-group-flush">
-                                        <li className="list-group-item">{product.metal}</li>
-                                        <li className="list-group-item">€{product.price}</li>
+                                        <li className="list-group-item" style={{ 
+                                            backgroundColor: "#c5d5cb",
+                                            fontFamily: "Allura",
+                                            fontWeight: "bold",
+                                            }}>
+                                                {product.metal}</li>
+                                        <li className="list-group-item" style={{ backgroundColor: "#c5d5cb"}}>€{product.price}</li>
                                     </ul>
                                     <div className="card-body">
                                         <Button

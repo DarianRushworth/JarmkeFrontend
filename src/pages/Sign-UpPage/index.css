@@ -2,4 +2,30 @@ JumboImage {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
+}
+
+.form_container_2 {
+  background-color: #c5d5cb;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  -webkit-border-radius: 36px 12px;
+}
+
+.title_sign_up {
+  font-family: "Allura";
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.label_form {
+  font-family: "Allura";
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.button_form {
+  text-align: center;
+}
