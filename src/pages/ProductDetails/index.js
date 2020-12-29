@@ -66,13 +66,9 @@ export default function ProductDetails(){
                             <div className="card-body">
                                 <h5 className="card-title"
                                     style={{
-                                        textAlign: "right"
+                                        textAlign: "center"
                                     }}>
                                     {product.title}
-                                    <div style={{
-                                        textAlign: "left"
-                                    }}>
-                                    </div>
                                 </h5>
                                 <p className="card-text">
                                     {product.description}
