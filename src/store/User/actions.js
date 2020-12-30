@@ -115,7 +115,6 @@ export function newUser(
                     dateOfBirth,
                     password,
                 })
-                // console.log("new user test", userSignedUp)
 
                 dispatch(setNewUser(userSignedUp.data))
 

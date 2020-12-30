@@ -12,9 +12,7 @@ import { Button, Image } from "react-bootstrap";
 export default function Navigation() {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
-    // console.log("user nav test", user)
     const tokenNeeded = useSelector(selectToken)
-    // console.log("token test", tokenNeeded)
 
     const welcomeMessage = user === undefined
     ? "Error"

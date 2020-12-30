@@ -17,7 +17,6 @@ const message =
 jewellery`
 export default function HomePage() {
     const owner = useSelector(selectOwner)
-    console.log("owner:", owner)
     const errorRecieved = useSelector(selectError)
     const errorMessage = errorRecieved.message
 
