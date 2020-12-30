@@ -52,12 +52,12 @@ export function getUser(email, password){
                 email, 
                 password,
             })
-            console.log("user check test:", userCheck)
+            // console.log("user check test:", userCheck)
             
             dispatch(setUser(userCheck.data))
 
         } catch(error){
-            // console.log(error.response.data)
+            // console.log(error.message)
             if(error){
                 dispatch(errorHandle(error.response.data))
             }

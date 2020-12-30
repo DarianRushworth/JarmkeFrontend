@@ -2,7 +2,8 @@ const initialState = {
     token: localStorage.getItem("token"),
     favorites: [ ],
     data: { },
-    error: { }
+    error: { },
+    loading: true,
 }
 
 export default function userReducer(state = initialState, action){
@@ -45,7 +46,8 @@ export default function userReducer(state = initialState, action){
                 return {
                     ...state,
                     token: action.payload.token,
-                    data: {...state.data, ...action.payload}
+                    data: {...state.data, ...action.payload},
+                    loading: false,
                 }
     
             } else {

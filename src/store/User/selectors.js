@@ -13,3 +13,7 @@ export const selectToken = state => {
 export const selectError = state => {
     return state.user.error
 }
+
+export const selectSpinner = state => {
+    return state.user.loading
+}
