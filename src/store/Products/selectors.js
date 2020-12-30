@@ -9,3 +9,7 @@ export const selectProduct = state => {
 export const selectError = state => {
     return state.products.error
 }
+
+export const selectLoader = state => {
+    return state.products.loading
+}
