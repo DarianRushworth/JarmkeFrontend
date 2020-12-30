@@ -44,8 +44,22 @@ export default function ProductTable() {
         }
     }
 
-    const displayProducts = products.length >= 2
-        ? products.map(product => {
+    if( products.length === 0){
+        return (
+            <div>
+                <Jumbotron
+                    className="JumboImage"
+                    style={{
+                        backgroundImage: `url(${imageUrl})`,
+                        height: 200,
+                    }}>
+                </Jumbotron>
+                <div className="loader_container"><LoadingSpinner /></div>
+            </div>
+        )
+    }
+
+    const displayProducts = products.map(product => {
             return (
                 <Col
                     key={product.id}
@@ -96,7 +110,7 @@ export default function ProductTable() {
                 </Col>
             )
         })
-        : <LoadingSpinner />
+
     return (
         <div>
         <div onScroll={MoreProducts} style={{ overflowY: "scroll", maxHeight: "800px"}}>
