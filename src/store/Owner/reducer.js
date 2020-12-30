@@ -1,13 +1,16 @@
-const initialState = {}
+const initialState = {
+    loading: true,
+}
 
-export default function ownerReducer(state = initialState, action){
-    switch(action.type){
+export default function ownerReducer(state = initialState, action) {
+    switch (action.type) {
         case "SET_OWNER":
             return {
-                ...action.payload
+                ...action.payload,
+                loading: false,
             }
 
-            default:
-                return state
+        default:
+            return state
     }
 }
