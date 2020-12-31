@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { Button, Jumbotron, Container, Col, Image, Row } from "react-bootstrap"
@@ -10,6 +10,7 @@ import { addProduct } from "../../store/Order/actions"
 import Errors from "../../components/Errors"
 import "./index.css"
 import LoadingSpinner from "../../components/LoadingSpinner"
+import { selectOrderData } from "../../store/Order/selectors"
 
 const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597769832/IMG-6327_ssonf4.jpg"
 
@@ -17,9 +18,11 @@ export default function ProductDetails() {
     const dispatch = useDispatch()
     const product = useSelector(selectProduct)
     // console.log("product test", product)
+    const [loading, setLoading] = useState(false)
     const loader = useSelector(selectLoader)
     const idNeeded = parseInt(useParams().id)
     // console.log("params test", idNeeded)
+    const orderData = useSelector(selectOrderData)
     const errorRecieved = useSelector(selectError)
     const errorMessage = errorRecieved.data
 
@@ -35,7 +38,25 @@ export default function ProductDetails() {
     }, [dispatch, idNeeded])
 
     function addToCart(id) {
+        setLoading(true)
         dispatch(addProduct(id))
+    }
+
+    if(loading && orderData.loading){
+        return (
+            <div>
+                <Jumbotron
+                    className="JumboImage"
+                    style={{
+                        backgroundImage: `url(${jumboUrl})`,
+                        height: 200,
+                    }}>
+                </Jumbotron>
+                <div className="loader_container">
+                    <LoadingSpinner />
+                </div>
+            </div>
+        )
     }
 
     if (loader) {
