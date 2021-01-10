@@ -23,3 +23,8 @@
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+
+.card_element {
+  width: 19%;
+  margin-left: 10px;
+}
