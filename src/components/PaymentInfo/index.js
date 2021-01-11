@@ -44,7 +44,7 @@ export default function PaymentInfo() {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     const orderData = useSelector(selectOrderData)
-    console.log("order data:", orderData.shippingAddress)
+    console.log("order data:", orderData)
 
     const order = user.orders.find(order => order.completed === false)
 
@@ -127,7 +127,7 @@ export default function PaymentInfo() {
             </div>
             <div>
                 <p>
-                    {orderData.shippingAddress}
+                    {orderData.shippingAddress.split().length === 1 ? user.address : orderData.shippingAddress}
                 </p>
                 <Button
                     variant="outline-danger"
@@ -265,25 +265,6 @@ export default function PaymentInfo() {
             </Form.Group>
         </div>
 
-    if(loading){
-        return (
-            <div>
-                <Jumbotron
-                    className="JumboImage"
-                    style={
-                        {
-                            backgroundImage: `url(${jumboImage})`,
-                            height: 250,
-                        }
-                    }>
-
-                </Jumbotron>
-                <div className="loader_container">
-                    <LoadingSpinner />
-                </div>
-            </div>
-        )
-    } else {
         return (
             <div>
                 <div>
@@ -298,7 +279,7 @@ export default function PaymentInfo() {
 
                     </Jumbotron>
                     <div className="checkout_container">
-                        {display ? otherAddress : info_checker}
+                        {loading ? <LoadingSpinner /> : display ? otherAddress : info_checker}
                         <div className="card_info">
                             <h5 className="card_details">
                                 Card Details
@@ -311,6 +292,7 @@ export default function PaymentInfo() {
                                 <div className="pay_button">
                                     <Button
                                         onClick={(e) => {
+                                            setLoading(true)
                                             set_Message(false)
                                             submitted(e)
                                         }}>
@@ -333,4 +315,3 @@ export default function PaymentInfo() {
             </div>
         )
     }
-}
