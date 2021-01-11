@@ -34,7 +34,6 @@ export default function PaymentInfo() {
     const [standard, setStandard] = useState("outline-danger")
     const [loading, setLoading] = useState(false)
     const [display, set_Display] = useState(false)
-    const [message, set_Message] = useState(false)
     const [streetName, set_StreetName] = useState("")
     const [houseNumber, set_HouseNumber] = useState("")
     const [postalCode, set_PostalCode] = useState("")
@@ -44,7 +43,6 @@ export default function PaymentInfo() {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     const orderData = useSelector(selectOrderData)
-    console.log("order data:", orderData)
 
     const order = user.orders.find(order => order.completed === false)
 
@@ -55,8 +53,6 @@ export default function PaymentInfo() {
 
         dispatch(getCountries())
     }, [dispatch, order.id, orderData.total])
-
-    console.log("secret test:", orderData.client_secret)
 
     function sendShipping(shipping, class_name) {
         dispatch(addShipping(shipping))
@@ -78,9 +74,6 @@ export default function PaymentInfo() {
             return
         }
 
-        console.log("payment here:")
-
-        console.log('secret matias', orderData.client_secret);
         const response = await stripe.confirmCardPayment(orderData.client_secret, {
             payment_method: {
                 card: elements.getElement(CardElement),
@@ -92,15 +85,13 @@ export default function PaymentInfo() {
                 }
             }
         })
-        console.log('success a', response)
+        
         if (response.error) {
             console.log(response.error.message)
         } else {
             if (response.paymentIntent.status === "succeeded") {
                 history.push("/profilePage")
-                // dispatch(addOrderProduct(response.data.order))
                 dispatch(addPayment(orderData.total))
-                console.log("success")
             }
         }
     }
@@ -293,7 +284,6 @@ export default function PaymentInfo() {
                                     <Button
                                         onClick={(e) => {
                                             setLoading(true)
-                                            set_Message(false)
                                             submitted(e)
                                         }}>
                                         Pay
@@ -303,7 +293,7 @@ export default function PaymentInfo() {
                                     <Button
                                         variant="danger"
                                         onClick={() => {
-                                            set_Message(false)
+                                            history.push("/")
                                         }}>
                                         Abort
                                     </Button>

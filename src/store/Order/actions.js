@@ -40,7 +40,6 @@ export function getCountries(){
             const apiCountry = await axios.get("https://restcountries.eu/rest/v2/all")
 
             const apiCity = await axios.get("https://countriesnow.space/api/v0.1/countries/population/cities")
-            console.log("api", apiCity)
 
             dispatch(setCountries(apiCountry.data, apiCity.data.data))
 
@@ -54,7 +53,6 @@ export function getSecretKey(total){
     return async function thunk16(dispatch, getState){
         const tokenNeeded = getState().user.token
         try{
-            console.log("here man")
             const stripeResponse = await axios.post(`${apiUrl}/payment`, {
                 amount: total * 100,
                 currency: "eur",
@@ -63,7 +61,6 @@ export function getSecretKey(total){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("response man", stripeResponse)
 
             dispatch(setSecret(stripeResponse.data.client_secret))
 
@@ -136,7 +133,6 @@ export function addShipping(shipping){
     return async function thunk13(dispatch, getState){
         const tokenNeeded = getState().user.token
         try{
-            console.log("shipping:", false)
             const shippingUpdated = await axios.patch(`${apiUrl}/checkout/updateCart`,{
                 expressShipping: shipping
             },{
@@ -144,7 +140,6 @@ export function addShipping(shipping){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            console.log("update went well", shippingUpdated)
 
             dispatch(setUser(shippingUpdated.data.user))
             dispatch(addOrderProduct(shippingUpdated.data.order))
