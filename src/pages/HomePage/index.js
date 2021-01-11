@@ -32,21 +32,12 @@ export default function HomePage() {
         return (
             <div>
                 <div>
-                    <div>
-                        <header>
-                            <Jumbotron
-                                className="JumboImage"
-                                style={{
-                                    backgroundImage: `url(${jumboUrl})`,
-                                    height: 200,
-                                }}>
-                                <h1 className="BrandH1">
-                                    {message}
-                                </h1>
-                            </Jumbotron>
-                        </header>
-                    </div>
                     {errorDisplay()}
+                    <div className="title_container">
+                        <div className="BrandH1">
+                            {message}
+                        </div>
+                    </div>
                     <div>
                         <Carousel className="HomeImage">
                             <Carousel.Item style={

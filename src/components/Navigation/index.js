@@ -102,10 +102,10 @@ export default function Navigation() {
                 className="JumboImage"
                 style={{
                     backgroundImage: `url(${neededUrl})`,
-                    height: 200,
-                    marginBottom: 0,
+                    height: 170,
                 }}
             >
+            <div className="nav_logo">
                 <Image 
                     src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597914048/LogoEdit_jsikpf.jpg"
                     roundedCircle
@@ -115,6 +115,7 @@ export default function Navigation() {
                     }}
                     onClick={() => history.push("/")}
                 />
+            </div>
                 {navDisplay}
             </Jumbotron>
         </div>

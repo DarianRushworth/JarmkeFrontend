@@ -4,15 +4,21 @@
     background-size: cover;
 }
 
+.nav_logo {
+    position: relative;
+    top: -55%;
+}
+
 .links_right_in {
     position: relative;
-    top: -170%;
+    top: -340%;
+    left: 1%;
     text-align: right;
 }
 
 .links_right_out {
     position: relative;
-    top: -100%;
+    top: -230%;
     text-align: right;
 }
 
