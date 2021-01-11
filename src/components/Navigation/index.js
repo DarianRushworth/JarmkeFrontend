@@ -1,22 +1,32 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux"
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router"
 
-import NavBarItem from "./NavBarItem"
 import { selectUser, selectToken } from "../../store/User/selectors"
 import { removeUser } from "../../store/User/actions"
-import { Button, Image } from "react-bootstrap";
+import { Button, Image, Jumbotron } from "react-bootstrap";
+import "./index.css"
+
+const navImages = [
+    "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761569/IMG-1796_m8rmvr.jpg",
+    "https://res.cloudinary.com/djzjepmnr/image/upload/v1597845845/IMG_5539_qpvufa.jpg",
+    "https://res.cloudinary.com/djzjepmnr/image/upload/v1597769832/IMG-6327_ssonf4.jpg",
+    "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761978/IMG-1292_zrtuom.jpg",
+    "https://res.cloudinary.com/djzjepmnr/image/upload/v1597845473/IMG_5481_etie1o.jpg",
+    "https://res.cloudinary.com/djzjepmnr/image/upload/v1597827679/IMG-6987_bjm8x8.jpg",
+    "https://res.cloudinary.com/djzjepmnr/image/upload/v1597766391/Kristina_Matthews_Extra_Lifestyle_smaller_wcusal.jpg",
+]
 
 export default function Navigation() {
+    const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     const tokenNeeded = useSelector(selectToken)
 
-    const welcomeMessage = user === undefined
+    const fullName = user === undefined
     ? "Error"
-    :`Welcome ${user.firstName} ${user.lastName}`
+    :`${user.firstName} ${user.lastName}`
     // console.log(user.orders)
 
 
@@ -33,37 +43,80 @@ export default function Navigation() {
         return amountToDisplay
     }
 
+    // <div className="welcome">
+    //     <Link to="/profilePage" className="link_custom">{welcomeMessage}</Link>
+    // </div>
+    // <div className="cart">
+    //     <Link to="/cartCheckout" className="link_custom">{`${amountOfOrders()} 🛒`}</Link>
+    // </div>
+
     const navDisplay = tokenNeeded
-        ? <>
-          <NavBarItem path="/profilePage" linkText={welcomeMessage} />
-          <NavBarItem path="/cartCheckout" linkText={`🛒${amountOfOrders()}`} />
-          <Button onClick={() => dispatch(removeUser())}>Logout</Button>
-          </>
-        : <NavBarItem path="/login" linkText="Login" />
+        ? <div className="links_right_in">
+            <div className="nav_profile">
+                <Button
+                    variant="info"
+                    size="sm"
+                    onClick={() => history.push("/profilePage")}>
+                    {fullName}
+                </Button>
+            </div>
+            <div className="nav_products">
+                <Button
+                    variant="info"
+                    size="sm"
+                    onClick={() => history.push("/productsPage")}>
+                    Store
+                </Button>
+            </div>
+                <Button
+                        variant="info"
+                        size="sm"
+                        onClick={() => history.push("/cartCheckout")}>
+                        {`${amountOfOrders()} 🛒`}
+                    </Button>
+                <div className="nav_out">
+                    <Button
+                        variant="info"
+                        size="sm" 
+                        onClick={() => dispatch(removeUser())}
+                    >Logout</Button>
+                </div>
+          </div>
+        : <div className="links_right_out">
+            <div className="nav_out">
+                <Button
+                    variant="info"
+                    size="sm"
+                    onClick={() => history.push("/login")}
+                >Login</Button>
+            </div>
+        </div>
 
-
+    const randomNum = Math.floor(Math.random() * 7)
+    const neededUrl = navImages[randomNum]
     // console.log("user test", user)
+
     return (
-        <Navbar bg="dark"  variant={{
-            color: "white"
-        }} expand="lg">
-            <Navbar.Brand as={NavLink} to="/">
+        <div>
+            <Jumbotron
+                className="JumboImage"
+                style={{
+                    backgroundImage: `url(${neededUrl})`,
+                    height: 200,
+                    marginBottom: 0,
+                }}
+            >
                 <Image 
                     src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597914048/LogoEdit_jsikpf.jpg"
                     roundedCircle
                     style={{
-                        width: 60,
-                        height: 60,
-                    }} />
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav style={{ 
-                    width: "100%"}} fill>
-                    <NavBarItem path="/productsPage" linkText="Store" />
-                    {navDisplay}
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
+                        width: 80,
+                        height: 80,
+                    }}
+                    onClick={() => history.push("/")}
+                />
+                {navDisplay}
+            </Jumbotron>
+        </div>
     )
 }
