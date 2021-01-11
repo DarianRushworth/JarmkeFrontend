@@ -17,6 +17,59 @@ function setOrderProducts(OrderData){
     }
 }
 
+function setSecret(secret){
+    return {
+        type: "SET_SECRET",
+        payload: secret,
+    }
+}
+
+function setCountries(countries, cities){
+    return {
+        type: "SET_COUNTRIES",
+        payload: {
+            country: countries,
+            city: cities,
+        }
+    }
+}
+
+export function getCountries(){
+    return async function thunk17(dispatch, getState){
+        try{
+            const apiCountry = await axios.get("https://restcountries.eu/rest/v2/all")
+
+            const apiCity = await axios.get("https://countriesnow.space/api/v0.1/countries/population/cities")
+
+            dispatch(setCountries(apiCountry.data, apiCity.data.data))
+
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
+
+export function getSecretKey(total){
+    return async function thunk16(dispatch, getState){
+        const tokenNeeded = getState().user.token
+        try{
+            const stripeResponse = await axios.post(`${apiUrl}/payment`, {
+                amount: total * 100,
+                currency: "eur",
+            }, {
+                headers: {
+                    Authorization: `Bearer ${tokenNeeded}`
+                }
+            })
+
+            dispatch(setSecret(stripeResponse.data.client_secret))
+
+        } catch(error){
+            console.log("error:", error.message)
+        }
+    }
+}
+
 export function getOrderedProducts(id){
     return async function thunk10(dispatch, getState){
         const tokenNeeded = getState().user.token
@@ -87,7 +140,6 @@ export function addShipping(shipping){
                     Authorization: `Bearer ${tokenNeeded}`
                 }
             })
-            // console.log("update went well", shippingUpdated)
 
             dispatch(setUser(shippingUpdated.data.user))
             dispatch(addOrderProduct(shippingUpdated.data.order))

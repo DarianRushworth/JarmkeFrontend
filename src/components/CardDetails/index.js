@@ -25,11 +25,8 @@ export default function CardDetails(){
     }
 
     return (
-        <label>
-          Card Details
-          <div>
-            <CardElement options={CardSetup}/>
-          </div>
-        </label>
+        <div className="card_element">
+          <CardElement options={CardSetup}/>
+        </div>
     )
 }
