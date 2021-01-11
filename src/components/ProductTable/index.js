@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Button, Container, Image, Row, Col, Jumbotron } from "react-bootstrap"
+import { Button, Container, Image, Row, Col } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 
@@ -11,8 +11,6 @@ import { selectUser } from "../../store/User/selectors"
 import ContactDetails from "../ContactDetails/index"
 import LoadingSpinner from "../LoadingSpinner"
 import "./index.css"
-
-const imageUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597766391/Kristina_Matthews_Extra_Lifestyle_smaller_wcusal.jpg"
 
 export default function ProductTable() {
     const history = useHistory()
@@ -46,16 +44,7 @@ export default function ProductTable() {
 
     if( products.length === 0){
         return (
-            <div>
-                <Jumbotron
-                    className="JumboImage"
-                    style={{
-                        backgroundImage: `url(${imageUrl})`,
-                        height: 200,
-                    }}>
-                </Jumbotron>
-                <div className="loader_container"><LoadingSpinner /></div>
-            </div>
+            <div className="loader_container"><LoadingSpinner /></div>
         )
     }
 
@@ -114,13 +103,6 @@ export default function ProductTable() {
     return (
         <div>
         <div onScroll={MoreProducts} style={{ overflowY: "scroll", maxHeight: "800px"}}>
-            <Jumbotron
-                className="JumboImage"
-                style={{
-                    backgroundImage: `url(${imageUrl})`,
-                    height: 200,
-                }}>
-            </Jumbotron>
             <Container>
                 <Row>
                     {displayProducts}

@@ -4,7 +4,6 @@ import {
     Container,
     Button,
     Col,
-    Jumbotron,
     Modal
 } from "react-bootstrap"
 import { Link } from "react-router-dom"
@@ -16,7 +15,6 @@ import { getUser } from "../../store/User/actions"
 import { selectSpinner } from "../../store/User/selectors"
 import LoadingSpinner from "../../components/LoadingSpinner"
 
-const jumboImage = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597845845/IMG_5539_qpvufa.jpg"
 const message =
     `jarmké
 jewellery`
@@ -52,14 +50,6 @@ export default function LoginPage() {
     if(!loading){
         return (
             <div className="main_container">
-                <Jumbotron style={
-                    {
-                        backgroundImage: `url(${jumboImage})`,
-                        height: 250,
-                    }
-                } className="JumboImage">
-
-                </Jumbotron>
                 <Modal
                     show={display}
                     onHide={exit}
@@ -147,19 +137,8 @@ export default function LoginPage() {
         }
 
         return (
-            <div>
-                <Jumbotron
-                    style={
-                        {
-                            backgroundImage: `url(${jumboImage})`,
-                            height: 250,
-                        }
-                    }
-                    className="JumboImage">
-                </Jumbotron>
-                <div className="loader_container">
-                    <LoadingSpinner />
-                </div>
+            <div className="loader_container">
+                <LoadingSpinner />
             </div>
         )
     }

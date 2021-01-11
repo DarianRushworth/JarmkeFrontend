@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { Button, Jumbotron, Container, Col, Image, Row } from "react-bootstrap"
+import { Button, Container, Col, Image, Row } from "react-bootstrap"
 
 import HeartButton from "../../components/HeartButton"
 import { getSpecificProduct } from "../../store/Products/actions"
@@ -11,8 +11,6 @@ import Errors from "../../components/Errors"
 import "./index.css"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import { selectOrderData } from "../../store/Order/selectors"
-
-const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597769832/IMG-6327_ssonf4.jpg"
 
 export default function ProductDetails() {
     const dispatch = useDispatch()
@@ -44,47 +42,22 @@ export default function ProductDetails() {
 
     if(loading && orderData.loading){
         return (
-            <div>
-                <Jumbotron
-                    className="JumboImage"
-                    style={{
-                        backgroundImage: `url(${jumboUrl})`,
-                        height: 200,
-                    }}>
-                </Jumbotron>
-                <div className="loader_container">
-                    <LoadingSpinner />
-                </div>
+            <div className="loader_container">
+                <LoadingSpinner />
             </div>
         )
     }
 
     if (loader) {
         return (
-            <div>
-                <Jumbotron
-                    className="JumboImage"
-                    style={{
-                        backgroundImage: `url(${jumboUrl})`,
-                        height: 200,
-                    }}>
-                </Jumbotron>
-                <div className="loader_container">
-                    <LoadingSpinner />
-                </div>
+            <div className="loader_container">
+                <LoadingSpinner />
             </div>
         )
     }
 
     return (
         <div>
-            <Jumbotron
-                className="JumboImage"
-                style={{
-                    backgroundImage: `url(${jumboUrl})`,
-                    height: 200,
-                }}>
-            </Jumbotron>
             {displayError()}
             <Container>
                 <Row>
