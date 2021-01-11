@@ -3,3 +3,97 @@
     flex-direction: row;
     justify-content: center;
 }
+
+.card_stripe {
+    width: 75%;
+}
+
+.checkout_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.shipping_info {
+    width: 30%;
+    background-color: #c5d5cb;
+    border-radius: 10px;
+    -webkit-border-radius: 36px 12px;
+    text-align: center;
+    margin-right: 8%;
+}
+
+.card_info {
+    width: 30%;
+    background-color: #c5d5cb;
+    border-radius: 10px;
+    -webkit-border-radius: 36px 12px;
+    margin-left: 8%;
+}
+
+.card_details {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    text-align: center;
+}
+
+.card_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.standard_ship {
+    margin-right: 2%;
+}
+
+.express_ship {
+    margin-left: 2%;
+}
+
+.product_container {
+    display: flex;
+    flex-direction: row;
+}
+
+.checkout_img {
+    width: 50px;
+    height: 50px;
+}
+
+.checkout_product {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pay_button {
+    margin-right: 5%;
+    margin-bottom: 3%;
+}
+
+.abort_button {
+    margin-left: 5%;
+}
+
+.form_inputs {
+    width: 75%;
+}
+
+.form_input_double {
+    width: 50%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.street_num {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.total_order {
+    text-align: center;
+}

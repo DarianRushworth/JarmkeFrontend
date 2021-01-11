@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import axios from 'axios';
 import {
     Form,
-    Container,
-    Col,
     Button,
-    Alert,
-    Jumbotron
+    Jumbotron,
+    Figure
 } from "react-bootstrap"
 import { useHistory } from "react-router"
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
@@ -20,11 +17,12 @@ import {
     getOrderedProducts,
     addShipping,
     addShippingAddress,
-    addOrderProduct
+    getSecretKey,
+    getCountries
 } from "../../store/Order/actions"
 import { selectOrderData } from "../../store/Order/selectors"
-import { apiUrl } from "../../config/constants"
 import "./index.css"
+import LoadingSpinner from "../LoadingSpinner";
 
 const jumboImage ="https://res.cloudinary.com/djzjepmnr/image/upload/v1597827679/IMG-6987_bjm8x8.jpg"
 
@@ -32,29 +30,39 @@ const jumboImage ="https://res.cloudinary.com/djzjepmnr/image/upload/v1597827679
 export default function PaymentInfo() {
     const stripe = useStripe()
     const elements = useElements()
+    const [express, setExpress] = useState("outline-danger")
+    const [standard, setStandard] = useState("outline-danger")
+    const [loading, setLoading] = useState(false)
     const [display, set_Display] = useState(false)
     const [message, set_Message] = useState(false)
     const [streetName, set_StreetName] = useState("")
     const [houseNumber, set_HouseNumber] = useState("")
     const [postalCode, set_PostalCode] = useState("")
     const [district, set_District] = useState("")
+    const [countryNeeded, setCountryNeeded] = useState("")
     const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     const orderData = useSelector(selectOrderData)
-    const tokenNeeded = user.token
-
-    console.log("user test", user)
+    console.log("order data:", orderData.shippingAddress)
 
     const order = user.orders.find(order => order.completed === false)
-    console.log("order test(CART)", order)
 
     useEffect(() => {
         dispatch(getOrderedProducts(order.id))
-    }, [dispatch, order.id])
 
-    function sendShipping(shipping) {
+        dispatch(getSecretKey(orderData.total))
+
+        dispatch(getCountries())
+    }, [dispatch, order.id, orderData.total])
+
+    console.log("secret test:", orderData.client_secret)
+
+    function sendShipping(shipping, class_name) {
         dispatch(addShipping(shipping))
+        class_name === "standard_ship"
+        ? setStandard("danger")
+        : setExpress("danger")
     }
 
     const submitted = async (event) => {
@@ -65,22 +73,15 @@ export default function PaymentInfo() {
         dispatch(addShippingAddress(address))
 
         set_Display(false)
-        set_Message(true)
 
         if (!stripe || !elements) {
             return
         }
 
-        const clientSecret = await axios.post(`${apiUrl}/payment`, {
-            amount: orderData.total * 100,
-            currency: "eur",
-        }, {
-            headers: {
-                Authorization: `Bearer ${tokenNeeded}`
-            }
-        })
-        // console.log('secret matias', clientSecret);
-        const response = await stripe.confirmCardPayment(clientSecret.data.client_secret, {
+        console.log("payment here:")
+
+        console.log('secret matias', orderData.client_secret);
+        const response = await stripe.confirmCardPayment(orderData.client_secret, {
             payment_method: {
                 card: elements.getElement(CardElement),
                 billing_details: {
@@ -91,15 +92,15 @@ export default function PaymentInfo() {
                 }
             }
         })
-        // console.log('success a', response)
+        console.log('success a', response)
         if (response.error) {
             console.log(response.error.message)
         } else {
             if (response.paymentIntent.status === "succeeded") {
                 history.push("/profilePage")
-                dispatch(addOrderProduct(clientSecret.data.order))
+                // dispatch(addOrderProduct(response.data.order))
                 dispatch(addPayment(orderData.total))
-                // console.log("success")
+                console.log("success")
             }
         }
     }
@@ -112,141 +113,147 @@ export default function PaymentInfo() {
         set_Display(false)
     }
 
-    const expressMessage = JSON.stringify(orderData.expressShipping) === "false"
-        ? "No express shipping has been added."
-        : "Express shipping has been added, expect your package in 5 working days."
+    const cities = orderData.cities.filter(city => city.country === countryNeeded)
+    const neededCities = cities.map(city => { 
+        return <option value={city.city} onClick={(event) => set_District(event.target.value)}>{city.city}</option>
+    })
 
-    const alertMessage = message
-        ? <Alert variant="success">
-            <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5"
-                onSubmit={submitted}>
-                <Alert.Heading>
-                    Payment Details:
-                </Alert.Heading>
+    const info_checker =
+        <div className="shipping_info">
+            <div>
+                <p>
+                    Shipping Address:
+                </p>
+            </div>
+            <div>
+                <p>
+                    {orderData.shippingAddress}
+                </p>
+                <Button
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={() => set_Display(true)}>
+                    Change Address
+                </Button>
                 <hr />
-                <div>
-                    <div>
-                        <p>
-                            Shipping Address:
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            {orderData.shippingAddress}
-                        </p>
-                        <hr />
-                    </div>
-                    <div>
-                        <p>
-                            Express Shipping:
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            {expressMessage}
-                        </p>
-                        <hr />
-                    </div>
-                    <div>
-                        <p>
-                            Products:
-                        </p>
-                    </div>
-                    <div>
-                        <ul>
-                            {orderData.products.map(product => {
-                                return (
-                                    <li style={{
-                                        display: "list-item",
-                                    }}>{product.title}</li>
-                                )
-                            })}
-                        </ul>
-                        <hr />
-                    </div>
-                    <div>
-                        <p>
-                            Total:
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            €{orderData.total}
-                        </p>
-                        <hr />
-                    </div>
-                </div>
-                <div>
-                    <CardDetails />
-                    <hr />
-                </div>
-                <div>
-                    <Button
-                        onClick={(e) => {
-                            set_Message(false)
-                            submitted(e)
-                        }}>
-                        Pay
+            </div>
+            <div>
+                <p>
+                    Express Shipping:
+                </p>
+            </div>
+            <div>
+                <Button
+                    variant={standard}
+                    className="standard_ship"
+                    value={false}
+                    onClick={(event) => {
+                        sendShipping(event.target.value, "standard_ship")
+                    }}>
+                    Standard 3 Day Delivery
                 </Button>
-                    <Button
-                        variant="danger"
-                        onClick={() => {
-                            set_Message(false)
-                        }}>
-                        Abort
+                <Button
+                    variant={express}
+                    className="express_ship"
+                    value={true}
+                    onClick={(event) => {
+                        sendShipping(event.target.value, "express_ship")
+                    }}>
+                    Over Night Shipping +€50
                 </Button>
-                </div>
-            </Form>
-        </Alert>
-        : ""
-
-    const otherAddress = display
-        ?
-        <Container>
-            <Form.Group controlId="formBasicStreetName">
-                <Form.Label>
-                    Street Name:
-                </Form.Label>
-                <Form.Control
-                    value={streetName}
-                    onChange={(event) => set_StreetName(event.target.value)}
-                    type="input"
-                    placeholder="Street Name Here"
-                    required />
+                <hr />
+            </div>
+            <div>
+                <p>
+                    Products:
+                </p>
+            </div>
+            <div className="product_container">
+                {orderData.products.map(product => {
+                    return (
+                        <div className="checkout_product">
+                            <Figure>
+                                <Figure.Image 
+                                    className="checkout_img" 
+                                    src={product.image}
+                                    alt="Product" 
+                                />
+                                <Figure.Caption>
+                                    €{product.price}
+                                </Figure.Caption>
+                            </Figure>
+                        </div>
+                    )
+                })}
+                <hr />
+            </div>
+            <div>
+                <p>
+                    Total:
+                </p>
+            </div>
+            <div>
+                <PaymentTotal data={orderData}/>
+                <hr />
+            </div>
+        </div>
+        
+    
+    const otherAddress =
+        <div className="shipping_info">
+            <div className="street_num">
+                <Form.Group controlId="formBasicStreetName" className="form_inputs">
+                    <Form.Label>
+                        Street Name:
+                    </Form.Label>
+                    <Form.Control
+                        value={streetName}
+                        onChange={(event) => set_StreetName(event.target.value)}
+                        type="input"
+                        placeholder="Street Name Here"
+                        required />
+                </Form.Group>
+            </div>
+            <div className="street_num">
+            <Form.Group controlId="formBasicHouseNumber" className="form_input_double">
+                    <Form.Label>
+                        House Number:
+                    </Form.Label>
+                    <Form.Control
+                        value={houseNumber}
+                        onChange={(event) => set_HouseNumber(event.target.value)}
+                        type="input"
+                        placeholder="House Number Here"
+                        required />
+                </Form.Group>
+            <Form.Group controlId="formBasicCountry" className="form_input_double">
+                <Form.Label>Select Country</Form.Label>
+                <Form.Control as="select">
+                    {orderData.countries.map(country => {
+                        return <option value={country.name} onClick={(event) => setCountryNeeded(event.target.value)}>
+                                {country.name}</option>})}
+                </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formBasicHouseNumber">
-                <Form.Label>
-                    House Number:
-                </Form.Label>
-                <Form.Control
-                    value={houseNumber}
-                    onChange={(event) => set_HouseNumber(event.target.value)}
-                    type="input"
-                    placeholder="House Number Here"
-                    required />
-            </Form.Group>
-            <Form.Group controlId="formBasicPostalCode">
-                <Form.Label>
-                    Postal Code:
-                </Form.Label>
-                <Form.Control
-                    value={postalCode}
-                    onChange={(event) => set_PostalCode(event.target.value)}
-                    type="input"
-                    placeholder="Postal Code Here"
-                    required />
-            </Form.Group>
-            <Form.Group controlId="formBasicDistrict">
-                <Form.Label>
-                    District:
-                </Form.Label>
-                <Form.Control
-                    value={district}
-                    onChange={(event) => set_District(event.target.value)}
-                    type="input"
-                    placeholder="District Here"
-                    required />
-            </Form.Group>
+            </div>
+            <div className="street_num">
+                <Form.Group controlId="formBasicPostalCode" className="form_input_double">
+                    <Form.Label>
+                        Postal Code:
+                    </Form.Label>
+                    <Form.Control
+                        value={postalCode}
+                        onChange={(event) => set_PostalCode(event.target.value)}
+                        type="input"
+                        placeholder="Postal Code Here"
+                        required />
+                </Form.Group>
+                <Form.Group controlId="formBasicDistrict" className="form_input_double">
+                    <Form.Label>Select City</Form.Label>
+                    <Form.Control as="select">
+                        {neededCities}
+                    </Form.Control>
+                </Form.Group>
+            </div>
             <Form.Group>
                 <Button
                     variant="info"
@@ -256,94 +263,74 @@ export default function PaymentInfo() {
                     Submit Address
                 </Button>
             </Form.Group>
-        </Container>
-        : <hr />
+        </div>
 
-
-    return (
-        <div>
-            <head>
-                <script
-                    src="https://js.stripe.com/v3/"
-                ></script>
-            </head>
+    if(loading){
+        return (
             <div>
-            <Jumbotron
-                className="JumboImage"
-                style={
-                    {
-                        backgroundImage: `url(${jumboImage})`,
-                        height: 250,
-                    }
-                }>
+                <Jumbotron
+                    className="JumboImage"
+                    style={
+                        {
+                            backgroundImage: `url(${jumboImage})`,
+                            height: 250,
+                        }
+                    }>
 
-            </Jumbotron>
-            <Container>
-                {alertMessage}
-            </Container>
-            <Container fluid>
-                <Col className="checkout_col">
-                    <div className="card"
-                        style={{ width: "27rem" }}>
-                        <div className="card-body">
-                            <h4 className="card-title">
-                                Shipping Information
-                            </h4>
-                        </div>
-                        <div className="card-body">
-                            <Form>
-                                <Form.Group controlId="formBasicShippingAddress">
-                                    <Form.Label>
-                                        Shipping Address:
-                            </Form.Label>
-                                    <Form.Control
-                                        as="select"
-                                        required>
-                                        <option
-                                            onClick={() => {
-                                                set_Display(false)
-                                                dispatch(addShippingAddress(user.address))
-                                            }}
-                                        >{user.address}</option>
-                                        <option
-                                            value="elseWhere"
-                                            onClick={() => set_Display(true)}
-                                        >Some Where Else</option>
-                                    </Form.Control>
-                                </Form.Group>
-                                {otherAddress}
-                                <Form.Group controlId="formBasicExpressShipping">
-                                    <Form.Label>
-                                        Express Shipping:
-                                </Form.Label>
-                                    <Form.Control
-                                        onChange={(event) => {
-                                            sendShipping(event.target.value)
-                                            set_Message(true)
-                                        }}
-                                        as="select"
-                                        required>
-                                        <option>--Select-Shipping--</option>
-                                        <option
-                                            value="true">Yes Please, within 5 working days(€50)</option>
-                                        <option
-                                            value="false">No Thanks!</option>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Form>
-                            <div className="card-body">
-                                <h6 style={{
-                                    textAlign: "left",
-                                }}>
-                                    Total:
-                        </h6>
-                                <PaymentTotal data={orderData} />
+                </Jumbotron>
+                <div className="loader_container">
+                    <LoadingSpinner />
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <div>
+                    <Jumbotron
+                        className="JumboImage"
+                        style={
+                            {
+                                backgroundImage: `url(${jumboImage})`,
+                                height: 250,
+                            }
+                        }>
+
+                    </Jumbotron>
+                    <div className="checkout_container">
+                        {display ? otherAddress : info_checker}
+                        <div className="card_info">
+                            <h5 className="card_details">
+                                Card Details
+                            </h5>
+                            <div>
+                                <CardDetails />
+                                <hr />
+                            </div>
+                            <div className="card_button">
+                                <div className="pay_button">
+                                    <Button
+                                        onClick={(e) => {
+                                            set_Message(false)
+                                            submitted(e)
+                                        }}>
+                                        Pay
+                                    </Button>
+                                </div>
+                                <div className="abort_button">
+                                    <Button
+                                        variant="danger"
+                                        onClick={() => {
+                                            set_Message(false)
+                                        }}>
+                                        Abort
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </Col>
-            </Container>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
