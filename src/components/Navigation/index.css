@@ -4,21 +4,28 @@
     background-size: cover;
 }
 
-.nav_logo {
+.logo {
     position: relative;
     top: -55%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .links_right_in {
+    width: 25%;
     position: relative;
-    top: -340%;
-    left: 1%;
     text-align: right;
+    left: 76%;
+    top: -350%;
 }
 
 .links_right_out {
+    width: 25%;
     position: relative;
     top: -230%;
+    left: 76%;
     text-align: right;
 }
 

@@ -4,7 +4,7 @@ import { useHistory } from "react-router"
 
 import { selectUser, selectToken } from "../../store/User/selectors"
 import { removeUser } from "../../store/User/actions"
-import { Button, Image, Jumbotron } from "react-bootstrap";
+import { Button, Jumbotron } from "react-bootstrap";
 import "./index.css"
 
 const navImages = [
@@ -95,6 +95,11 @@ export default function Navigation() {
     const neededUrl = navImages[randomNum]
     // console.log("user test", user)
 
+    function goHome(){
+        console.log("Clicked")
+        history.push("/")
+    }
+
     return (
         <div>
             <Jumbotron
@@ -104,18 +109,13 @@ export default function Navigation() {
                     height: 170,
                 }}
             >
-            <div className="nav_logo">
-                <Image 
-                    src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597914048/LogoEdit_jsikpf.jpg"
-                    roundedCircle
-                    style={{
-                        width: 80,
-                        height: 80,
-                    }}
-                    onClick={() => history.push("/")}
-                />
-            </div>
-                {navDisplay}
+            <img
+                src="https://res.cloudinary.com/djzjepmnr/image/upload/v1597914048/LogoEdit_jsikpf.jpg"
+                alt="logo"
+                className="logo"
+                onClick={goHome}
+            />
+            {navDisplay}
             </Jumbotron>
         </div>
     )
