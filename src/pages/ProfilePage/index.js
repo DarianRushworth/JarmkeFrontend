@@ -12,6 +12,7 @@ import Usersfavorites from "../../components/UsersFavorites"
 import UserOrders from "../../components/UserOrders"
 import { selectUser } from "../../store/User/selectors"
 import "./index.css"
+import ContactDetails from "../../components/ContactDetails"
 
 export default function ProfilePage(){
     const [FirstName, set_FirstName] = useState("")
@@ -103,6 +104,9 @@ export default function ProfilePage(){
                 </Row>
             </Container>
             <Usersfavorites data={user} />
+            <footer>
+                <ContactDetails />
+            </footer>
         </div>
     )
 }
