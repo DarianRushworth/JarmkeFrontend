@@ -7,3 +7,81 @@ ul li {
 .horLine {
     border: 1px solid white;
 }
+
+.social_footer {
+    display: flex;
+    flex-direction: row;
+    background-color: #c3ccd4;
+    width: 75%;
+    height: 100px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    -webkit-border-radius: 36px 12px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.social_container {
+    width: 20%;
+}
+
+.brand {
+    font-family: "Allura", cursive;
+    font-size: 30px;
+    text-shadow: 1px 1px 1px #000;
+    margin-left: 5%;
+}
+
+.social_icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-left: 2%;
+}
+
+.email {
+    margin-bottom: 1%;
+    margin-left: 3%;
+}
+
+.phone {
+    margin-bottom: 1%;
+    margin-left: 2%;
+}
+
+.phone_number {
+    visibility: hidden;
+    background-color: #a6b3c0;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    position: absolute;
+}
+
+.phone:hover .phone_number{
+    visibility: visible;
+}
+
+.linkedIn {
+    margin-bottom: 1%;
+    margin-left: 2%;
+}
+
+.instagram {
+    margin-bottom: 1%;
+    margin-left: 4%;
+}
+
+.register_button {
+    margin-left: 20%;
+    margin-top: 2.5%;
+}
+
+.store_button {
+   margin-left: 20%;
+   margin-top: 2.5%;
+}
