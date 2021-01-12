@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux"
 import {
     Form,
     Button,
-    Jumbotron,
     Figure
 } from "react-bootstrap"
 import { useHistory } from "react-router"
@@ -23,8 +22,6 @@ import {
 import { selectOrderData } from "../../store/Order/selectors"
 import "./index.css"
 import LoadingSpinner from "../LoadingSpinner";
-
-const jumboImage ="https://res.cloudinary.com/djzjepmnr/image/upload/v1597827679/IMG-6987_bjm8x8.jpg"
 
 
 export default function PaymentInfo() {
@@ -259,16 +256,6 @@ export default function PaymentInfo() {
         return (
             <div>
                 <div>
-                    <Jumbotron
-                        className="JumboImage"
-                        style={
-                            {
-                                backgroundImage: `url(${jumboImage})`,
-                                height: 250,
-                            }
-                        }>
-
-                    </Jumbotron>
                     <div className="checkout_container">
                         {loading ? <LoadingSpinner /> : display ? otherAddress : info_checker}
                         <div className="card_info">

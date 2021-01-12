@@ -1,6 +1,6 @@
 import React, { useState} from "react"
 import { useSelector } from "react-redux"
-import { Jumbotron, Row } from "react-bootstrap"
+import { Row } from "react-bootstrap"
 import {
     Form,
     Container,
@@ -12,8 +12,6 @@ import Usersfavorites from "../../components/UsersFavorites"
 import UserOrders from "../../components/UserOrders"
 import { selectUser } from "../../store/User/selectors"
 import "./index.css"
-
-const jumboImage = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761978/IMG-1292_zrtuom.jpg"
 
 export default function ProfilePage(){
     const [FirstName, set_FirstName] = useState("")
@@ -31,15 +29,6 @@ export default function ProfilePage(){
 
     return (
         <div>
-            <Jumbotron 
-            className="JumboImage"
-            style={
-                {
-                    backgroundImage: `url(${jumboImage})`,
-                    height: 250,
-                }
-            }>
-            </Jumbotron>
             <Container fluid>
                 <Row className="form_row">
                 <Col className="form_col">

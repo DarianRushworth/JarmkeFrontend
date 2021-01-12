@@ -1,0 +1,42 @@
+.JumboImage {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo {
+    position: relative;
+    top: -55%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.links_right_in {
+    width: 25%;
+    position: relative;
+    text-align: right;
+    left: 76%;
+    top: -350%;
+}
+
+.links_right_out {
+    width: 25%;
+    position: relative;
+    top: -230%;
+    left: 76%;
+    text-align: right;
+}
+
+.nav_out {
+    margin-top: 1%;
+}
+
+.nav_products {
+    margin-bottom: 1%;
+}
+
+.nav_profile {
+    margin-bottom: 1%;
+}

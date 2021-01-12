@@ -1,5 +1,5 @@
 import React from "react"
-import { Jumbotron, Carousel, Image } from "react-bootstrap"
+import { Carousel, Image } from "react-bootstrap"
 import "./index.css"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
@@ -10,11 +10,10 @@ import Errors from "../../components/Errors"
 import ContactDetails from "../../components/ContactDetails"
 import LoadingSpinner from "../../components/LoadingSpinner"
 
-const jumboUrl = "https://res.cloudinary.com/djzjepmnr/image/upload/v1597761569/IMG-1796_m8rmvr.jpg"
-
 const message =
     `jarmké
 jewellery`
+
 export default function HomePage() {
     const owner = useSelector(selectOwner)
     const errorRecieved = useSelector(selectError)
@@ -32,21 +31,12 @@ export default function HomePage() {
         return (
             <div>
                 <div>
-                    <div>
-                        <header>
-                            <Jumbotron
-                                className="JumboImage"
-                                style={{
-                                    backgroundImage: `url(${jumboUrl})`,
-                                    height: 200,
-                                }}>
-                                <h1 className="BrandH1">
-                                    {message}
-                                </h1>
-                            </Jumbotron>
-                        </header>
-                    </div>
                     {errorDisplay()}
+                    <div className="title_container">
+                        <div className="BrandH1">
+                            {message}
+                        </div>
+                    </div>
                     <div>
                         <Carousel className="HomeImage">
                             <Carousel.Item style={
