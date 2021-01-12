@@ -11,6 +11,7 @@ import Errors from "../../components/Errors"
 import "./index.css"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import { selectOrderData } from "../../store/Order/selectors"
+import ContactDetails from "../../components/ContactDetails"
 
 export default function ProductDetails() {
     const dispatch = useDispatch()
@@ -113,6 +114,9 @@ export default function ProductDetails() {
                     </Col>
                 </Row>
             </Container>
+            <footer>
+                <ContactDetails />
+            </footer>
         </div>
     )
 }
