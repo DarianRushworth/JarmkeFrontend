@@ -42,13 +42,6 @@ export default function Navigation() {
         return amountToDisplay
     }
 
-    // <div className="welcome">
-    //     <Link to="/profilePage" className="link_custom">{welcomeMessage}</Link>
-    // </div>
-    // <div className="cart">
-    //     <Link to="/cartCheckout" className="link_custom">{`${amountOfOrders()} 🛒`}</Link>
-    // </div>
-
     const navDisplay = tokenNeeded
         ? <div className="links_right_in">
             <div className="nav_profile">
