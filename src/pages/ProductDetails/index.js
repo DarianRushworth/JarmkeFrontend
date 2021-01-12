@@ -93,12 +93,12 @@ export default function ProductDetails() {
                             </div>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item" style={{
-                                    backgroundColor: "#c5d5cb",
+                                    backgroundColor: "#c3ccd4",
                                     fontFamily: "Allura",
                                     fontWeight: "bold",
                                 }}>
                                     {product.metal}</li>
-                                <li className="list-group-item" style={{ backgroundColor: "#c5d5cb" }}>€{product.price}</li>
+                                <li className="list-group-item" style={{ backgroundColor: "#c3ccd4" }}>€{product.price}</li>
                             </ul>
                             <div className="card-body">
                                 <Button

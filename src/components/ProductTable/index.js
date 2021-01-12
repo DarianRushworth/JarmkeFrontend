@@ -78,13 +78,13 @@ export default function ProductTable() {
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item"
                                 style={{
-                                    backgroundColor: "#c5d5cb",
+                                    backgroundColor: "#c3ccd4",
                                     fontFamily: "Allura",
                                     fontWeight: "bold",
                                 }}>{product.metal}</li>
                             <li className="list-group-item"
                                 style={{
-                                    backgroundColor: "#c5d5cb"
+                                    backgroundColor: "#c3ccd4"
                                 }}>€{product.price}.00</li>
                         </ul>
                         <div className="card-body">
