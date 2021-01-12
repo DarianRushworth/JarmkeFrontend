@@ -1,13 +1,11 @@
 import React from "react"
-import {Button, Col, Container, Jumbotron, Row } from "react-bootstrap"
+import {Button, Col, Container, Row } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 
 import { removeProduct } from "../../store/Order/actions"
 import LoadingSpinner from "../LoadingSpinner"
 import "./index.css"
-
-const jumboImage ="https://res.cloudinary.com/djzjepmnr/image/upload/v1597827679/IMG-6987_bjm8x8.jpg"
 
 export default function ProductsOrdered(props){
     const history = useHistory()
@@ -47,12 +45,12 @@ export default function ProductsOrdered(props){
                                     </div>
                                     <ul className="list-group list-group-flush">
                                         <li className="list-group-item" style={{ 
-                                            backgroundColor: "#c5d5cb",
+                                            backgroundColor: "#c3ccd4",
                                             fontFamily: "Allura",
                                             fontWeight: "bold",
                                             }}>
                                                 {product.metal}</li>
-                                        <li className="list-group-item" style={{ backgroundColor: "#c5d5cb"}}>€{product.price}</li>
+                                        <li className="list-group-item" style={{ backgroundColor: "#c3ccd4"}}>€{product.price}</li>
                                     </ul>
                                     <div className="card-body">
                                         <Button
@@ -70,16 +68,6 @@ export default function ProductsOrdered(props){
                         : <LoadingSpinner />
     return (
         <div>
-            <Jumbotron
-                className="JumboImage"
-                style={
-                    {
-                        backgroundImage: `url(${jumboImage})`,
-                        height: 250,
-                    }
-                }>
-
-            </Jumbotron>
             <Container fluid>
                 <Row>
                     {displayOrder}
