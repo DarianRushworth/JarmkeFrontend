@@ -20,9 +20,15 @@ export default function productsReducer(state = initialState, action){
                 loading: false,
             }
         case "SET_PRODUCTS":
+            const all_jewellery = [...state.allJewellery, ...action.payload]
+            console.log("ALL", all_jewellery)
+
+            const new_payload = all_jewellery.filter((v,i,a)=>a.findIndex(t=>(t.id === v.id))===i)
+            console.log("PAYLOAD", new_payload)
+
             return {
                 ...state,
-                allJewellery: [...state.allJewellery ,...action.payload],
+                allJewellery: [...new_payload],
             }
 
             default:
