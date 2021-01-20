@@ -17,6 +17,8 @@ export default function IDeal(){
     }
 
     return (
-        <IdealBankElement options={ideal_options}/>
+        <div className="card_element">
+            <IdealBankElement options={ideal_options}/>
+        </div>
     )
 }
