@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux"
 import {
     Form,
     Button,
-    Figure
+    Figure,
+    Image
 } from "react-bootstrap"
 import { useHistory } from "react-router"
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
@@ -260,6 +261,31 @@ export default function PaymentInfo() {
                         {loading ? <LoadingSpinner /> : display ? otherAddress : info_checker}
                         <div className="card_info">
                             <h5 className="card_details">
+                                Payment Methods
+                            </h5>
+                            <div className="card_button">
+                                <div className="card_payment">
+                                    <Image
+                                        src="https://res.cloudinary.com/djzjepmnr/image/upload/v1611133946/credit-card_dc7bwl.png"
+                                        alt="Card Payment"
+                                        className="payment_image"
+                                        rounded
+                                        value="card"
+                                        onClick={(e) => console.log(e.target.alt)}
+                                    />
+                                </div>
+                                <div className="ideal_payment">
+                                    <Image
+                                        src="https://res.cloudinary.com/djzjepmnr/image/upload/v1611134208/ideal_svwh2t.png"
+                                        alt="IDeal Payment"
+                                        className="payment_image"
+                                        rounded
+                                        value="ideal"
+                                        onClick={(e) => console.log(e.target.alt)}
+                                    />
+                                </div>
+                            </div>
+                            {/* <h5 className="card_details">
                                 Card Details
                             </h5>
                             <div>
@@ -285,7 +311,7 @@ export default function PaymentInfo() {
                                         Abort
                                     </Button>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

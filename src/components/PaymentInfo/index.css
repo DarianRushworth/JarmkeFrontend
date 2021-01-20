@@ -97,3 +97,24 @@
 .total_order {
     text-align: center;
 }
+
+.payment_image {
+    width: 70px;
+    height: 70px;
+}
+
+.card_payment{
+    margin-right: 10%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+.ideal_payment {
+    margin-left: 10%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+.payment_image:hover {
+    transform: scale(1.1);
+}
