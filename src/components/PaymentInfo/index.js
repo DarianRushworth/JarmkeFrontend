@@ -7,7 +7,7 @@ import {
     Image
 } from "react-bootstrap"
 import { useHistory } from "react-router"
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
+import { useStripe, useElements, CardElement, IdealBankElement } from '@stripe/react-stripe-js'
 
 import CardDetails from "../CardDetails"
 import PaymentTotal from "../PaymentTotal"
@@ -74,6 +74,8 @@ export default function PaymentInfo() {
             return
         }
 
+        if(method === "Card Payment"){
+
         const response = await stripe.confirmCardPayment(orderData.client_secret, {
             payment_method: {
                 card: elements.getElement(CardElement),
@@ -92,6 +94,24 @@ export default function PaymentInfo() {
             if (response.paymentIntent.status === "succeeded") {
                 history.push("/profilePage")
                 dispatch(addPayment(orderData.total))
+            }
+        }
+        } else if(method === "IDeal Payment"){
+
+            const idealBank = elements.getElement(IdealBankElement)
+
+            const {error} = await stripe.confirmIdealPayment(orderData.client_secret, {
+                payment_method: {
+                    ideal: idealBank,
+                    billing_details: {
+                        name: `${user.firstName} ${user.lastName}`,
+                    },
+                },
+                return_url: "http://localhost:3000/profilePage"
+            })
+            
+            if(error){
+                console.log(error.message)
             }
         }
     }
@@ -327,7 +347,10 @@ export default function PaymentInfo() {
             <div className="card_button">
                 <div className="pay_button">
                     <Button
-                        variant="info">
+                        variant="info"
+                        onClick={(e) => {
+                            setLoading(true) 
+                            submitted(e)}}>
                         Submit Payment
                     </Button>
                 </div>
