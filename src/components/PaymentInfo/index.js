@@ -92,7 +92,7 @@ export default function PaymentInfo() {
             console.log(response.error.message)
         } else {
             if (response.paymentIntent.status === "succeeded") {
-                history.push("/profilePage")
+                history.push("/success")
                 dispatch(addPayment(orderData.total))
             }
         }
@@ -107,7 +107,7 @@ export default function PaymentInfo() {
                         name: `${user.firstName} ${user.lastName}`,
                     },
                 },
-                return_url: "http://localhost:3000/profilePage"
+                return_url: "http://localhost:3000/success"
             })
             
             if(error){
