@@ -89,7 +89,7 @@ export default function PaymentInfo() {
         })
         
         if (response.error) {
-            console.log(response.error.message)
+            history.push("/failure")
         } else {
             if (response.paymentIntent.status === "succeeded") {
                 history.push("/success")
@@ -111,7 +111,7 @@ export default function PaymentInfo() {
             })
             
             if(error){
-                console.log(error.message)
+                history.push("/failure")
             }
         }
     }
