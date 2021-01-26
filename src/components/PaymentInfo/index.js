@@ -18,7 +18,7 @@ import {
     addShipping,
     addShippingAddress,
     getSecretKey,
-    getCountries
+    getCountries,
 } from "../../store/Order/actions"
 import { selectOrderData } from "../../store/Order/selectors"
 import "./index.css"
@@ -119,7 +119,7 @@ export default function PaymentInfo() {
     function onSubmit(event) {
         event.preventDefault()
         const address =
-            `${streetName} ${houseNumber}, ${postalCode}, ${district}`
+            `${streetName} ${houseNumber}, ${postalCode}, ${district}, N/A, ${countryNeeded}`
         dispatch(addShippingAddress(address))
         set_Display(false)
     }
