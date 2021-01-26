@@ -1,0 +1,40 @@
+.success_container {
+    background-color: #c3ccd4;
+    width: 50%;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    -webkit-border-radius: 36px 12px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+.success_image {
+    width: 80px;
+    height: 80px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.success_title {
+    margin-top: 15%;
+    text-decoration: underline;
+}
+
+.success_body {
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+.success_buttons {
+    margin-bottom: 2%;
+}
+
+.success_store {
+    margin-left: 5%;
+}
+
+.success_home {
+    margin-right: 5%;
+}

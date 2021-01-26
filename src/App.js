@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import { Switch, Route } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
@@ -9,8 +9,10 @@ import SignUpPage from "./pages/Sign-UpPage"
 import ProductDetails from "./pages/ProductDetails"
 import Navigation from "./components/Navigation"
 import Profilepage from "./pages/ProfilePage"
-import ShoppingCart from './pages/ShoppingCart';
+import ShoppingCart from './pages/ShoppingCart'
 import CheckoutPage from "./pages/CheckoutPage"
+import PaymentSuccess from './pages/PaymentSuccess'
+import PaymentFailure from './pages/PaymentFailure'
 import { validateUser } from "./store/User/actions"
 import "./App.css"
 
@@ -58,6 +60,14 @@ function App() {
           <Route
             path="/purchase"
             component={CheckoutPage}
+          />
+          <Route
+            path="/success"
+            component={PaymentSuccess}
+          />
+          <Route
+            path="/failure"
+            component={PaymentFailure}
           />
         </Switch>
     </div>

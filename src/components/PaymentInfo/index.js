@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from "react-redux"
 import {
     Form,
     Button,
-    Figure
+    Figure,
+    Image
 } from "react-bootstrap"
 import { useHistory } from "react-router"
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
+import { useStripe, useElements, CardElement, IdealBankElement } from '@stripe/react-stripe-js'
 
 import CardDetails from "../CardDetails"
 import PaymentTotal from "../PaymentTotal"
@@ -17,16 +18,18 @@ import {
     addShipping,
     addShippingAddress,
     getSecretKey,
-    getCountries
+    getCountries,
 } from "../../store/Order/actions"
 import { selectOrderData } from "../../store/Order/selectors"
 import "./index.css"
 import LoadingSpinner from "../LoadingSpinner";
+import IDeal from "../IDeal"
 
 
 export default function PaymentInfo() {
     const stripe = useStripe()
     const elements = useElements()
+    const [method, setMethod] = useState("deciding")
     const [express, setExpress] = useState("outline-danger")
     const [standard, setStandard] = useState("outline-danger")
     const [loading, setLoading] = useState(false)
@@ -71,6 +74,8 @@ export default function PaymentInfo() {
             return
         }
 
+        if(method === "Card Payment"){
+
         const response = await stripe.confirmCardPayment(orderData.client_secret, {
             payment_method: {
                 card: elements.getElement(CardElement),
@@ -84,11 +89,29 @@ export default function PaymentInfo() {
         })
         
         if (response.error) {
-            console.log(response.error.message)
+            history.push("/failure")
         } else {
             if (response.paymentIntent.status === "succeeded") {
-                history.push("/profilePage")
+                history.push("/success")
                 dispatch(addPayment(orderData.total))
+            }
+        }
+        } else if(method === "IDeal Payment"){
+
+            const idealBank = elements.getElement(IdealBankElement)
+
+            const {error} = await stripe.confirmIdealPayment(orderData.client_secret, {
+                payment_method: {
+                    ideal: idealBank,
+                    billing_details: {
+                        name: `${user.firstName} ${user.lastName}`,
+                    },
+                },
+                return_url: "http://localhost:3000/success"
+            })
+            
+            if(error){
+                history.push("/failure")
             }
         }
     }
@@ -96,7 +119,7 @@ export default function PaymentInfo() {
     function onSubmit(event) {
         event.preventDefault()
         const address =
-            `${streetName} ${houseNumber}, ${postalCode}, ${district}`
+            `${streetName} ${houseNumber}, ${postalCode}, ${district}, N/A, ${countryNeeded}`
         dispatch(addShippingAddress(address))
         set_Display(false)
     }
@@ -253,40 +276,102 @@ export default function PaymentInfo() {
             </Form.Group>
         </div>
 
+    const paymentMethods =
+        <div className="card_info">
+            <h5 className="card_details">
+            Payment Methods
+            </h5>
+            <div className="card_button">
+                <div className="card_payment">
+                    <Image
+                        src="https://res.cloudinary.com/djzjepmnr/image/upload/v1611133946/credit-card_dc7bwl.png"
+                        alt="Card Payment"
+                        className="payment_image"
+                        rounded
+                        value="card"
+                        onClick={(e) => setMethod(e.target.alt)}
+                    />
+                </div>
+                <div className="ideal_payment">
+                    <Image
+                        src="https://res.cloudinary.com/djzjepmnr/image/upload/v1611134208/ideal_svwh2t.png"
+                        alt="IDeal Payment"
+                        className="payment_image"
+                        rounded
+                        value="ideal"
+                        onClick={(e) => setMethod(e.target.alt)}
+                    />
+                </div>
+            </div>
+        </div>
+
+    const cardMethod = 
+        <div className="card_info">
+            <h5 className="card_details">
+                Card Details
+            </h5>
+            <div>
+                <CardDetails />
+                <hr />
+            </div>
+            <div className="card_button">
+                <div className="pay_button">
+                    <Button
+                        onClick={(e) => {
+                            setLoading(true)
+                            submitted(e)
+                        }}>
+                        Pay
+                    </Button>
+                </div>
+                <div className="abort_button">
+                    <Button
+                        variant="danger"
+                        onClick={() => {
+                            history.push("/")
+                        }}>
+                        Abort
+                    </Button>
+                </div>
+            </div>
+        </div>
+    
+    const idealMethod = 
+        <div className="card_info">
+            <h5 className="card_details">
+                Ideal Details
+            </h5>
+            <div>
+                <IDeal />
+            </div>
+            <div className="card_button">
+                <div className="pay_button">
+                    <Button
+                        variant="info"
+                        onClick={(e) => {
+                            setLoading(true) 
+                            submitted(e)}}>
+                        Submit Payment
+                    </Button>
+                </div>
+                <div className="abort_button">
+                    <Button
+                            variant="danger"
+                            onClick={() => {
+                                history.push("/")
+                            }}>
+                            Abort
+                    </Button>
+                </div>
+            </div>
+        </div>
+
         return (
             <div>
                 <div>
                     <div className="checkout_container">
                         {loading ? <LoadingSpinner /> : display ? otherAddress : info_checker}
-                        <div className="card_info">
-                            <h5 className="card_details">
-                                Card Details
-                            </h5>
-                            <div>
-                                <CardDetails />
-                                <hr />
-                            </div>
-                            <div className="card_button">
-                                <div className="pay_button">
-                                    <Button
-                                        onClick={(e) => {
-                                            setLoading(true)
-                                            submitted(e)
-                                        }}>
-                                        Pay
-                                    </Button>
-                                </div>
-                                <div className="abort_button">
-                                    <Button
-                                        variant="danger"
-                                        onClick={() => {
-                                            history.push("/")
-                                        }}>
-                                        Abort
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
+                        {method === "deciding" ? paymentMethods : method === "Card Payment" ? cardMethod : idealMethod}
                     </div>
                 </div>
             </div>
